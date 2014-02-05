@@ -27,8 +27,7 @@
         <property name="use_sql_comments">false</property>
 
         <!-- Reference to all the mapping files used -->
-        <!--<mapping resource="Persistence/Song.hbm.xml" />-->
-        <!--<mapping resource="Persistence/Album.hbm.xml" />-->
         <property name="hbm2ddl.auto">create-drop</property>
+        <mapping class="be.kdg.model.User" />
     </session-factory>
 </hibernate-configuration>
