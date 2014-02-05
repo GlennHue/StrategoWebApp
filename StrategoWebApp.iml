@@ -23,6 +23,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/Java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/Source Files" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/Test Files" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/Android Source Files" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
