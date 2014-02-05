@@ -7,6 +7,7 @@ public class Test {
 
     @org.junit.Test
     public void test() {
-        assertTrue("derp", false);
+        User user = new User("username", "password", "email");
+
     }
 }
