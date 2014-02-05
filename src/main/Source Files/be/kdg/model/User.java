@@ -1,10 +1,11 @@
-package be.kdg.model;
-
 /*
-* Project Application Development
+* Software Development
 * Karel de Grote-hogeschool
 * 2013-2014
 */
+package be.kdg.model;
+
+
 
 public class User {
                        private int i = 0;
