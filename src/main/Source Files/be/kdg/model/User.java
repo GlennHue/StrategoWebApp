@@ -1,8 +1,11 @@
 package be.kdg.model;
 
-/**
- * Created by Glenn on 5/02/14.
- */
+/*
+* Project Application Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 public class User {
                        private int i = 0;
 
