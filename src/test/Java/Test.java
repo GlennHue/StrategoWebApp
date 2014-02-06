@@ -20,4 +20,6 @@ public class Test {
         operations.insertNewUser(user);
         assertEquals("users should be the same", user.toString(), operations.getUserById(user.getId()).toString());
     }
+
+
 }
