@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Login</title>
+    <h:outputStylesheet library="css" name="" />
+</h:head>
+
+<h:body>
+<h2>Register</h2>
+<h:form action="register" method="POST">
+    <table>
+        <tr>
+        <td><h:outputLabel for="userName" value="User"/> </td>
+        <td><h:inputText id="userName" value="#{registerBean.username}" required="true"/></td></tr>
+        <tr>
+        <tr>
+        <td><h:outputLabel for="email" value="E-mail"/> </td>
+        <td><h:inputText id="email" value="#{registerBean.email}" required="true"/></td></tr>
+        <tr>
+        <td><h:outputLabel for="password" value="Password"/></td>
+        <td><h:inputSecret id="password" value="#{registerBean.password}" required="true"/></td></tr>
+        <tr>
+        <tr>
+        <td><h:outputLabel for="password" value="Confirm Password"/></td>
+        <td><h:inputSecret id="passwordConfirm" value="#{registerBean.confirmPassword}" required="true"/></td></tr>
+         <tr>
+         <td><h:commandButton value="Register now" action="#{registerBean.addNewUser}"/></td></tr>
+    </table>
+</h:form>
+</h:body>
+</html>
