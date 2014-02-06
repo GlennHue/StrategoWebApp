@@ -20,7 +20,8 @@ public class UserDbOperationsImplementation implements UserDbOperations {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         String queryString = "from User u where u.id = :id";
-        Query query = session.createQuery(queryString).setInteger("id", id);;
+        Query query = session.createQuery(queryString).setInteger("id", id);
+        session.close();
         return (User) query.uniqueResult();
     }
 
@@ -55,5 +56,22 @@ public class UserDbOperationsImplementation implements UserDbOperations {
     @Override
     public void updatePassword(String password) {
 
+    }
+
+    @Override
+    public boolean checkLogin(String username, String password) {
+        User user = getUserByUsername(username);
+        return user != null && user.getPassword().equals(password);
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        String querystring = "from User u where u.username = :username";
+        Query query = session.createQuery(querystring).setString("username", username);
+        session.close();
+        return (User) query.uniqueResult();
     }
 }

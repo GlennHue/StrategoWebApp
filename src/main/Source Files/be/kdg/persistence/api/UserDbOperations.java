@@ -23,4 +23,7 @@ public interface UserDbOperations {
 
     public void updatePassword(String password);
 
+    public boolean checkLogin(String username, String password);
+
+    public User getUserByUsername(String username);
 }
