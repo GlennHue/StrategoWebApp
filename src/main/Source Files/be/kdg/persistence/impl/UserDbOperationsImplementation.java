@@ -1,0 +1,59 @@
+package be.kdg.persistence.impl;
+
+import be.kdg.model.User;
+import be.kdg.persistence.HibernateUtil;
+import be.kdg.persistence.api.UserDbOperations;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.List;
+
+/**
+ * Created by Glenn on 6/02/14.
+ */
+public class UserDbOperationsImplementation implements UserDbOperations {
+
+
+    @Override
+    public User getUserById(int id) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        String queryString = "from User u where u.id = :id";
+        Query query = session.createQuery(queryString).setInteger("id", id);;
+        return (User) query.uniqueResult();
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public void insertNewUser(User user) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        session.saveOrUpdate(user);
+        tx.commit();
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public void removeUser(User user) {
+
+    }
+
+    @Override
+    public void updateEmail(String email) {
+
+    }
+
+    @Override
+    public void updatePassword(String password) {
+
+    }
+}
