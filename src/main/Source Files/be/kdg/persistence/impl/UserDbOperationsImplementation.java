@@ -17,12 +17,13 @@ public class UserDbOperationsImplementation implements UserDbOperations {
 
     @Override
     public User getUserById(int id) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         String queryString = "from User u where u.id = :id";
         Query query = session.createQuery(queryString).setInteger("id", id);
+        User user = (User) query.uniqueResult();
         session.close();
-        return (User) query.uniqueResult();
+        return user;
     }
 
     @Override
@@ -32,7 +33,7 @@ public class UserDbOperationsImplementation implements UserDbOperations {
 
     @Override
     public void insertNewUser(User user) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         session.saveOrUpdate(user);
         tx.commit();
@@ -45,7 +46,10 @@ public class UserDbOperationsImplementation implements UserDbOperations {
 
     @Override
     public void removeUser(User user) {
-
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        session.delete(user);
+        tx.commit();
     }
 
     @Override
@@ -66,12 +70,24 @@ public class UserDbOperationsImplementation implements UserDbOperations {
 
     @Override
     public User getUserByUsername(String username) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
         String querystring = "from User u where u.username = :username";
         Query query = session.createQuery(querystring).setString("username", username);
+        User user = (User) query.uniqueResult();
         session.close();
-        return (User) query.uniqueResult();
+        return user;
+    }
+
+    @Override
+    public boolean userExists(String username) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+
+        String queryString = "from User u where u.username = :username";
+        Query query = session.createQuery(queryString).setString("username", username);
+        User user = (User) query.uniqueResult();
+        return user != null;
     }
 }

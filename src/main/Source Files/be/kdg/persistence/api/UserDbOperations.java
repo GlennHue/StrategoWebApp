@@ -26,4 +26,6 @@ public interface UserDbOperations {
     public boolean checkLogin(String username, String password);
 
     public User getUserByUsername(String username);
+
+    public boolean userExists(String username);
 }
