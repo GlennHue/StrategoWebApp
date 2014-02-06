@@ -31,9 +31,7 @@ public class Test {
 
     @org.junit.Test
     public void testBasicDatabaseInsert() {
-        User user = new User("username", "password", "email");
         UserDbOperations operations = new UserDbOperationsImplementation();
-        operations.insertNewUser(user);
         assertEquals("users should be the same", user.toString(), operations.getUserById(user.getId()).toString());
     }
 

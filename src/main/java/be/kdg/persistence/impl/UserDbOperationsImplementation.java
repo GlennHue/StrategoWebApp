@@ -35,8 +35,10 @@ public class UserDbOperationsImplementation implements UserDbOperations {
     public void insertNewUser(User user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
-        session.saveOrUpdate(user);
-        tx.commit();
+        if(!userExists(user.getUsername())) {
+            session.saveOrUpdate(user);
+            tx.commit();
+        }
     }
 
     @Override
