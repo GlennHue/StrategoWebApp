@@ -59,4 +59,14 @@ public class User {
     public void seteMail(String eMail) {
         this.eMail = eMail;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", eMail='" + eMail + '\'' +
+                '}';
+    }
 }

@@ -16,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
 public class Test {
 
     @org.junit.Test
-    public void test() {
+    public void testBasicDatabaseInsert() {
         User user = new User("username", "password", "email");
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
@@ -29,6 +29,7 @@ public class Test {
 
         Query query = session.createQuery("from be.kdg.model.User");
         User testUser = (User)query.uniqueResult();
-        assertEquals("users should be the same", user, testUser);
+        System.out.println(user + "\n" + testUser);
+        assertEquals("users should be the same", user.toString(), testUser.toString());
     }
 }
