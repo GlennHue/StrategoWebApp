@@ -22,6 +22,8 @@ public class Piece{
         return name.toString();
     }
 
-
+    public int getRank() {
+        return rank;
+    }
 
 }
