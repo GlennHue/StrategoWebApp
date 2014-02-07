@@ -8,7 +8,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <title>Login</title>
+    <title>Register</title>
     <h:outputStylesheet library="css" name="" />
 </h:head>
 
@@ -20,13 +20,11 @@
         <td><h:outputLabel for="userName" value="User"/> </td>
         <td><h:inputText id="userName" value="#{registerBean.username}" required="true"/></td></tr>
         <tr>
-        <tr>
         <td><h:outputLabel for="email" value="E-mail"/> </td>
         <td><h:inputText id="email" value="#{registerBean.email}" required="true"/></td></tr>
         <tr>
         <td><h:outputLabel for="password" value="Password"/></td>
         <td><h:inputSecret id="password" value="#{registerBean.password}" required="true"/></td></tr>
-        <tr>
         <tr>
         <td><h:outputLabel for="password" value="Confirm Password"/></td>
         <td><h:inputSecret id="passwordConfirm" value="#{registerBean.confirmPassword}" required="true"/></td></tr>
