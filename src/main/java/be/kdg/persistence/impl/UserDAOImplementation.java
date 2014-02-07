@@ -2,7 +2,7 @@ package be.kdg.persistence.impl;
 
 import be.kdg.model.User;
 import be.kdg.persistence.HibernateUtil;
-import be.kdg.persistence.api.UserDbOperations;
+import be.kdg.persistence.api.UserDAOApi;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Glenn on 6/02/14.
  */
-public class UserDbOperationsImplementation implements UserDbOperations {
+public class UserDAOImplementation implements UserDAOApi {
 
 
     @Override
@@ -55,12 +55,12 @@ public class UserDbOperationsImplementation implements UserDbOperations {
     }
 
     @Override
-    public void updateEmail(String email) {
+    public void updateEmail(String username, String email) {
 
     }
 
     @Override
-    public void updatePassword(String password) {
+    public void updatePassword(String username, String password) {
 
     }
 
