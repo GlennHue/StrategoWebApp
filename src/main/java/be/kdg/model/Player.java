@@ -7,19 +7,23 @@ import java.util.List;
 public class Player {
     private String name;
     private List<Piece> army;
+    private List<Piece> graveyard;
+   /* private String color;       */
 
     public Player(String name) {
         this.name = name;
         createArmy();
+
+        graveyard = new ArrayList<Piece>();
     }
 
     public int armyGetSize() {
         return army.size();
     }
 
-    public String getName() {
+  /*  public String getName() {
         return name;
-    }
+    }        */
 
     public void createArmy(){
         army = new ArrayList<Piece>();
@@ -41,4 +45,17 @@ public class Player {
     public Piece getPiece(int i) {
         return army.get(i);
     }
+
+    public int graveyardGetSize() {
+        return graveyard.size();
+    }
+
+   /* public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }     */
+
 }

@@ -6,38 +6,34 @@ import static junit.framework.Assert.assertEquals;
 public class TestPlayer {
 
      private Player player = new Player("De Fons");
+    int flag=0,spy=0,scout=0,miner=0,sergeant=0,lieutenant=0,captain=0,major=0,
+            colonel=0, general=0, marshal=0, bomb =0 ;
 
     @org.junit.Test
-    public void testCountArmy() {
+    public void testCountArmyandGraveyard() {
 
 
-                assertEquals("Army size should be 40", 40, player.armyGetSize());
+                assertEquals("Army size should be 40", 40, player.armyGetSize() + player.graveyardGetSize());
 
     }
 
 
     @org.junit.Test
      public void testCountPieces(){
-          int flag=0,spy=0,scout=0,miner=0,sergeant=0,lieutenant=0,captain=0,major=0,
-                  colonel=0, general=0, marshal=0, bomb =0 ;
-        for(int i =0;i < 40;i++){
 
-           Piece piece = player.getPiece(i);
 
-            switch (piece.getRank()){
-            case 0 : flag++;break;
-            case 1 : spy++ ;break;
-            case 2 : scout++;break;
-            case 3 : miner++;break;
-            case 4 : sergeant++;break;
-            case 5 : lieutenant++;break;
-            case 6 : captain++;break;
-            case 7 : major++;break;
-            case 8 : colonel++;break;
-            case 9 : general++;break;
-            case 10 : marshal++;break;
-            case 11 : bomb++;break;   }
 
+        for(int i =0;i < player.armyGetSize();i++){
+
+            Piece piece = player.getPiece(i);
+
+            swutch(piece.getRank());
+
+        }
+
+        for(int i = 0;i < player.graveyardGetSize();i++){
+            Piece piece = player.getPiece(i);
+            swutch(piece.getRank());
         }
 
         assertEquals("Count of Flag", 1, flag);
@@ -55,5 +51,26 @@ public class TestPlayer {
 
 
      }
+
+
+
+    private void swutch(int rank){
+
+            switch (rank){
+                case 0 : flag++;break;
+                case 1 : spy++ ;break;
+                case 2 : scout++;break;
+                case 3 : miner++;break;
+                case 4 : sergeant++;break;
+                case 5 : lieutenant++;break;
+                case 6 : captain++;break;
+                case 7 : major++;break;
+                case 8 : colonel++;break;
+                case 9 : general++;break;
+                case 10 : marshal++;break;
+                case 11 : bomb++;break;   }
+
+
+    }
 
 }

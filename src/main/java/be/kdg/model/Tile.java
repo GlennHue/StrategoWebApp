@@ -12,10 +12,11 @@ public class Tile {
     private boolean occupied;
     public boolean obstacle;
 
-    public Tile( boolean obstacle){
+  /*  public Tile( boolean obstacle){
         this.occupied = false;
         this.obstacle = obstacle;
-    }
+    }       */
+
     public Tile(){
         this.occupied = false;
         this.obstacle = false;
