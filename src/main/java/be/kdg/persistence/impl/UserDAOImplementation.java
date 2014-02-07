@@ -6,12 +6,14 @@ import be.kdg.persistence.api.UserDAOApi;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by Glenn on 6/02/14.
  */
+@Repository("userDAO")
 public class UserDAOImplementation implements UserDAOApi {
 
 
