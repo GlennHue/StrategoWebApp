@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Glenn on 6/02/14.
  */
-public interface UserDbOperations {
+public interface UserDAOApi {
 
     public User getUserById(int id);
 
@@ -19,9 +19,9 @@ public interface UserDbOperations {
 
     public void removeUser(User user);
 
-    public void updateEmail(String email);
+    public void updateEmail(String username, String email);
 
-    public void updatePassword(String password);
+    public void updatePassword(String username, String password);
 
     public boolean checkLogin(String username, String password);
 

@@ -5,8 +5,8 @@
 */
 
 import be.kdg.model.User;
-import be.kdg.persistence.api.UserDbOperations;
-import be.kdg.persistence.impl.UserDbOperationsImplementation;
+import be.kdg.persistence.api.UserDAOApi;
+import be.kdg.persistence.impl.UserDAOImplementation;
 import org.junit.After;
 import org.junit.Before;
 
@@ -17,7 +17,7 @@ import static junit.framework.Assert.assertTrue;
 
 public class Test {
     private User user = new User("username", "password", "email");
-    private UserDbOperations operations = new UserDbOperationsImplementation();
+    private UserDAOApi operations = new UserDAOImplementation();
 
     @Before
     public void insertBasicUser() {
@@ -31,7 +31,7 @@ public class Test {
 
     @org.junit.Test
     public void testBasicDatabaseInsert() {
-        UserDbOperations operations = new UserDbOperationsImplementation();
+        UserDAOApi operations = new UserDAOImplementation();
         assertEquals("users should be the same", user.toString(), operations.getUserById(user.getId()).toString());
     }
 
