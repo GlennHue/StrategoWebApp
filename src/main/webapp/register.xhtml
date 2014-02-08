@@ -9,7 +9,6 @@
 
 <h:head>
     <title>Login</title>
-    <h:outputStylesheet library="css" name="" />
 </h:head>
 
 <h:body>
@@ -17,21 +16,24 @@
 <h:form action="register" method="POST">
     <table>
         <tr>
-        <td><h:outputLabel for="userName" value="User"/> </td>
-        <td><h:inputText id="userName" value="#{registerBean.username}" required="true"/></td></tr>
+            <td><h:outputLabel for="userName" value="User"/> </td>
+            <td><h:inputText id="userName" value="#{registerBean.username}" required="true"/></td>
+        </tr>
         <tr>
+            <td><h:outputLabel for="email" value="E-mail"/> </td>
+            <td><h:inputText id="email" value="#{registerBean.email}" required="true"/></td>
+        </tr>
         <tr>
-        <td><h:outputLabel for="email" value="E-mail"/> </td>
-        <td><h:inputText id="email" value="#{registerBean.email}" required="true"/></td></tr>
+            <td><h:outputLabel for="password" value="Password"/></td>
+            <td><h:inputSecret id="password" value="#{registerBean.password}" required="true"/></td>
+        </tr>
         <tr>
-        <td><h:outputLabel for="password" value="Password"/></td>
-        <td><h:inputSecret id="password" value="#{registerBean.password}" required="true"/></td></tr>
+            <td><h:outputLabel for="password" value="Confirm Password"/></td>
+            <td><h:inputSecret id="passwordConfirm" value="#{registerBean.confirmPassword}" required="true"/></td>
+        </tr>
         <tr>
-        <tr>
-        <td><h:outputLabel for="password" value="Confirm Password"/></td>
-        <td><h:inputSecret id="passwordConfirm" value="#{registerBean.confirmPassword}" required="true"/></td></tr>
-         <tr>
-         <td><h:commandButton value="Register now" action="#{registerBean.addNewUser}"/></td></tr>
+            <td><h:commandButton value="Register now" action="#{registerBean.addNewUser}"/></td>
+        </tr>
     </table>
 </h:form>
 </h:body>

@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * Created by wouter on 6/02/14.
  */
-@Component
+@Component("registerBean")
 @Scope("request")
 public class RegisterBean implements Serializable {
     private String username;

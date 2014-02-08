@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /**
  * Created by wouter on 6/02/14.
  */
-@Component
+@Component("userBean")
 @Scope("session")
-public class UserBean {
+public class UserBean implements Serializable{
     private String username;
     private String password;
     private User user;
@@ -26,6 +28,16 @@ public class UserBean {
     public String getPassword() {
         return password;
     }
+
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     public String checkCredentials()
     {
