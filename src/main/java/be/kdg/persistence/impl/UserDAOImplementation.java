@@ -69,7 +69,7 @@ public class UserDAOImplementation implements UserDAOApi {
     @Override
     public boolean checkLogin(String username, String password) {
         User user = getUserByUsername(username);
-        return user != null && user.getPassword().equals(password);
+        return user != null && user.getPassword().equals(password) && user.isVerified();
     }
 
     @Override
@@ -93,5 +93,36 @@ public class UserDAOImplementation implements UserDAOApi {
         Query query = session.createQuery(queryString).setString("username", username);
         User user = (User) query.uniqueResult();
         return user != null;
+    }
+
+    @Override
+    public void setUserAuthenticationCode(String username,String uuid) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+       Query query = session.createQuery("update User u set u.uuid = :uuid" +
+               " where u.username = :username");
+        query.setString("uuid",uuid);
+        query.setString("username",username);
+        query.executeUpdate();
+        tx.commit();
+        session.close();
+    }
+
+    @Override
+    public boolean uuidIsVerified(String uuid) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+
+        Query query = session.createQuery("from User u where u.uuid = :uuid");
+        query.setString("uuid",uuid);
+        User user = (User)query.uniqueResult();
+        if (user!=null)
+        {
+            user.setVerified(true);
+            session.saveOrUpdate(user);
+            tx.commit();
+            return true;
+        }
+        return false;
     }
 }

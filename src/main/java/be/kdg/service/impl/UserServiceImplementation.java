@@ -42,4 +42,15 @@ public class UserServiceImplementation implements UserService {
     public void removeUser(User user) {
         userDao.removeUser(user);
     }
+
+    @Override
+    public void setAuthenticationCode(String username,String uuid) {
+        userDao.setUserAuthenticationCode(username,uuid);
+    }
+
+    @Override
+    public boolean uuidIsVerified(String uuid) {
+       return userDao.uuidIsVerified(uuid);
+    }
+
 }

@@ -28,4 +28,9 @@ public interface UserDAOApi {
     public User getUserByUsername(String username);
 
     public boolean userExists(String username);
+
+    public void setUserAuthenticationCode(String username,String uuid);
+
+
+    public boolean uuidIsVerified(String uuid);
 }

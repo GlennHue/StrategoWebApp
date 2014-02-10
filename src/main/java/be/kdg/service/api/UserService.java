@@ -13,5 +13,7 @@ public interface UserService {
     public void updatePassword(String username,String password);
     public void updateEmail(String username,String email);
     public void removeUser(User user);
+    public void setAuthenticationCode(String username,String uuid);
 
+    boolean uuidIsVerified(String uuid);
 }

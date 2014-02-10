@@ -18,6 +18,8 @@ public class User {
     private String username;
     private String password;
     private String eMail;
+    private String uuid;
+    private boolean verified;
 
     public User() {
     }
@@ -26,6 +28,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.eMail = eMail;
+        this.verified = false;
     }
 
     public int getId() {
@@ -47,5 +50,21 @@ public class User {
                 ", password='" + password + '\'' +
                 ", eMail='" + eMail + '\'' +
                 '}';
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean isVerified) {
+        this.verified = isVerified;
     }
 }
