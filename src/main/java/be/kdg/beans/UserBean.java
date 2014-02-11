@@ -43,7 +43,7 @@ public class UserBean implements Serializable{
     {
         if(userService.userIsValid(username,password))
         {
-            return "succes";
+            return "index.xhtml";
         }
         return null;
     }
