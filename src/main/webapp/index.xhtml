@@ -35,17 +35,19 @@
         </p:menubar>
     </h:form>
     <div id="fade"></div>
-    <div id="loginForm">
-        <table>
-            <h:form>
-                <tr><td><h:outputLabel for="userName" value="Username: "/></td><td><h:inputText id="userName" value="#{userBean.username}" required="true"/></td></tr>
-                <tr><td><h:outputLabel for="password" value="Password: "/></td><td><h:inputSecret id="password" value="#{userBean.password}" required="true"/></td></tr>
-                <tr><td><h:commandButton value="Login" action="#{userBean.checkCredentials()}"/></td><td><fb:login-button show-faces="false" width="200" max-rows="1" autologoutlink="true"/></td></tr>
-            </h:form>
-            <h:form>
-                <tr><td><h:commandButton value="Register" action="register" /></td></tr>
-            </h:form>
-        </table>
+    <div id="loginContainer">
+        <div id="loginForm">
+            <table>
+                <h:form>
+                    <tr><td><h:outputLabel for="userName" value="Username: "/></td><td><h:inputText id="userName" value="#{userBean.username}" required="true"/></td></tr>
+                    <tr><td><h:outputLabel for="password" value="Password: "/></td><td><h:inputSecret id="password" value="#{userBean.password}" required="true"/></td></tr>
+                    <tr><td><h:commandButton styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/></td><td><fb:login-button show-faces="false" width="200" max-rows="1" autologoutlink="true"/></td></tr>
+                </h:form>
+                <h:form>
+                    <tr><td><h:commandButton styleClass="btn" value="Register" action="register" /></td></tr>
+                </h:form>
+            </table>
+        </div>
     </div>
     <div id="content">
         <p>
