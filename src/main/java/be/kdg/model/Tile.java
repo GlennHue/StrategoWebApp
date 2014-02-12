@@ -10,9 +10,10 @@ package be.kdg.model;
 public class Tile {
 
     private boolean occupied;
-    public boolean obstacle;
+    private boolean obstacle;
+    private Piece piece;
 
-  /*  public Tile( boolean obstacle){
+    /*  public Tile( boolean obstacle){
         this.occupied = false;
         this.obstacle = obstacle;
     }       */
@@ -24,6 +25,19 @@ public class Tile {
 
     public void setObstacle(boolean obstacle) {
         this.obstacle = obstacle;
+    }
+
+
+    public Piece getPiece() {
+        return piece;
+    }
+
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+    }
+
+    public boolean getObstacle() {
+        return obstacle;
     }
 }
 

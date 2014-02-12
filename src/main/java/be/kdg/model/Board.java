@@ -9,7 +9,7 @@ package be.kdg.model;
 
 public class Board {
 
-    public Tile[][] tiles;
+    private Tile[][] tiles;
 
     public Board(){
         this.tiles = new Tile[10][10];
@@ -19,6 +19,18 @@ public class Board {
             }
         }
         createObstacles();
+    }
+
+    public Tile[][] getTiles() {
+        return tiles;
+    }
+
+    public Piece getPieceByCoordinate(int x, int y) {
+        return tiles[x][y].getPiece();
+    }
+
+    public Tile getTile(int x, int y) {
+        return tiles[x][y];
     }
 
     public void createObstacles(){

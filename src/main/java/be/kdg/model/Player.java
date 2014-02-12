@@ -8,7 +8,13 @@ public class Player {
     private String name;
     private List<Piece> army;
     private List<Piece> graveyard;
-   /* private String color;       */
+    private Color color;
+
+    public enum Color {
+        BLUE, RED
+    }
+
+
 
     public Player(String name) {
         this.name = name;
@@ -21,11 +27,11 @@ public class Player {
         return army.size();
     }
 
-  /*  public String getName() {
+    public String getName() {
         return name;
-    }        */
+    }
 
-    public void createArmy(){
+    private void createArmy(){
         army = new ArrayList<Piece>();
         int[] countPieces = {1,1,8,5,4,4,4,3,2,1,1,6};
 
@@ -42,6 +48,19 @@ public class Player {
 
     }
 
+    public Piece getPieceByName(String name) {
+        Piece piece = null;
+        for (Piece p : army) {
+            if (!p.isPlaced()) {
+                if (p.getName().equalsIgnoreCase(name)) {
+                    piece = p;
+                    break;
+                }
+            }
+        }
+        return piece;
+    }
+
     public Piece getPiece(int i) {
         return army.get(i);
     }
@@ -50,12 +69,12 @@ public class Player {
         return graveyard.size();
     }
 
-   /* public String getColor() {
+   public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
-    }     */
+    }
 
 }

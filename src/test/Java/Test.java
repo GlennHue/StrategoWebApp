@@ -21,6 +21,7 @@ public class Test {
 
     @Before
     public void insertBasicUser() {
+        user.setVerified(true);
         operations.insertNewUser(user);
     }
 
