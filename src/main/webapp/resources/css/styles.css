@@ -1,0 +1,121 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: black;
+    background: url("#{resource['css:img/bg.jpg']}") top right no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    font-family: Arial, Geneva, sans-serif;
+    color: white;
+}
+
+#content {
+    margin: auto;
+    margin-top: 5%;
+    width: 80%;
+    min-height: 80%;
+    background: rgba(0,0,0,0.75);
+    z-index: 1;
+}
+
+#fade {
+    position: fixed;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding:0;
+    filter: alpha(opacity=0); /* INTERNET EXPLORER */
+    opacity: 0;
+    display: none;
+    z-index: 10;
+}
+
+#loginContainer {
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+
+#loginForm {
+    position: absolute;
+    float: left;
+    padding: 5px;
+    margin-top: 10%;
+    background: grey;
+    border: 1px white;
+    z-index: 20;
+    display: none;
+}
+
+#loginForm table {
+
+}
+
+#loginForm td, th {
+    padding: 5px;
+}
+
+.centeredMenuBar.ui-menubar {
+    text-align: center;
+    background: -webkit-linear-gradient(#C4433A, #5E0000); /* For Safari */
+    background: -o-linear-gradient(#C4433A, #5E0000); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#C4433A, #5E0000); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#C4433A, #5E0000); /* Standard syntax */
+    border: none;
+}
+
+.centeredMenuBar .ui-menu-list {
+    display: inline-block;
+    color: #000000;
+}
+
+.centeredMenuBar .ui-menu-child {
+    background: -webkit-linear-gradient(#C4433A, #5E0000); /* For Safari */
+    background: -o-linear-gradient(#C4433A, #5E0000); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#C4433A, #5E0000); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#C4433A, #5E0000); /* Standard syntax */
+    border: none;
+}
+
+.centeredMenuBar .ui-menuitem-text {
+    color: #000000;
+}
+
+.centeredMenuBar .ui-state-disabled {
+    opacity: 1 !important;
+}
+
+.stratego {
+    margin: 0;
+    padding: 0;
+    background: url("#{resource['css:img/stratego.png']}") no-repeat !important;
+    height: 25px;
+    width: 82px;
+ }
+
+.btn {
+    background: #C4433A;
+    background-image: -webkit-linear-gradient(top, #C4433A, #5E0000);
+    background-image: -moz-linear-gradient(top, #C4433A, #5E0000);
+    background-image: -ms-linear-gradient(top, #C4433A, #5E0000);
+    background-image: -o-linear-gradient(top, #C4433A, #5E0000);
+    background-image: linear-gradient(to bottom, #C4433A, #5E0000);
+    -webkit-border-radius: 5;
+    -moz-border-radius: 5;
+    border-radius: 5px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    border: 0px;
+}
+
+.btn:hover {
+    background: #85b2cb;
+    text-decoration: none;
+}

@@ -137,6 +137,12 @@
             <artifactId>mail</artifactId>
             <version>1.4.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>4.0</version>
+        </dependency>
     </dependencies>
 
     <build>
