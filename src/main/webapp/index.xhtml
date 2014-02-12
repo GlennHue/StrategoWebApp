@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+
+<h:head>
+    <title>Stratego</title>
+    <h:outputStylesheet library="css" name="styles.css"  />
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+    <h:outputScript library="js" name="script.js" />
+    <h:outputScript library="js" name="fblogin.js" />
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:menubar styleClass="centeredMenuBar">
+            <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
+            <p:menuitem value="Home" url="index.xhtml"/>
+            <p:menuitem value="Play" url="game.xhtml" />
+
+            <p:submenu label="Help">
+                <p:menuitem value="Instructions" url="instructions.xhtml" />
+                <p:menuitem value="FAQ" url="faq.xhtml" />
+            </p:submenu>
+
+            <p:menuitem value="Achievements" url="achievements.xhtml" />
+
+            <p:menuitem value="Login" url="#" onclick="showLogin()"/>
+        </p:menubar>
+    </h:form>
+    <div id="fade"></div>
+    <div id="loginForm">
+        <table>
+            <h:form>
+                <tr><td><h:outputLabel for="userName" value="Username: "/></td><td><h:inputText id="userName" value="#{userBean.username}" required="true"/></td></tr>
+                <tr><td><h:outputLabel for="password" value="Password: "/></td><td><h:inputSecret id="password" value="#{userBean.password}" required="true"/></td></tr>
+                <tr><td><h:commandButton value="Login" action="#{userBean.checkCredentials()}"/></td><td><fb:login-button show-faces="false" width="200" max-rows="1" autologoutlink="true"/></td></tr>
+            </h:form>
+            <h:form>
+                <tr><td><h:commandButton value="Register" action="register" /></td></tr>
+            </h:form>
+        </table>
+    </div>
+    <div id="content">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ante enim, luctus sit amet mattis ac, elementum sed quam. Nunc suscipit libero sed vulputate consectetur. Aenean fringilla turpis non quam condimentum varius. Etiam eleifend dignissim purus. Nam a ultricies odio. Quisque vel ipsum sed justo gravida mattis eget at magna. In nibh turpis, ornare non augue eu, facilisis egestas neque. Sed commodo augue ut volutpat volutpat. Nullam convallis mi et metus aliquet pretium.
+
+            Etiam eget sollicitudin urna, ut accumsan urna. Mauris faucibus lorem a pellentesque tincidunt. Suspendisse potenti. Pellentesque gravida purus in dolor molestie eleifend ac at odio. Nullam a erat elementum, sollicitudin orci in, porta lorem. Pellentesque sollicitudin ligula eget mollis laoreet. Ut sit amet turpis vel quam dapibus volutpat. Proin volutpat nisl ante, id porta nunc tristique quis. Proin a tristique ligula. Cras at auctor neque.
+
+            In hac habitasse platea dictumst. In non sem vel turpis euismod viverra vitae ac erat. Phasellus eget tempus lacus. Sed sodales enim eu purus dapibus tristique. Vivamus cursus tellus urna, id consectetur dolor pulvinar eget. Sed rhoncus tincidunt accumsan. In eget bibendum tortor. Etiam molestie euismod magna, ac venenatis elit fringilla a. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce egestas ut ligula sed vehicula. Proin vulputate arcu ac ullamcorper sagittis. Phasellus dictum orci et lacus pretium, vitae aliquam massa pellentesque. Sed molestie neque urna, in cursus purus adipiscing a.
+        </p>
+    </div>
+</h:body>
+</html>
