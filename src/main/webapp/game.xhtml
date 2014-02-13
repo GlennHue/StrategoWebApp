@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+
+<h:head>
+    <title>Stratego</title>
+    <h:outputStylesheet library="css" name="styles.css"  />
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+    <h:outputScript library="js" name="script.js" />
+    <h:outputScript library="js" name="fblogin.js" />
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:menubar styleClass="centeredMenuBar">
+            <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
+            <p:menuitem value="Home" url="index.xhtml"/>
+            <p:menuitem value="Play" url="game.xhtml" />
+
+            <p:submenu label="Help">
+                <p:menuitem value="Instructions" url="instructions.xhtml" />
+                <p:menuitem value="FAQ" url="faq.xhtml" />
+            </p:submenu>
+
+            <p:menuitem value="Achievements" url="achievements.xhtml" />
+
+            <p:menuitem value="Login" url="#" onclick="showLogin()"/>
+        </p:menubar>
+    </h:form>
+    <div id="fade"></div>
+    <div id="loginContainer">
+        <div id="loginForm">
+            <table>
+                <h:form>
+                    <tr><td><h:outputLabel for="userName" value="Username: "/></td><td><h:inputText id="userName" value="#{userBean.username}" required="true"/></td></tr>
+                    <tr><td><h:outputLabel for="password" value="Password: "/></td><td><h:inputSecret id="password" value="#{userBean.password}" required="true"/></td></tr>
+                    <tr><td><h:commandButton styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/></td><td><fb:login-button show-faces="false" width="200" max-rows="1" autologoutlink="true"/></td></tr>
+                </h:form>
+                <h:form>
+                    <tr><td><h:commandButton styleClass="btn" value="Register" action="register" /></td></tr>
+                </h:form>
+            </table>
+        </div>
+    </div>
+
+        <div id="gameboard">
+       <table>
+           <tr> <td></td><td><h:graphicImage
+                   value="./resources/css/img/piece/b0.png" alt="Flag of blue player"/></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+           <tr> <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+           <tr> <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+           <tr> <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+           <tr> <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+           <tr> <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+           <tr> <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+           <tr> <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+           <tr> <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+           <tr> <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+       </table>
+    </div>
+</h:body>
+</html>

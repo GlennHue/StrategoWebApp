@@ -6,6 +6,7 @@ package be.kdg.model;
 public class Game {
     private Board board;
     private Player[] players;
+    private int time;
 
     public Game(Player playerOne, Player playerTwo) {
         board = new Board();
@@ -15,6 +16,8 @@ public class Game {
         playerTwo.setColor(Player.Color.BLUE);
         players[1] = playerTwo;
     }
+
+
 
     public boolean setPiece(Player player, Piece piece, int x, int y) {
         if(player.getColor() == Player.Color.RED) {
@@ -61,6 +64,10 @@ public class Game {
 
     public Board getBoard() {
         return board;
+    }
+
+    public void setTime(int time){
+        this.time = time;
     }
 
     public String move(Player player, Piece piece, int x, int y) {

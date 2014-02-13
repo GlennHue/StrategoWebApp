@@ -59,6 +59,32 @@ body {
     padding: 5px;
 }
 
+#gameboard{
+
+    margin: auto;
+    margin-top: 5%;
+    background: url("#{resource['css:img/board.jpg']}") no-repeat;
+    height: 619px;
+    width: 621px;
+
+    padding-left: 6px;
+    padding-top: 5px;
+    z-index: 2;
+}
+
+#gameboard table{
+    border-spacing: 0px;
+    border: none;
+}
+
+#gameboard td{
+    width: 59px;
+    height: 59px;
+    padding: 1px 1px 1px 1px;
+
+
+}
+
 .centeredMenuBar.ui-menubar {
     text-align: center;
     background: -webkit-linear-gradient(#C4433A, #5E0000); /* For Safari */
