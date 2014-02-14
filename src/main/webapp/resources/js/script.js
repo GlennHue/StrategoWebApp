@@ -1,10 +1,9 @@
-$ = jQuery;
+$ = jQuery
 
 $(document).ready(function() {
+    $("#closeButton").click(function() {
+        $("#fade").hide();
+        $("#fade").css({ opacity: 0 });
+        $("#loginForm").hide();
+    })
 });
-
-function showLogin() {
-    $("#fade").show();
-    $("#fade").animate({ opacity: 0.75 }, 500);
-    $("#loginForm").show();
-}

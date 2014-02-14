@@ -1,3 +1,25 @@
+$ = jQuery;
+
+
+
+function showLogin() {
+    var elements = $(".ui-menuitem-text");
+    for(var i = 0;i<elements.length;i++) {
+        var element = elements[i];
+        if(element.innerHTML == "Login") {
+            $("#fade").show();
+            $("#fade").animate({ opacity: 0.75 }, 500);
+            $("#loginForm").show();
+        } else if(element.innerHTML == "Logout") {
+            FB.logout(function(response) {
+                element.innerHTML = "Login";
+                $(".visible").addClass("invisible");
+                $(".visible").removeClass("visible");
+            });
+        }
+    }
+}
+
 window.fbAsyncInit = function() {
     FB.init({
         appId      : "216993358489527",
@@ -11,9 +33,10 @@ window.fbAsyncInit = function() {
         if (response.status === 'connected') {
             testAPI();
         } else if (response.status === 'not_authorized') {
-            FB.login();
+            //FB.logout();
+            //FB.login();
         } else {
-            FB.login();
+            //FB.login();
         }
     });
 };
@@ -28,8 +51,23 @@ window.fbAsyncInit = function() {
 }(document));
 
 function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
+    $("#fade").hide();
+    $("#fade").css({ opacity: 0 });
+    $("#loginForm").hide();
+
     FB.api('/me', function(response) {
-        console.log('Good to see you, ' + response.name + '.');
+        var elements = $(".ui-menuitem-text");
+        for(var i = 0;i<elements.length;i++) {
+            var element = elements[i];
+            if(element.innerHTML == "Login") {
+                element.innerHTML = "Logout";
+            }
+
+            if(element.innerHTML =="name" || element.innerHTML == "Welcome, " + response.name) {
+                element.innerHTML = "Welcome, " + response.name;
+                $(".invisible").addClass("visible");
+                $(".invisible").removeClass("invisible");
+            }
+        }
     });
 }
