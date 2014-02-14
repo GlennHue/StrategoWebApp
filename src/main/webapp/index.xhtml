@@ -31,17 +31,20 @@
 
             <p:menuitem value="Achievements" url="achievements.xhtml" />
 
+            <p:menuitem styleClass="invisible" value="name" url="#"/>
+
             <p:menuitem value="Login" url="#" onclick="showLogin()"/>
         </p:menubar>
     </h:form>
     <div id="fade"></div>
     <div id="loginContainer">
         <div id="loginForm">
+            <div id="closeButton"></div>
             <table>
                 <h:form>
                     <tr><td><h:outputLabel for="userName" value="Username: "/></td><td><h:inputText id="userName" value="#{userBean.username}" required="true"/></td></tr>
                     <tr><td><h:outputLabel for="password" value="Password: "/></td><td><h:inputSecret id="password" value="#{userBean.password}" required="true"/></td></tr>
-                    <tr><td><h:commandButton styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/></td><td><fb:login-button show-faces="false" width="200" max-rows="1" autologoutlink="true"/></td></tr>
+                    <tr><td><h:commandButton styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/></td><td><fb:login-button max_rows="1" size="medium" show_faces="false" auto_logout_link="false"/></td></tr>
                 </h:form>
                 <h:form>
                     <tr><td><h:commandButton styleClass="btn" value="Register" action="register" /></td></tr>
@@ -50,13 +53,22 @@
         </div>
     </div>
     <div id="content">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ante enim, luctus sit amet mattis ac, elementum sed quam. Nunc suscipit libero sed vulputate consectetur. Aenean fringilla turpis non quam condimentum varius. Etiam eleifend dignissim purus. Nam a ultricies odio. Quisque vel ipsum sed justo gravida mattis eget at magna. In nibh turpis, ornare non augue eu, facilisis egestas neque. Sed commodo augue ut volutpat volutpat. Nullam convallis mi et metus aliquet pretium.
-
-            Etiam eget sollicitudin urna, ut accumsan urna. Mauris faucibus lorem a pellentesque tincidunt. Suspendisse potenti. Pellentesque gravida purus in dolor molestie eleifend ac at odio. Nullam a erat elementum, sollicitudin orci in, porta lorem. Pellentesque sollicitudin ligula eget mollis laoreet. Ut sit amet turpis vel quam dapibus volutpat. Proin volutpat nisl ante, id porta nunc tristique quis. Proin a tristique ligula. Cras at auctor neque.
-
-            In hac habitasse platea dictumst. In non sem vel turpis euismod viverra vitae ac erat. Phasellus eget tempus lacus. Sed sodales enim eu purus dapibus tristique. Vivamus cursus tellus urna, id consectetur dolor pulvinar eget. Sed rhoncus tincidunt accumsan. In eget bibendum tortor. Etiam molestie euismod magna, ac venenatis elit fringilla a. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce egestas ut ligula sed vehicula. Proin vulputate arcu ac ullamcorper sagittis. Phasellus dictum orci et lacus pretium, vitae aliquam massa pellentesque. Sed molestie neque urna, in cursus purus adipiscing a.
-        </p>
+        <div id="text">
+            <h2>Stratego</h2>
+            <p>Welkom bij Stratego, een spel vol tactiek, listen en avontuur. Volg in de voetsporen van historische generalen<br/>
+                zoals Napoleon en Wellington. Herspeel historische veldslagen na of herschrijf de geschiedenis.<br/>
+                Daag spelers van rond de wereld uit; stel je leger op en bepaal wie de grootste strateeg is.</p>
+            <p>Hou je scores bij en herbeleef gewonnen veldslagen of herbekijk verloren matchen en leer van je fouten.</p>
+            <p> De veldslag wacht, generaal!</p>
+            <p>
+                <h:form>
+                    <h:commandButton styleClass="btn" value="Registreer nu!" action="register" />
+                </h:form>
+            </p>
+        </div>
+        <div id="image">
+                <h:graphicImage library="css" name="img/generaal.png" alt="Generaal" styleClass="image"/>
+        </div>
     </div>
 </h:body>
 </html>
