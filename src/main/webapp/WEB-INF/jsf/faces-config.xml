@@ -9,5 +9,24 @@
             org.springframework.web.jsf.el.SpringBeanFacesELResolver
         </el-resolver>
     </application>
+
+
+
+    <managed-bean>
+        <managed-bean-name>dragDropBean</managed-bean-name>
+        <managed-bean-class>be.kdg.beans.DragDropBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>dragDropEventBean</managed-bean-name>
+        <managed-bean-class>be.kdg.beans.DragDropEventBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>dragDropBean</property-name>
+            <value>#{dragDropBean}</value>
+        </managed-property>
+    </managed-bean>
+
+
 </faces-config>
 

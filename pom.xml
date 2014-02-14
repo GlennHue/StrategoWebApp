@@ -11,6 +11,22 @@
     <name>StrategoWebApp</name>
     <url>http://maven.apache.org</url>
 
+    <properties>
+        <org.richfaces.bom.version>4.3.5.Final</org.richfaces.bom.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.richfaces</groupId>
+                <artifactId>richfaces-bom</artifactId>
+                <version>${org.richfaces.bom.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
         <dependency>
@@ -125,6 +141,12 @@
             <version>4.2.1.Final</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>4.1.1.4</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -143,7 +165,22 @@
             <artifactId>primefaces</artifactId>
             <version>4.0</version>
         </dependency>
+
+    <!-- RichFaces for Drag 'n' Drop -->
+
+    <dependency>
+        <groupId>org.richfaces.ui</groupId>
+        <artifactId>richfaces-components-ui</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.richfaces.core</groupId>
+        <artifactId>richfaces-core-impl</artifactId>
+    </dependency>
+
+
     </dependencies>
+
+
 
     <build>
         <finalName>JavaServerFaces</finalName>
