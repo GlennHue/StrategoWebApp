@@ -11,8 +11,10 @@ public class Piece implements Comparable<Piece>{
     private boolean isPlaced;
     private int xCoordinate;
     private int yCoordinate;
+    private String url;
 
     public Piece(int rank) {
+        url = "img/piece/b" + rank + ".png";
         this.rank = rank;
         assignName();
     }
@@ -47,6 +49,9 @@ public class Piece implements Comparable<Piece>{
         return rank;
     }
 
+    public String getUrl() {
+        return url;
+    }
 
     @Override
     public int compareTo(Piece p) {
