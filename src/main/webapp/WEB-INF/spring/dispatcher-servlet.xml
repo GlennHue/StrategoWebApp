@@ -24,4 +24,5 @@
     <!--<mvc:resources mapping="/resources/**" location="/resources/" /> -->
     <!--this will create an error for some unkown reason.-->
 
+
 </beans>
