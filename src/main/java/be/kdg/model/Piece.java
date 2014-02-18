@@ -41,9 +41,27 @@ public class Piece implements Comparable<Piece>{
         name = NameEnum.values()[rank];
     }
 
+    public void setyCoordinate(int yCoordinate) {
+        this.yCoordinate = yCoordinate;
+    }
+
+    public void setxCoordinate(int xCoordinate) {
+        this.xCoordinate = xCoordinate;
+    }
+
     public String getName() {
         return name.toString();
     }
+
+    /**public List getCoordinatesOfViableTiles(Board board) {
+        List result = new ArrayList<String>();
+        Tile left = board.getTile(xCoordinate - 1, yCoordinate);
+        Tile front = board.getTile(xCoordinate, yCoordinate + 1);
+        Tile right = board.getTile(xCoordinate + 1, yCoordinate);
+        Tile back = board.getTile(xCoordinate, yCoordinate - 1);
+        if(left.getPiece())
+        return result;
+    }  **/
 
     public int getRank() {
         return rank;

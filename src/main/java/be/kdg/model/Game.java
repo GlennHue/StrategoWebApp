@@ -30,6 +30,8 @@ public class Game {
             }
         }
         board.getTile(x, y).setPiece(piece);
+        piece.setxCoordinate(x);
+        piece.setyCoordinate(y);
         return true;
     }
 
