@@ -9,5 +9,6 @@ import android.os.Bundle;
 public class LobbyActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 }

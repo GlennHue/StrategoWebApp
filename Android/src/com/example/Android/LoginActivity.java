@@ -42,7 +42,7 @@ public class LoginActivity extends Activity {
     public void checkCredentials(View view) throws ExecutionException, InterruptedException {
        //wait until the asynctask has finished its doInBackground method.
         Object result = new sendUser().execute().get();
-
+        System.out.println(isVerified);
         if(isVerified){
             Intent intent = new Intent(this,LobbyActivity.class);
             EditText editText = (EditText)findViewById(R.id.username);
