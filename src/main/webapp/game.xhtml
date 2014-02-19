@@ -89,16 +89,17 @@
                          <td>
                              <rich:panel styleClass="dropTargetPanel">
 
+                                 <rich:dropTarget acceptedTypes="True" render="@all" dropListener="#{dragDropEventBean.processDrop}" dropValue="#{status.index}"/>
+
                              <h:panelGroup rendered="#{piece !=null}">
                              <a4j:outputPanel layout="block" styleClass="default">
-                                 <rich:dragSource type="True" dragValue="#{piece.name}" />
+                                 <rich:dragSource type="True" dragValue="#{piece}" />
 
                                  <h:graphicImage library="css" name="#{piece.url}" alt="#{piece.name}"/>
 
                              </a4j:outputPanel>
                              </h:panelGroup>
 
-                             <rich:dropTarget acceptedTypes="True" render="gameboard, src" dropListener="#{dragDropEventBean.processDrop}"/>
                              </rich:panel>
                          </td>
 
@@ -106,19 +107,23 @@
                 </tr>
             </table>
 
-   <!--      <h:dataTable id="src" value="#{dragDropBean.pieces}" var="fm">
-                <h:column>
-                    <a4j:outputPanel layout="block" styleClass="default">
-                        <rich:dragSource type="True" dragValue="#{fm.name}" />
 
-                        <h:graphicImage library="css" name="img/piece/b0.png" alt="Flag of blue player"/>
+            <!--            <p:outputLabel value="#{dragDropBean.source}"> + </p:outputLabel>
+                   <p:outputLabel value="#{dragDropBean.target}"> </p:outputLabel>
 
-                    </a4j:outputPanel>
-                </h:column>
+              <h:dataTable id="src" value="#{dragDropBean.pieces}" var="fm">
+                      <h:column>
+                          <a4j:outputPanel layout="block" styleClass="default">
+                              <rich:dragSource type="True" dragValue="#{fm.name}" />
 
-            </h:dataTable>
+                              <h:graphicImage library="css" name="img/piece/b0.png" alt="Flag of blue player"/>
 
-            <a4j:log/>    -->
+                          </a4j:outputPanel>
+                      </h:column>
+
+                  </h:dataTable>
+
+                  <a4j:log/>    -->
 
     </div>
 </h:body>

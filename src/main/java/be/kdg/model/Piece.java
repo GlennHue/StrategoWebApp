@@ -19,6 +19,13 @@ public class Piece implements Comparable<Piece>{
         assignName();
     }
 
+    public Piece(int rank , int place) {
+        url = "img/piece/b" + rank + ".png";
+        this.rank = rank;
+        xCoordinate = place;
+        assignName();
+    }
+
 
 
     public boolean isPlaced() {

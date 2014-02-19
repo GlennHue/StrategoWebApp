@@ -1,6 +1,6 @@
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -22,7 +22,7 @@ body {
     -webkit-border-radius: 20;
     -moz-border-radius: 20;
     border-radius: 20px;
-    border: 0px;
+    border: 0;
     overflow: auto;
     display: inline-block;
     text-align: left;
@@ -48,7 +48,7 @@ body {
 
 #image .image {
     margin: 20px;
-    margin-left: 0px;
+    margin-left: 0;
     border-width: 3px;
     border-color: white;
     border-style: solid;
@@ -210,7 +210,7 @@ td, th {
     font-size: 12px !important;
     padding: 5px 10px 5px 10px !important;
     text-decoration: none !important;
-    border: 0px !important;
+    border: 0 !important;
 }
 
 .btn:hover {
@@ -224,4 +224,9 @@ td, th {
 
 .visible {
     display: inline !important;
+}
+
+.green{
+
+    background: rgba(34,139,34,0.75);
 }

@@ -15,12 +15,26 @@ public class DragDropEventBean implements DropListener {
     @ManagedProperty(value = "#{dragDropBean}")
     private DragDropBean dragDropBean;
 
+
     public void setDragDropBean(DragDropBean dragDropBean) {
         this.dragDropBean = dragDropBean;
     }
 
     public void processDrop(DropEvent event) {
+
        // dragDropBean.movePiece((Piece) event.getDragValue());
-        dragDropBean.movePiece(0,25);
+      // dragDropBean.movePiece(7,25);
+        Piece piece = (Piece) event.getDragValue();
+      //  String[] parts = event.getDropValue().toString().split("=");
+      //  dragDropBean.setSource(Integer.toString(piece.getxCoordinate()));
+       // dragDropBean.setTarget(event.getDropValue().toString());
+
+      //  dragDropBean.setTarget(parts[1].split(",")[0]);
+        dragDropBean.movePiece(piece.getxCoordinate(),  Integer.parseInt(event.getDropValue().toString()));
+      //    dragDropBean.setSource(event.getDragSource().toString());
+       // dragDropBean.setTarget(event.getDropTarget().toString());
+
+
+
     }
 }

@@ -18,6 +18,8 @@ public class DragDropBean implements Serializable {
   //  private List<Piece> source;
   //  private List<Piece> target;
     private Piece[] pieces;
+    private String  source = "Source";
+    private String target = "target";
 
     public DragDropBean() {
         initList();
@@ -31,8 +33,8 @@ public class DragDropBean implements Serializable {
 
 
         for(int i = 0;i < 10; i++){
-             pieces[i] = new Piece(i);
-             pieces[i*10] = new Piece(i) ;
+             pieces[i] = new Piece(i,i);
+             pieces[i*10] = new Piece(i,i*10) ;
         }
     }
 
@@ -48,5 +50,21 @@ public class DragDropBean implements Serializable {
 
     public Piece[] getPieces() {
         return pieces;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public void setTarget(String target) {
+        this.target = target;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }
