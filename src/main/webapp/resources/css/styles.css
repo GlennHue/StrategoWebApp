@@ -230,3 +230,7 @@ td, th {
 
     background: rgba(34,139,34,0.75);
 }
+
+.drag {
+    border: none !important;
+}

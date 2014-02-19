@@ -31,6 +31,7 @@ public class DragDropEventBean implements DropListener {
 
       //  dragDropBean.setTarget(parts[1].split(",")[0]);
         dragDropBean.movePiece(piece.getxCoordinate(),  Integer.parseInt(event.getDropValue().toString()));
+      piece.setxCoordinate(Integer.parseInt(event.getDropValue().toString()));
       //    dragDropBean.setSource(event.getDragSource().toString());
        // dragDropBean.setTarget(event.getDropTarget().toString());
 
