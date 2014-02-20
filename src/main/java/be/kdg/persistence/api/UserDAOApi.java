@@ -31,6 +31,10 @@ public interface UserDAOApi {
 
     public void setUserAuthenticationCode(String username,String uuid);
 
-
     public boolean uuidIsVerified(String uuid);
+
+    public void addUser(User user);
+
+    public List getAchievementsByUsername(String username);
+
 }

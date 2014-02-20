@@ -1,7 +1,7 @@
 package be.kdg.beans;
 
 
-import be.kdg.service.api.UserService;
+import be.kdg.service.api.UserServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -24,7 +24,7 @@ public class RegisterBean implements Serializable {
     private String password;
     private String confirmPassword;
     @Autowired
-    private UserService userService;
+    private UserServiceApi userService;
 
     public String getUsername() {
         return username;

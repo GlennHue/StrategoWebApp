@@ -7,6 +7,8 @@ package be.kdg.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "T_USER")
@@ -20,6 +22,14 @@ public class User {
     private String eMail;
     private String uuid;
     private boolean verified;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable (
+            name = "T_USERACHIEVEMENTS",
+            joinColumns = {@JoinColumn(name = "userId")},
+            inverseJoinColumns = {@JoinColumn(name = "achievementId")}
+    )
+    private List<Achievement> achievements = new ArrayList<Achievement>();
 
     public User() {
     }
@@ -66,5 +76,37 @@ public class User {
 
     public void setVerified(boolean isVerified) {
         this.verified = isVerified;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
+    public List<Achievement> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(List<Achievement> achievements) {
+        this.achievements = achievements;
+    }
+
+    public void addAchievement(Achievement achievement) {
+        achievements.add(achievement);
     }
 }
