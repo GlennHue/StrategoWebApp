@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="StrategoWebApp:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="StrategoWebApp-1.0-SNAPSHOT.war">
+    <root id="archive" name="JavaServerFaces.war">
       <element id="artifact" artifact-name="StrategoWebApp:war exploded" />
     </root>
   </artifact>

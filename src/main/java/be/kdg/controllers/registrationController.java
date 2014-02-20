@@ -18,7 +18,7 @@ public class registrationController {
     private UserServiceApi userService;
     //Check if the uuid send in the verification e-mail is the same as the one in the database
     //If they are the same, set property verified to true so the user is able to login
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "/verify")
     public ModelAndView checkVerificationEmail(@RequestParam("uuid")String uuid)
     {
         if(userService.uuidIsVerified(uuid))

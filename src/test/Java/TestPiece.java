@@ -1,11 +1,7 @@
 
 
-import be.kdg.model.Piece;
-
-import static junit.framework.Assert.assertEquals;
-
 public class TestPiece {
-
+    /*
     Piece miner = new Piece(3);
     Piece colonel = new Piece(8);
     Piece bomb = new Piece(11);
@@ -65,5 +61,5 @@ public class TestPiece {
     public void testCaptureTheFlag(){
         Piece flag = new Piece(0);
         assertEquals("De waarde moet 2 zijn",2,marshal.compareTo(flag));
-    }
+    } */
 }
