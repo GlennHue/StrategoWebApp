@@ -11,7 +11,7 @@ public class Player {
     private Color color;
 
     public enum Color {
-        BLUE, RED
+        b, r
     }
 
 
@@ -42,7 +42,7 @@ public class Player {
 
     private void createPiece(int rank,int count){
         for(int i = 0;i<count;i++){
-            Piece piece = new Piece(rank);
+            Piece piece = new Piece(rank, "b");
             army.add(piece);
         }
 

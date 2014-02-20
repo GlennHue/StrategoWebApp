@@ -24,7 +24,7 @@ public class DragDropBean implements Serializable {
     private String target = "target";
 
     public DragDropBean() {
-        initList();
+        /*initList();*/
         maakLijst();
     }
 
@@ -39,7 +39,11 @@ public class DragDropBean implements Serializable {
                 tiles[i].setPiece(new Piece(i));
             }*/
             if(i<12) {
-                tiles[i].setPiece(new Piece(i));
+                if(i % 2 == 0) {
+                    tiles[i].setPiece(new Piece(i, "b"));
+                } else {
+                    tiles[i].setPiece(new Piece(i, "r"));
+                }
             }
 
             if(i == 42 || i == 43 || i == 46 || i == 47 || i == 52 || i == 53 || i == 56 || i == 57){
@@ -56,8 +60,8 @@ public class DragDropBean implements Serializable {
 
 
         for(int i = 0;i < 10; i++){
-             pieces[i] = new Piece(i,i);
-             pieces[i*10] = new Piece(i,i*10) ;
+             pieces[i] = new Piece(i,i, "r");
+             pieces[i*10] = new Piece(i,i*10, "b") ;
         }
     }
 

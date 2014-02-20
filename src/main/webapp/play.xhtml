@@ -66,7 +66,7 @@
                         </f:verbatim>
                         <f:verbatim rendered="#{tile.obstacle == true}"> &lt;td class="mark"&gt;   </f:verbatim>
                         <f:verbatim rendered="#{tile.obstacle == false}"> &lt;td&gt;  </f:verbatim>
-                        <h:panelGroup rendered="#{tile.piece !=null}">
+                        <h:panelGroup rendered="#{tile.piece != null}">
                             <div class="drag">
                                 <h:graphicImage library="css" name="#{tile.piece.url}" alt="#{tile.piece.name}"/>
                             </div>
