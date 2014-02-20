@@ -207,23 +207,34 @@ REDIPS.drag = (function () {
                     return false;
                 } else if(imgAlt != "scout") {
                     //ONLY 1 BLOCK HORIZONTAL OR VERTICAL MOVEMENT WITH OTHER PIECES EXCEPT FOR SCOUT
-                   if((rowOffset>1 || rowOffset<-1) || (columnOffset>1 || columnOffset<-1)) {
+                    if((rowOffset>1 || rowOffset<-1) || (columnOffset>1 || columnOffset<-1)) {
                         alert("NO MOVERINO MORE THAN ONE BLOKSKE PLS SEÑOR")
                         return false;
                     } else if((rowOffset >= 1 || rowOffset <= -1) && (columnOffset >= 1 || columnOffset <= -1)) {
                         alert("ALSO NO DIAGONAL MOVEMENT PLS")
                         return false;
                     }  else {
-                        return true;
+                        return checkTarget(td.source, td.target);
                     }
-                } else {
-                    //INFINITE HORIZONTAL OR VERTICAL MOVEMENT WITH SCOUT BUT NO DIAGONAL MOVEMENT
-                    if((rowOffset > 0 || rowOffset < 0) && (columnOffset > 0 || columnOffset < 0)) {
-                        alert("NO DIAGONAL MOVEMENT WITH SCOUT PLS");
-                        return false
-                    } else {
-                        return true;
-                    }
+                } else if((rowOffset > 0 || rowOffset < 0) && (columnOffset > 0 || columnOffset < 0)) {
+                    alert("NO DIAGONAL MOVEMENT WITH SCOUT PLS");
+                    return false
+                } else if((pos[2] == 2 || pos[2] == 3 || pos[2] == 6 || pos[2] == 7) && ((pos[4] <= 4 && pos[1] >= 7) || (pos[4] >= 7 && pos[1] <= 4))) {
+                    //NO HORIZONTAL WATER SKIPPING
+                    alert("NO BOAT NO OVER WATER");
+                    return false;
+                } else if((pos[1] == 5 || pos[1] == 6) && ((pos[5] == 4 || pos[5] == 5) && (pos[2] == 0 ||pos[2] == 1 || pos[2] == 8 || pos[2] == 9) )  ){
+                    //NO VERTICAL WATER SKIPPING;
+                    alert("NO BOAT NO OVER WATER");
+                    return false;
+                }   else if((pos[1] == 5 || pos[1] == 6) && ((pos[5] == 0 || pos[5] == 1) && (pos[2] > 3)) || ((pos[5] == 8 || pos[5] == 9) && (pos[2] < 8))){
+                    //NO VERTICAL WATER SKIPPING;
+                    alert("NO BOAT NO OVER WATER");
+                    return false;
+                }
+
+                else {
+                    return checkTarget(td.source, td.target);
                 }
             },
             finish : function () {},
@@ -252,6 +263,26 @@ REDIPS.drag = (function () {
         var div = source.getElementsByTagName("div")[0];
         var img = div.getElementsByTagName("img")[0];
         return img.alt.toLowerCase();
+    }
+
+    function checkTarget(source, target) {
+        var sourceDiv = source.getElementsByTagName("div")[0];
+        var sourceImg = sourceDiv.getElementsByTagName("img")[0];
+        var sourceColor = sourceImg.src.split("/")[6].substring(0,1);
+
+        try {
+            var targetDiv = target.getElementsByTagName("div")[0];
+            var targetImg = targetDiv.getElementsByTagName("img")[0];
+            var targetColor = targetImg.src.split("/")[6].substring(0,1);
+        } catch(err) {
+            return true;
+        }
+
+        if(sourceColor == targetColor) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 

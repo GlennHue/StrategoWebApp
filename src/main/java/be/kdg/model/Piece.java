@@ -13,14 +13,14 @@ public class Piece implements Comparable<Piece>{
     private int yCoordinate;
     private String url;
 
-    public Piece(int rank) {
-        url = "img/piece/b" + rank + ".png";
+    public Piece(int rank, String color) {
+        url = "img/piece/" + color + rank + ".png";
         this.rank = rank;
         assignName();
     }
 
-    public Piece(int rank , int place) {
-        url = "img/piece/b" + rank + ".png";
+    public Piece(int rank , int place, String color) {
+        url = "img/piece/" + color + rank + ".png";
         this.rank = rank;
         xCoordinate = place;
         assignName();

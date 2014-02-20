@@ -11,16 +11,16 @@ public class Game {
     public Game(Player playerOne, Player playerTwo) {
         board = new Board();
         players = new Player[2];
-        playerOne.setColor(Player.Color.RED);
+        playerOne.setColor(Player.Color.r);
         players[0] = playerOne;
-        playerTwo.setColor(Player.Color.BLUE);
+        playerTwo.setColor(Player.Color.b);
         players[1] = playerTwo;
     }
 
 
 
     public boolean setPiece(Player player, Piece piece, int x, int y) {
-        if(player.getColor() == Player.Color.RED) {
+        if(player.getColor() == Player.Color.r) {
             if(y>3) {
                 return false;
             }
@@ -38,7 +38,7 @@ public class Game {
     public void setArmy(Player player, String[] names) {
         int x = 0;
         int y = 0;
-        if (player.getColor() == Player.Color.BLUE) {
+        if (player.getColor() == Player.Color.b) {
             y = 9;
             for (int i = names.length-1; i != -1; i--) {
                 Piece currentPiece = player.getPieceByName(names[i]);
