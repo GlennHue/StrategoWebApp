@@ -9,7 +9,6 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:fb="https://www.facebook.com/2008/fbml"
       xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
@@ -18,7 +17,7 @@
     <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
     <h:outputScript library="js" name="script.js" />
     <h:outputScript library="js" name="fblogin.js" />
-    <h:outputScript library="js" name="redips-drag-min.js" />
+    <h:outputScript library="js" name="redips-drag-source.js" />
 </h:head>
 
 <h:body onload="REDIPS.drag.init()">
@@ -57,38 +56,27 @@
         </div>
     </div>
 
-        <div id="gameboard">
-    <div id="drag">
+    <div id="gameboard">
+        <div id="drag">
             <table id="src">
                 <tr>
-
-                    <ui:repeat var="piece" value="#{dragDropBean.tiles}" varStatus="status">
-
+                    <ui:repeat var="tile" value="#{dragDropBean.tiles}" varStatus="status">
                         <f:verbatim rendered="#{status.index mod 10 ==0}">
                             &lt;/tr&gt;  &lt;tr&gt;
                         </f:verbatim>
-
-
-                           <f:verbatim rendered="#{piece.obstacle == true}"> &lt;td class="mark"&gt;   </f:verbatim>
-                        <f:verbatim rendered="#{piece.obstacle == false}"> &lt;td&gt;  </f:verbatim>
-
-
-
-                                <h:panelGroup rendered="#{piece.piece !=null}">
-                                    <div class="drag">
-
-                                        <h:graphicImage library="css" name="#{piece.piece.url}" alt="#{piece.piece.name}"/>
-                                       </div>
-
-                                </h:panelGroup>
-
-
+                        <f:verbatim rendered="#{tile.obstacle == true}"> &lt;td class="mark"&gt;   </f:verbatim>
+                        <f:verbatim rendered="#{tile.obstacle == false}"> &lt;td&gt;  </f:verbatim>
+                        <h:panelGroup rendered="#{tile.piece !=null}">
+                            <div class="drag">
+                                <h:graphicImage library="css" name="#{tile.piece.url}" alt="#{tile.piece.name}"/>
+                            </div>
+                        </h:panelGroup>
                         <f:verbatim> &lt;/td&gt;  </f:verbatim>
-
                     </ui:repeat>
                 </tr>
             </table>
 
-        </div>   </div>
+        </div>
+    </div>
 </h:body>
 </html>

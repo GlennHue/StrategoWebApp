@@ -32,10 +32,13 @@ public class DragDropBean implements Serializable {
         tiles = new Tile[100];
         for(int i = 0;i < 100; i++){
             tiles[i] = new Tile();
-           if(i == 1){
+           /*if(i == 1){
                    tiles[i].setPiece(new Piece(i));
            }
             if(i == 2){
+                tiles[i].setPiece(new Piece(i));
+            }*/
+            if(i<12) {
                 tiles[i].setPiece(new Piece(i));
             }
 
