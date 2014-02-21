@@ -32,6 +32,7 @@ public class Board {
     }
 
     public void createObstacles(){
+
         tiles[42].setObstacle(true);
         tiles[43].setObstacle(true);
         tiles[46].setObstacle(true);

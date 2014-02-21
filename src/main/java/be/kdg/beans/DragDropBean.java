@@ -35,7 +35,7 @@ public class DragDropBean implements Serializable {
     /*    for(int i = 0;i < 100; i++){
       /*      tiles[i] = new Tile();            */
            /*if(i == 1){
-                   tiles[i].setPiece(new Piece(i));
+               //    tiles[i].setPiece(new Piece(i));
            }
             if(i == 2){
                 tiles[i].setPiece(new Piece(i));

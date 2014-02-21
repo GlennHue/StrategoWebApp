@@ -9,6 +9,7 @@ public class Game {
     private int time;
 
     public Game(Player playerOne, Player playerTwo) {
+
         board = new Board();
         players = new Player[2];
         playerOne.setColor(Player.Color.r);

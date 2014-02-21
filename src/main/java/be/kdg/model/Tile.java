@@ -18,6 +18,7 @@ public class Tile {
         this.obstacle = obstacle;
     }       */
 
+
     public Tile(){
         this.occupied = false;
         this.obstacle = false;
