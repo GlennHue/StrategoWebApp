@@ -31,12 +31,19 @@ function ready(button) {
     for(var i = 0; i < content.length; i += 1) {
         var source = content[i]['src']; source = source.substring(53);
         sources += source.split(".")[0] + ","; }
-    //alert(sources);
 
-    $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources);
 
-    notready = false;
-    $("#sideTable").find(".btn").addClass("ready");
+    if(content.length == 40){
+        alert(sources);
+        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources);
+
+        notready = false;
+        $("#sideTable").find(".btn").addClass("ready");
+    }    else{
+        alert("U hebt geen 40 stukken!")
+    }
+
+
     return false;
 }
 
@@ -204,7 +211,10 @@ REDIPS.drag = (function () {
             cloned : function () {},
             clonedDropped : function () {},
             clonedEnd1 : function () {},
-            clonedEnd2 : function () {},
+            clonedEnd2 : function () {
+                var img = objOld.getElementsByTagName("img")[0];
+                $(img).addClass("desaturate");
+            },
             dblClicked : function () {},
             deleted : function () {},
             dropped : function () {
@@ -237,7 +247,7 @@ REDIPS.drag = (function () {
                     }
                 } else {
                     if(pos[3] == 1) {
-                        return true;
+                        return false;
                     } else {
                         if(imgAlt == "flag" || imgAlt == "bomb") {
                             //NO MOVEMENT WITH FLAG OR BOMB
@@ -257,15 +267,15 @@ REDIPS.drag = (function () {
                         } else if((rowOffset > 0 || rowOffset < 0) && (columnOffset > 0 || columnOffset < 0)) {
                             alert("Can't move diagonal with scout");
                             return false
-                        } else if((pos[2] == 2 || pos[2] == 3 || pos[2] == 6 || pos[2] == 7) && ((pos[4] <= 4 && pos[1] >= 7) || (pos[4] >= 7 && pos[1] <= 4))) {
+                        } else if((pos[2] == 2 || pos[2] == 3 || pos[2] == 6 || pos[2] == 7) && ((pos[4] <= 3 && pos[1] >= 6) || (pos[4] >= 6 && pos[1] <= 3))) {
                             //NO HORIZONTAL WATER SKIPPING
                             alert("Can't jump over water");
                             return false;
-                        } else if((pos[1] == 5 || pos[1] == 6) && ((pos[5] == 4 || pos[5] == 5) && (pos[2] == 0 ||pos[2] == 1 || pos[2] == 8 || pos[2] == 9) )  ){
+                        } else if((pos[1] == 4 || pos[1] == 5) && ((pos[5] == 4 || pos[5] == 5) && (pos[2] == 0 ||pos[2] == 1 || pos[2] == 8 || pos[2] == 9) )  ){
                             //NO VERTICAL WATER SKIPPING;
                             alert("Can't jump over water");
                             return false;
-                        }   else if((pos[1] == 5 || pos[1] == 6) && ((pos[5] == 0 || pos[5] == 1) && (pos[2] > 3)) || ((pos[5] == 8 || pos[5] == 9) && (pos[2] < 8))){
+                        }   else if((pos[1] == 4 || pos[1] == 5) && ((pos[5] == 0 || pos[5] == 1) && (pos[2] > 3)) || ((pos[5] == 8 || pos[5] == 9) && (pos[2] < 8))){
                             //NO VERTICAL WATER SKIPPING;
                             alert("Can't jump over water");
                             return false;

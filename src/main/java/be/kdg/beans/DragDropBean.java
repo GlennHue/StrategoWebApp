@@ -39,15 +39,23 @@ public class DragDropBean implements Serializable {
            }
             if(i == 2){
                 tiles[i].setPiece(new Piece(i));
-            }
-            if(i<12) {
+            }    */
+       /* for(int i = 60;i < 70; i++){
+
+            board.getTile(i).setPiece(new Piece(1,"b"));
+            board.getTile(i+10).setPiece(new Piece(1,"b"));
+            board.getTile(i+20).setPiece(new Piece(1,"b"));
+            board.getTile(i+30).setPiece(new Piece(1,"b"));
+        }    */
+
+          /*  if(i<12) {
                 if(i % 2 == 0) {
                     tiles[i].setPiece(new Piece(i, "b"));
                 } else {
                     tiles[i].setPiece(new Piece(i, "r"));
                 }
             }
-
+           /*
             if(i == 42 || i == 43 || i == 46 || i == 47 || i == 52 || i == 53 || i == 56 || i == 57){
                 tiles[i].setObstacle(true);
             }  */
