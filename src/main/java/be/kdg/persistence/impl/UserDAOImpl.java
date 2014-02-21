@@ -48,8 +48,17 @@ public class UserDAOImpl implements UserDAOApi {
         openSessionAndTransaction();
         String queryString = "select a from User u join u.achievements a where u.username = :username";
         List achievements = session.createQuery(queryString).setString("username", username).list();
-        session.close();
+        close();
         return achievements;
+    }
+
+    @Override
+    public List<User> getFriendsByUsername(String username) {
+        openSessionAndTransaction();
+        String queryString = "select friends from User u join u.friends friends where u.username = :username";
+        List<User> users = session.createQuery(queryString).setString("username", username).list();
+        close();
+        return users;
     }
 
     @Override

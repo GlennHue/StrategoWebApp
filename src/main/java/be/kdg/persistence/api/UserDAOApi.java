@@ -37,4 +37,5 @@ public interface UserDAOApi {
 
     public List getAchievementsByUsername(String username);
 
+    public List<User> getFriendsByUsername(String username);
 }

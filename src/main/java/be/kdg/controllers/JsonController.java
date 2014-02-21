@@ -1,6 +1,11 @@
 package be.kdg.controllers;
 
 import be.kdg.model.Achievement;
+import be.kdg.model.User;
+import be.kdg.persistence.api.AchievementDAOApi;
+import be.kdg.persistence.api.UserDAOApi;
+import be.kdg.persistence.impl.AchievementDAOImpl;
+import be.kdg.persistence.impl.UserDAOImpl;
 import be.kdg.service.api.AchievementServiceApi;
 import be.kdg.service.api.UserServiceApi;
 import org.json.JSONArray;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +28,8 @@ import java.util.List;
 public class JsonController {
     @Autowired
     private UserServiceApi userService;
+
+    private boolean zever = true;
 
     @Autowired
     private AchievementServiceApi achievementService;
@@ -42,7 +50,7 @@ public class JsonController {
         jsonObjectUsers.put("users",jsonArray);
         return jsonObjectUsers.toString();
     }
-    //todo behaalde achievemtns + alle achievements, getgrindenlijst
+    //todo behaalde achievemtns + alle achievements, getvriendenlijst
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     @ResponseBody
@@ -55,9 +63,28 @@ public class JsonController {
     @RequestMapping(value = "/api/getachievements", method = RequestMethod.GET)
     @ResponseBody
     public String getAchievements(@RequestParam("username")String username){
+        if(zever)  {
+        List<Achievement> achievementArrayList = new ArrayList<Achievement>();
+        achievementArrayList.add(new Achievement("Minesweeper", "Sweep 5 mines with one miner"));
+        achievementArrayList.add(new Achievement("Win", "Win one game"));
+        achievementArrayList.add(new Achievement("more wins", "win 10 games"));
+        achievementArrayList.add(new Achievement("im a pro", "win 100 games"));
+        achievementArrayList.add(new Achievement("do you even lift bro", "beat a marshal with a spy 10 times"));
+        User user1 = new User("andy", "andy", "jefke@gmail.com");
+        user1.setVerified(true);
+        for(Achievement a : achievementArrayList) {
+            user1.addAchievement(a);
+        }
+        AchievementDAOApi achievementDAO = new AchievementDAOImpl();
+        UserDAOApi userDAO = new UserDAOImpl();
+        for(Achievement a : achievementArrayList) {
+            achievementDAO.addAchievement(a);
+        }
+        userDAO.addUser(user1);
+        zever = false;
+        }
         JSONObject resultObj = new JSONObject();
         try {
-            resultObj.put("username", username);
             List<Achievement> achievements = userService.getAchievementsByUsername(username);
             JSONArray array = new JSONArray();
             for(Achievement a : achievements) {
@@ -68,10 +95,37 @@ public class JsonController {
                 array.put(arrayElement);
             }
             resultObj.put("achievements", array);
+            resultObj.put("username", username);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return resultObj.toString();
     }
 
+    @RequestMapping(value = "api/getFriends", method = RequestMethod.GET)
+    @ResponseBody
+    public String getFriends(@RequestParam("username")String username) {
+        JSONObject resultObj = new JSONObject();
+        try{
+            List<User> friends = userService.getFriendsByUsername(username);
+            JSONArray array = new JSONArray();
+            for(User friend : friends) {
+                JSONObject arrayElement = new JSONObject();
+                arrayElement.put("id", friend.getId());
+                arrayElement.put("email", friend.geteMail());
+                arrayElement.put("username", friend.getUsername());
+                array.put(arrayElement);
+            }
+            resultObj.put("friends", array);
+            resultObj.put("username", username);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return resultObj.toString();
+    }
+
+    /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)
+    @ResponseBody
+    public String setStartPosition(@RequestParam("gameid")int gameid, )
+                                  */
 }

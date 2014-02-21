@@ -19,4 +19,6 @@ public interface UserServiceApi {
     public void setAuthenticationCode(String username,String uuid);
     public List<Achievement> getAchievementsByUsername(String username);
     boolean uuidIsVerified(String uuid);
+
+    public List<User> getFriendsByUsername(String username);
 }

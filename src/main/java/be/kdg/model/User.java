@@ -23,6 +23,14 @@ public class User {
     private String uuid;
     private boolean verified;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "T_FRIENDS",
+            joinColumns = {@JoinColumn(name = "userId")},
+            inverseJoinColumns = {@JoinColumn(name = "friendId")}
+    )
+    private List<User> friends = new ArrayList<User>();
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable (
             name = "T_USERACHIEVEMENTS",
@@ -108,5 +116,17 @@ public class User {
 
     public void addAchievement(Achievement achievement) {
         achievements.add(achievement);
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+
+    public void addFriend(User user) {
+        friends.add(user);
     }
 }

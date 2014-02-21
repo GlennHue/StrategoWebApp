@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserServiceApi {
         return userDao.uuidIsVerified(uuid);
     }
 
+    @Override
+    public List<User> getFriendsByUsername(String username) {
+        return userDao.getFriendsByUsername(username);
+    }
+
 }

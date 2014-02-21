@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-public class registrationController {
+public class RegistrationController {
     @Autowired
     private UserServiceApi userService;
     //Check if the uuid send in the verification e-mail is the same as the one in the database
