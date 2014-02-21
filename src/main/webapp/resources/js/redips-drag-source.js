@@ -23,7 +23,8 @@ $ = jQuery;
 var REDIPS = REDIPS || {};
 var notready = true;
 
-function ready() {
+function ready(button) {
+    var rd = REDIPS.drag
 
     var content = document.getElementById("gameBoard").getElementsByTagName('img');
     var sources = "";
@@ -37,7 +38,6 @@ function ready() {
     notready = false;
     $("#sideTable").find(".btn").addClass("ready");
     return false;
-
 }
 
 /**

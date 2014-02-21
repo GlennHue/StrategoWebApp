@@ -247,3 +247,7 @@ td, th {
 .drag {
     border: none !important;
 }
+
+.hidden {
+    display: none;
+}
