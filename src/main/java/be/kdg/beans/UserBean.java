@@ -2,7 +2,7 @@ package be.kdg.beans;
 
 
 import be.kdg.model.User;
-import be.kdg.service.api.UserService;
+import be.kdg.service.api.UserServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class UserBean implements Serializable{
     private String password;
     private User user;
     @Autowired
-    private UserService userService;
+    private UserServiceApi userService;
 
     public String getUsername() {
         return username;

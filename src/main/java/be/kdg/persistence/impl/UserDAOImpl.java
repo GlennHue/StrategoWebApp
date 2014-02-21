@@ -14,17 +14,18 @@ import java.util.List;
  * Created by Glenn on 6/02/14.
  */
 @Repository("userDAO")
-public class UserDAOImplementation implements UserDAOApi {
+public class UserDAOImpl implements UserDAOApi {
 
+    private Session session;
+    private Transaction tx;
 
     @Override
     public User getUserById(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
+        openSessionAndTransaction();
         String queryString = "from User u where u.id = :id";
         Query query = session.createQuery(queryString).setInteger("id", id);
         User user = (User) query.uniqueResult();
-        session.close();
+        close();
         return user;
     }
 
@@ -35,12 +36,20 @@ public class UserDAOImplementation implements UserDAOApi {
 
     @Override
     public void insertNewUser(User user) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
+        openSessionAndTransaction();
         if(!userExists(user.getUsername())) {
             session.saveOrUpdate(user);
-            tx.commit();
+            closeAndCommit();
         }
+    }
+
+    @Override
+    public List getAchievementsByUsername(String username) {
+        openSessionAndTransaction();
+        String queryString = "select a from User u join u.achievements a where u.username = :username";
+        List achievements = session.createQuery(queryString).setString("username", username).list();
+        session.close();
+        return achievements;
     }
 
     @Override
@@ -50,10 +59,9 @@ public class UserDAOImplementation implements UserDAOApi {
 
     @Override
     public void removeUser(User user) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
+        openSessionAndTransaction();
         session.delete(user);
-        tx.commit();
+        closeAndCommit();
     }
 
     @Override
@@ -74,44 +82,40 @@ public class UserDAOImplementation implements UserDAOApi {
 
     @Override
     public User getUserByUsername(String username) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
+        openSessionAndTransaction();
 
         String querystring = "from User u where u.username = :username";
         Query query = session.createQuery(querystring).setString("username", username);
         User user = (User) query.uniqueResult();
-        session.close();
+        close();
         return user;
     }
 
     @Override
     public boolean userExists(String username) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
+        openSessionAndTransaction();
 
         String queryString = "from User u where u.username = :username";
         Query query = session.createQuery(queryString).setString("username", username);
         User user = (User) query.uniqueResult();
+        close();
         return user != null;
     }
 
     @Override
     public void setUserAuthenticationCode(String username,String uuid) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
-       Query query = session.createQuery("update User u set u.uuid = :uuid" +
-               " where u.username = :username");
+        openSessionAndTransaction();
+        Query query = session.createQuery("update User u set u.uuid = :uuid" +
+                " where u.username = :username");
         query.setString("uuid",uuid);
         query.setString("username",username);
         query.executeUpdate();
-        tx.commit();
-        session.close();
+        closeAndCommit();
     }
 
     @Override
     public boolean uuidIsVerified(String uuid) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
+        openSessionAndTransaction();
 
         Query query = session.createQuery("from User u where u.uuid = :uuid");
         query.setString("uuid",uuid);
@@ -120,9 +124,30 @@ public class UserDAOImplementation implements UserDAOApi {
         {
             user.setVerified(true);
             session.saveOrUpdate(user);
-            tx.commit();
+            closeAndCommit();
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void addUser(User user) {
+        openSessionAndTransaction();
+        session.saveOrUpdate(user);
+        closeAndCommit();
+    }
+
+    private void openSessionAndTransaction(){
+        session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
+    }
+
+    private void close() {
+        session.close();
+    }
+
+    private void closeAndCommit() {
+        tx.commit();
+        session.close();
     }
 }

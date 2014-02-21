@@ -1,6 +1,8 @@
 package be.kdg.controllers;
 
-import be.kdg.service.api.UserService;
+import be.kdg.model.Achievement;
+import be.kdg.service.api.AchievementServiceApi;
+import be.kdg.service.api.UserServiceApi;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,13 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * Created by wouter on 13/02/14.
  */
 @Controller
 public class JsonController {
     @Autowired
-    private UserService userService;
+    private UserServiceApi userService;
+
+    @Autowired
+    private AchievementServiceApi achievementService;
+    //used for sending getessage to android, can be deleted after everything works
     @RequestMapping(value = "/api/users",method = RequestMethod.GET)
     @ResponseBody
     public String convertToJson() throws JSONException {
@@ -34,14 +42,36 @@ public class JsonController {
         jsonObjectUsers.put("users",jsonArray);
         return jsonObjectUsers.toString();
     }
+    //todo behaalde achievemtns + alle achievements, getgrindenlijst
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
     @ResponseBody
     public String showData(@RequestParam("username")String username,@RequestParam("password")String password) throws JSONException {
-        System.out.println(username+"!!!!!!!!!!!!!!!!!!");
         JSONObject jSonVerified = new JSONObject();
         jSonVerified.put("isVerified",userService.userIsValid(username,password));
         return jSonVerified.toString();
+    }
+
+    @RequestMapping(value = "/api/getachievements", method = RequestMethod.GET)
+    @ResponseBody
+    public String getAchievements(@RequestParam("username")String username){
+        JSONObject resultObj = new JSONObject();
+        try {
+            resultObj.put("username", username);
+            List<Achievement> achievements = userService.getAchievementsByUsername(username);
+            JSONArray array = new JSONArray();
+            for(Achievement a : achievements) {
+                JSONObject arrayElement = new JSONObject();
+                arrayElement.put("id", a.getId());
+                arrayElement.put("title", a.getTitle());
+                arrayElement.put("description", a.getDescription());
+                array.put(arrayElement);
+            }
+            resultObj.put("achievements", array);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return resultObj.toString();
     }
 
 }

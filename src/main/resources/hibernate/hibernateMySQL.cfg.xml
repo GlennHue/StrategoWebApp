@@ -26,7 +26,8 @@
         <property name="use_sql_comments">false</property>
 
         <!-- Reference to all the mapping files used -->
-        <!--<property name="hbm2ddl.auto">create-drop</property>-->
+        <property name="hbm2ddl.auto">create-drop</property>
         <mapping class="be.kdg.model.User" />
+        <mapping class="be.kdg.model.Achievement"/>
     </session-factory>
 </hibernate-configuration>

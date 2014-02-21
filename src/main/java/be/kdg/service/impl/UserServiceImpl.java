@@ -1,16 +1,19 @@
 package be.kdg.service.impl;
 
+import be.kdg.model.Achievement;
 import be.kdg.model.User;
 import be.kdg.persistence.api.UserDAOApi;
-import be.kdg.service.api.UserService;
+import be.kdg.service.api.UserServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by wouter on 6/02/14.
  */
 @Service("userService")
-public class UserServiceImplementation implements UserService {
+public class UserServiceImpl implements UserServiceApi {
     @Autowired
     private UserDAOApi userDao;
     @Override
@@ -44,13 +47,18 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
+    public List<Achievement> getAchievementsByUsername(String username) {
+        return userDao.getAchievementsByUsername(username);
+    }
+
+    @Override
     public void setAuthenticationCode(String username,String uuid) {
         userDao.setUserAuthenticationCode(username,uuid);
     }
 
     @Override
     public boolean uuidIsVerified(String uuid) {
-       return userDao.uuidIsVerified(uuid);
+        return userDao.uuidIsVerified(uuid);
     }
 
 }
