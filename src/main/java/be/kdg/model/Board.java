@@ -9,38 +9,36 @@ package be.kdg.model;
 
 public class Board {
 
-    private Tile[][] tiles;
+    private Tile[] tiles;
 
     public Board(){
-        this.tiles = new Tile[10][10];
-        for(int i = 0;i<10;i++){
-            for(int j = 0;j<10; j++){
-                tiles[i][j] = new Tile();
-            }
+        this.tiles = new Tile[100];
+        for(int i = 0;i<100;i++){
+                tiles[i]= new Tile();
         }
         createObstacles();
     }
 
-    public Tile[][] getTiles() {
+    public Tile[] getTiles() {
         return tiles;
     }
 
-    public Piece getPieceByCoordinate(int x, int y) {
-        return tiles[x][y].getPiece();
+    public Piece getPieceByCoordinate(int x) {
+        return tiles[x].getPiece();
     }
 
-    public Tile getTile(int x, int y) {
-        return tiles[x][y];
+    public Tile getTile(int x) {
+        return tiles[x];
     }
 
     public void createObstacles(){
-        tiles[2][4].setObstacle(true);
-        tiles[2][5].setObstacle(true);
-        tiles[3][4].setObstacle(true);
-        tiles[3][5].setObstacle(true);
-        tiles[6][4].setObstacle(true);
-        tiles[6][5].setObstacle(true);
-        tiles[7][4].setObstacle(true);
-        tiles[7][5].setObstacle(true);
+        tiles[42].setObstacle(true);
+        tiles[43].setObstacle(true);
+        tiles[46].setObstacle(true);
+        tiles[47].setObstacle(true);
+        tiles[52].setObstacle(true);
+        tiles[53].setObstacle(true);
+        tiles[56].setObstacle(true);
+        tiles[57].setObstacle(true);
     }
 }

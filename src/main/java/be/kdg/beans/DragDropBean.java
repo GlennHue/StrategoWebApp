@@ -1,6 +1,7 @@
 package be.kdg.beans;
 
 
+import be.kdg.model.Board;
 import be.kdg.model.Piece;
 import be.kdg.model.Tile;
 import com.google.common.collect.Lists;
@@ -19,7 +20,7 @@ public class DragDropBean implements Serializable {
   //  private List<Piece> source;
   //  private List<Piece> target;
     private Piece[] pieces;
-    private Tile[] tiles;
+    private Board board;
     private String  source = "Source";
     private String target = "target";
 
@@ -29,15 +30,16 @@ public class DragDropBean implements Serializable {
     }
 
     private void maakLijst(){
-        tiles = new Tile[100];
-        for(int i = 0;i < 100; i++){
-            tiles[i] = new Tile();
+        board = new Board();
+
+    /*    for(int i = 0;i < 100; i++){
+      /*      tiles[i] = new Tile();            */
            /*if(i == 1){
                    tiles[i].setPiece(new Piece(i));
            }
             if(i == 2){
                 tiles[i].setPiece(new Piece(i));
-            }*/
+            }
             if(i<12) {
                 if(i % 2 == 0) {
                     tiles[i].setPiece(new Piece(i, "b"));
@@ -48,8 +50,8 @@ public class DragDropBean implements Serializable {
 
             if(i == 42 || i == 43 || i == 46 || i == 47 || i == 52 || i == 53 || i == 56 || i == 57){
                 tiles[i].setObstacle(true);
-            }
-        }
+            }  */
+      //  }
     }
 
     private void initList() {
@@ -96,6 +98,6 @@ public class DragDropBean implements Serializable {
     }
 
     public Tile[] getTiles() {
-        return tiles;
+        return board.getTiles();
     }
 }

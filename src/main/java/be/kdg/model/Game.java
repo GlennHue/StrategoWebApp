@@ -29,7 +29,7 @@ public class Game {
                 return false;
             }
         }
-        board.getTile(x, y).setPiece(piece);
+        board.getTile(x).setPiece(piece);
         piece.setxCoordinate(x);
         piece.setyCoordinate(y);
         return true;
@@ -73,11 +73,11 @@ public class Game {
     }
 
     public String move(Player player, Piece piece, int x, int y) {
-        if(board.getTile(x, y).getPiece() == null) {
+        if(board.getTile(x).getPiece() == null) {
             int currentX = piece.getxCoordinate();
             int currentY = piece.getyCoordinate();
-            board.getTile(x, y).setPiece(piece);
-            board.getTile(currentX, currentY).setPiece(null);
+            board.getTile(x).setPiece(piece);
+            board.getTile(currentX).setPiece(null);
             return "";
         } else {
             return "You can't move here";

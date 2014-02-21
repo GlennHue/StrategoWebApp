@@ -12,7 +12,9 @@ import static junit.framework.Assert.assertTrue;
  */
 public class TestGame {
 
+    //Verwisselt naar 1 dimensionale array, deze test is dus veroudert.
 
+    /*
 
     private final Player playerTwo = new Player("Wouter");
     private final Player playerOne = new Player("Glenn");
@@ -79,5 +81,5 @@ public class TestGame {
         return game.getBoard().getTile(x, y).getPiece();
     }
 
-
+    */
 }
