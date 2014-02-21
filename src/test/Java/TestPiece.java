@@ -6,11 +6,11 @@ import static junit.framework.Assert.assertEquals;
 
 public class TestPiece {
 
-    Piece miner = new Piece(3);
-    Piece colonel = new Piece(8);
-    Piece bomb = new Piece(11);
-    Piece spy = new Piece(1);
-    Piece marshal = new Piece(10);
+    Piece miner = new Piece(3, "b");
+    Piece colonel = new Piece(8, "b");
+    Piece bomb = new Piece(11, "b");
+    Piece spy = new Piece(1, "b");
+    Piece marshal = new Piece(10, "b");
 
     @org.junit.Test
     public void testName() {
@@ -18,7 +18,7 @@ public class TestPiece {
                 "CAPTAIN", "MAJOR", "COLONEL","GENERAL", "MARSHAL", "BOMB"};
 
         for(int i = 0; i<12;i++) {
-            Piece piece = new Piece(i);
+            Piece piece = new Piece(i, "b");
             assertEquals("Names should be linked to the correct rank", arrayNames[i], piece.getName());
         }
     }
@@ -63,7 +63,7 @@ public class TestPiece {
 
     @org.junit.Test
     public void testCaptureTheFlag(){
-        Piece flag = new Piece(0);
+        Piece flag = new Piece(0, "b");
         assertEquals("De waarde moet 2 zijn",2,marshal.compareTo(flag));
     }
 }

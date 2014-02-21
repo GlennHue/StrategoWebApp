@@ -19,8 +19,15 @@
  * @name REDIPS
  * @description create REDIPS namespace (if is not already defined in another REDIPS package)
  */
+$ = jQuery;
 var REDIPS = REDIPS || {};
+var notready = true;
 
+function ready() {
+    notready = false;
+    $("#sideTable").find(".btn").addClass("ready");
+    return false;
+}
 
 /**
  * @namespace
@@ -189,52 +196,73 @@ REDIPS.drag = (function () {
             clonedEnd2 : function () {},
             dblClicked : function () {},
             deleted : function () {},
-            dropped : function () {},
+            dropped : function () {
+                var rd = REDIPS.drag;
+                var pos = rd.getPosition();
+                var img = $(td.target).find("div").find("img");
+
+                if(pos[3] == 1) {
+                    img.removeClass("sideImg");
+                }
+            },
             droppedBefore : function () {
                 var rd = REDIPS.drag;
                 var imgAlt = getImageAlt(td.source);
                 //pos[1] = target row index
                 //pos[2] = target column index
+                //pos[3] = source table index
                 //pos[4] = source row index
                 //pos[5] = source column index
                 var pos = rd.getPosition();
                 var rowOffset = pos[4] - pos[1];
                 var columnOffset = pos[5] - pos[2];
 
-                if(imgAlt == "flag" || imgAlt == "bomb") {
-                    //NO MOVEMENT WITH FLAG OR BOMB
-                    alert("NO MOVERINO WITH LE " + imgAlt.toUpperCase());
-                    return false;
-                } else if(imgAlt != "scout") {
-                    //ONLY 1 BLOCK HORIZONTAL OR VERTICAL MOVEMENT WITH OTHER PIECES EXCEPT FOR SCOUT
-                    if((rowOffset>1 || rowOffset<-1) || (columnOffset>1 || columnOffset<-1)) {
-                        alert("NO MOVERINO MORE THAN ONE BLOKSKE PLS SEÑOR")
-                        return false;
-                    } else if((rowOffset >= 1 || rowOffset <= -1) && (columnOffset >= 1 || columnOffset <= -1)) {
-                        alert("ALSO NO DIAGONAL MOVEMENT PLS")
-                        return false;
-                    }  else {
+                if(notready) {
+                    if(pos[1] >= 6) {
                         return checkTarget(td.source, td.target);
+                    } else {
+                        alert("Only use 4 bottom rows to setup your board.");
+                        return false;
                     }
-                } else if((rowOffset > 0 || rowOffset < 0) && (columnOffset > 0 || columnOffset < 0)) {
-                    alert("NO DIAGONAL MOVEMENT WITH SCOUT PLS");
-                    return false
-                } else if((pos[2] == 2 || pos[2] == 3 || pos[2] == 6 || pos[2] == 7) && ((pos[4] <= 4 && pos[1] >= 7) || (pos[4] >= 7 && pos[1] <= 4))) {
-                    //NO HORIZONTAL WATER SKIPPING
-                    alert("NO BOAT NO OVER WATER");
-                    return false;
-                } else if((pos[1] == 5 || pos[1] == 6) && ((pos[5] == 4 || pos[5] == 5) && (pos[2] == 0 ||pos[2] == 1 || pos[2] == 8 || pos[2] == 9) )  ){
-                    //NO VERTICAL WATER SKIPPING;
-                    alert("NO BOAT NO OVER WATER");
-                    return false;
-                }   else if((pos[1] == 5 || pos[1] == 6) && ((pos[5] == 0 || pos[5] == 1) && (pos[2] > 3)) || ((pos[5] == 8 || pos[5] == 9) && (pos[2] < 8))){
-                    //NO VERTICAL WATER SKIPPING;
-                    alert("NO BOAT NO OVER WATER");
-                    return false;
-                }
-
-                else {
-                    return checkTarget(td.source, td.target);
+                } else {
+                    if(pos[3] == 1) {
+                        return true;
+                    } else {
+                        if(imgAlt == "flag" || imgAlt == "bomb") {
+                            //NO MOVEMENT WITH FLAG OR BOMB
+                            alert("Can't move with the " + imgAlt.toUpperCase());
+                            return false;
+                        } else if(imgAlt != "scout") {
+                            //ONLY 1 BLOCK HORIZONTAL OR VERTICAL MOVEMENT WITH OTHER PIECES EXCEPT FOR SCOUT
+                            if((rowOffset>1 || rowOffset<-1) || (columnOffset>1 || columnOffset<-1)) {
+                                alert("Can't move more than one tile")
+                                return false;
+                            } else if((rowOffset >= 1 || rowOffset <= -1) && (columnOffset >= 1 || columnOffset <= -1)) {
+                                alert("Can't move diagonal")
+                                return false;
+                            }  else {
+                                return checkTarget(td.source, td.target);
+                            }
+                        } else if((rowOffset > 0 || rowOffset < 0) && (columnOffset > 0 || columnOffset < 0)) {
+                            alert("Can't move diagonal with scout");
+                            return false
+                        } else if((pos[2] == 2 || pos[2] == 3 || pos[2] == 6 || pos[2] == 7) && ((pos[4] <= 4 && pos[1] >= 7) || (pos[4] >= 7 && pos[1] <= 4))) {
+                            //NO HORIZONTAL WATER SKIPPING
+                            alert("Can't jump over water");
+                            return false;
+                        } else if((pos[1] == 5 || pos[1] == 6) && ((pos[5] == 4 || pos[5] == 5) && (pos[2] == 0 ||pos[2] == 1 || pos[2] == 8 || pos[2] == 9) )  ){
+                            //NO VERTICAL WATER SKIPPING;
+                            alert("Can't jump over water");
+                            return false;
+                        }   else if((pos[1] == 5 || pos[1] == 6) && ((pos[5] == 0 || pos[5] == 1) && (pos[2] > 3)) || ((pos[5] == 8 || pos[5] == 9) && (pos[2] < 8))){
+                            //NO VERTICAL WATER SKIPPING;
+                            alert("Can't jump over water");
+                            return false;
+                        }
+                        else {
+                            return checkTarget(td.source, td.target);
+                        }
+                    }
                 }
             },
             finish : function () {},

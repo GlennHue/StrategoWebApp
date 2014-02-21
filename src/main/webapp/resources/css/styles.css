@@ -113,48 +113,51 @@ td, th {
     margin: 0;
 }
 
-#gameboard{
-
+#gameContent {
     margin: auto;
-    margin-top: 5%;
+    margin-top: 3%;
+    overflow: auto;
+    display: inline-block;
+    text-align: left;
+    background: rgba(0,0,0,0.75);
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    border: 0;
+}
+
+#gameBoard{
+    margin-top: 20px;
     background: url("#{resource['css:img/board.jpg']}") no-repeat;
     height: 619px;
     width: 621px;
-
     padding-left: 6px;
     padding-top: 5px;
-    z-index: 2;
-}
-
-#gameboard table{
+    float: left;
     border-spacing: 0;
     border: none;
-
 }
-
-#gameboard td{
+#gameBoard td{
     width: 59px;
     height: 59px;
-    padding: 1px 1px 1px 1px;
+    padding: 0px;
 }
 
-
-#src div{
+#gameBoard div{
     width: 59px;
     height: 59px;
 }
 
 
-*.rf-p-b {
-    padding: 0 !important;
+#sideTable {
+    float: left;
+    text-align: center;
 }
 
-*.rf-p{
-    background-color : transparent !important;
-    padding: 0 !important;
-    border: none !important;
+.sideImg {
+    width: 35px;
+    height: 35px;
 }
-
 
 .centeredMenuBar.ui-menubar {
     text-align: center;
@@ -216,6 +219,16 @@ td, th {
 .btn:hover {
     background: #85b2cb !important;
     text-decoration: none !important;
+    cursor: pointer;
+}
+
+.ready {
+    background: #43C43A !important;
+    background-image: -webkit-linear-gradient(top, #43C43A, #005E00) !important;
+    background-image: -moz-linear-gradient(top, #43C43A, #005E00) !important;
+    background-image: -ms-linear-gradient(top, #43C43A, #005E00) !important;
+    background-image: -o-linear-gradient(top, #43C43A, #005E00) !important;
+    background-image: linear-gradient(to bottom, #43C43A, #005E00);
 }
 
 .invisible {
