@@ -24,9 +24,20 @@ var REDIPS = REDIPS || {};
 var notready = true;
 
 function ready() {
+
+    var content = document.getElementById("gameBoard").getElementsByTagName('img');
+    var sources = "";
+    for(var i = 0; i < content.length; i += 1) {
+        var source = content[i]['src']; source = source.substring(53);
+        sources += source.split(".")[0] + ","; }
+    //alert(sources);
+
+    $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources);
+
     notready = false;
     $("#sideTable").find(".btn").addClass("ready");
     return false;
+
 }
 
 /**
