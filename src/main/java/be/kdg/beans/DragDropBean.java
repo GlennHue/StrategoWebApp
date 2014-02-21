@@ -5,6 +5,7 @@ import be.kdg.model.Board;
 import be.kdg.model.Piece;
 import be.kdg.model.Tile;
 import com.google.common.collect.Lists;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -14,7 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 
-@ManagedBean
+@Component
 @ViewScoped
 public class DragDropBean implements Serializable {
   //  private List<Piece> source;
@@ -82,6 +83,14 @@ public class DragDropBean implements Serializable {
 
        pieces[newTile] = pieces[oldTile];
         pieces[oldTile] = null;
+    }
+
+    public void putStartPieces(String pieces){
+        String[] pieces2 = pieces.split(",");
+        Tile[] tiles = board.getTiles();
+        for (int i = 60; i<100;i++){
+            tiles[i].setPiece(new Piece(Integer.parseInt(pieces2[i-60].substring(1)), pieces2[i-60].substring(0, 1)));
+        }
     }
 
 

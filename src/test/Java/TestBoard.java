@@ -13,20 +13,18 @@ public class TestBoard {
     @org.junit.Test
     public void testGrootteBord() {
 
-        assertEquals("aantal vakjes moet 100 zijn", 100, (board.getTiles().length * board.getTiles()[0].length));
+        assertEquals("aantal vakjes moet 100 zijn", 100, board.getTiles().length);
     }
 
     @org.junit.Test
     public void testObstacles() {
 
         int countObstacles = 0;
-        for(int i = 0; i<10; i++){
-            for(int j = 0; j<10; j++){
-                if (board.getTiles()[i][j].getObstacle()) {
+        for(int i = 0; i<100; i++){
+                if (board.getTiles()[i].getObstacle()) {
                     countObstacles++;
                 }
             }
-        }
 
         assertEquals("aantal vakjes met obstakels moet 8 zijn", 8, countObstacles);
     }

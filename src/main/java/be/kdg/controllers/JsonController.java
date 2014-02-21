@@ -1,5 +1,6 @@
 package be.kdg.controllers;
 
+import be.kdg.beans.DragDropBean;
 import be.kdg.model.Achievement;
 import be.kdg.model.User;
 import be.kdg.persistence.api.AchievementDAOApi;
@@ -28,6 +29,8 @@ import java.util.List;
 public class JsonController {
     @Autowired
     private UserServiceApi userService;
+    @Autowired
+    private DragDropBean bean;
 
     private boolean zever = true;
 
@@ -122,6 +125,16 @@ public class JsonController {
             e.printStackTrace();
         }
         return resultObj.toString();
+    }
+
+    @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.GET)
+    @ResponseBody
+    public boolean setStartPosition(@RequestParam("pieces")String pieces ){
+
+        bean.putStartPieces(pieces);
+
+
+        return true;
     }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)
