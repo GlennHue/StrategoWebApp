@@ -23,9 +23,10 @@ $ = jQuery;
 var REDIPS = REDIPS || {};
 var notready = true;
 
-function ready() {
+function ready(button) {
+    var rd = REDIPS.drag
     notready = false;
-    $("#sideTable").find(".btn").addClass("ready");
+    $(button).addClass("ready");
     return false;
 }
 
@@ -193,7 +194,10 @@ REDIPS.drag = (function () {
             cloned : function () {},
             clonedDropped : function () {},
             clonedEnd1 : function () {},
-            clonedEnd2 : function () {},
+            clonedEnd2 : function () {
+                var img = objOld.getElementsByTagName("img")[0];
+                $(img).addClass("hidden");
+            },
             dblClicked : function () {},
             deleted : function () {},
             dropped : function () {
@@ -226,7 +230,7 @@ REDIPS.drag = (function () {
                     }
                 } else {
                     if(pos[3] == 1) {
-                        return true;
+                        return false;
                     } else {
                         if(imgAlt == "flag" || imgAlt == "bomb") {
                             //NO MOVEMENT WITH FLAG OR BOMB
