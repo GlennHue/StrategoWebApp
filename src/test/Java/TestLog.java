@@ -1,6 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+
 /**
  * Created by Thomas on 06/02/14.
  */
@@ -10,8 +11,8 @@ public class TestLog {
     String tPass = "testPassword";
     String tEmail = "testEmail";
     WebDriver driver = new FirefoxDriver();
-/*
-    @org.junit.Test
+
+ /*   @org.junit.Test
     public void testFouteRegister() throws InterruptedException {
         driver.get("http://localhost:8080/register.xhtml");
 
@@ -30,7 +31,7 @@ public class TestLog {
         pwField.submit();
         assertEquals("This register should fail and not switch page because the passwords do not match.", "http://localhost:8080/register.xhtml", driver.getCurrentUrl().substring(0,36));
     }*/
-/* Deze werkt nog niet maar manueel wel... gay
+/* Deze werkt manueel
     @org.junit.Test
     public void testJuisteRegister() throws InterruptedException {
 
