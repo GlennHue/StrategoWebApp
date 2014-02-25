@@ -1,9 +1,7 @@
 package be.kdg.beans;
 
 
-import be.kdg.model.Board;
-import be.kdg.model.Piece;
-import be.kdg.model.Tile;
+import be.kdg.model.*;
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +19,7 @@ public class DragDropBean implements Serializable {
   //  private List<Piece> source;
   //  private List<Piece> target;
     private Piece[] pieces;
-    private Board board;
+    private Game game;
     private String  source = "Source";
     private String target = "target";
 
@@ -31,7 +29,7 @@ public class DragDropBean implements Serializable {
     }
 
     private void maakLijst(){
-        board = new Board();
+        game = new Game(new Player("player a"), new Player("player b"));
 
     /*    for(int i = 0;i < 100; i++){
       /*      tiles[i] = new Tile();            */
@@ -87,7 +85,7 @@ public class DragDropBean implements Serializable {
 
     public void putStartPieces(String pieces){
         String[] pieces2 = pieces.split(",");
-        Tile[] tiles = board.getTiles();
+        Tile[] tiles = game.getBoard().getTiles();
         for (int i = 60; i<100;i++){
             tiles[i].setPiece(new Piece(Integer.parseInt(pieces2[i-60].substring(1)), pieces2[i-60].substring(0, 1)));
         }
@@ -115,6 +113,6 @@ public class DragDropBean implements Serializable {
     }
 
     public Tile[] getTiles() {
-        return board.getTiles();
+        return game.getBoard().getTiles();
     }
 }
