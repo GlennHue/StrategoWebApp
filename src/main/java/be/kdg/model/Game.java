@@ -9,7 +9,6 @@ public class Game {
     private int time;
 
     public Game(Player playerOne, Player playerTwo) {
-
         board = new Board();
         players = new Player[2];
         playerOne.setColor(Player.Color.r);
@@ -17,8 +16,6 @@ public class Game {
         playerTwo.setColor(Player.Color.b);
         players[1] = playerTwo;
     }
-
-
 
     public boolean setPiece(Player player, Piece piece, int x, int y) {
         if(player.getColor() == Player.Color.r) {
@@ -34,6 +31,10 @@ public class Game {
         piece.setxCoordinate(x);
         piece.setyCoordinate(y);
         return true;
+    }
+
+    public void setPlayerReady(int i) {
+        players[i].setReady(true);
     }
 
     public void setArmy(Player player, String[] names) {

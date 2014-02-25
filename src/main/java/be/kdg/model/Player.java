@@ -9,6 +9,7 @@ public class Player {
     private List<Piece> army;
     private List<Piece> graveyard;
     private Color color;
+    boolean ready;
 
     public enum Color {
         b, r
@@ -18,6 +19,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        ready = false;
         createArmy();
 
         graveyard = new ArrayList<Piece>();
@@ -26,6 +28,9 @@ public class Player {
     public int armyGetSize() {
         return army.size();
     }
+
+    public boolean getReady() { return ready; }
+    public void setReady(boolean ready) { this.ready = ready;}
 
     public String getName() {
         return name;

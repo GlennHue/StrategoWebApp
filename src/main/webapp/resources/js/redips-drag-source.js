@@ -33,7 +33,7 @@ function ready(button) {
         sources += source.split(".")[0] + ","; }
 
 
-    if(content.length == 40){
+    if(content.length>0){
         alert(sources);
         $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources);
 
@@ -42,7 +42,6 @@ function ready(button) {
     }    else{
         alert("U hebt geen 40 stukken!")
     }
-
 
     return false;
 }
@@ -271,16 +270,23 @@ REDIPS.drag = (function () {
                             //NO HORIZONTAL WATER SKIPPING
                             alert("Can't jump over water");
                             return false;
-                        } else if((pos[1] == 4 || pos[1] == 5) && ((pos[5] == 4 || pos[5] == 5) && (pos[2] == 0 ||pos[2] == 1 || pos[2] == 8 || pos[2] == 9) )  ){
+                        } else if(((pos[4] == 4 || pos[4] == 5) && (pos[5] <= 1)) && ((pos[1] == 4 || pos[1] == 5) && (pos[2] >= 4))){
                             //NO VERTICAL WATER SKIPPING;
                             alert("Can't jump over water");
                             return false;
-                        }   else if((pos[1] == 4 || pos[1] == 5) && ((pos[5] == 0 || pos[5] == 1) && (pos[2] > 3)) || ((pos[5] == 8 || pos[5] == 9) && (pos[2] < 8))){
+                        } else if(((pos[4] == 4 || pos[4] == 5) && (pos[5] >= 8)) && ((pos[1] == 4 || pos[1] == 5) && (pos[2] <= 5))){
+                            //NO VERTICAL WATER SKIPPING;
+                            alert("Can't jump over water");
+                            return false;
+                        } else if(((pos[4] == 4 || pos[4] == 5) && (pos[5] == 4 || pos[5] == 5)) && ((pos[1] == 4 || pos[1] == 5) && (pos[2] >= 8 || pos[2] <= 1))) {
                             //NO VERTICAL WATER SKIPPING;
                             alert("Can't jump over water");
                             return false;
                         }
-                        else {
+                        else if(!checkRoute(pos)){
+                            alert("Scout can't jump over other pieces");
+                            return false;
+                        } else {
                             return checkTarget(td.source, td.target);
                         }
                     }
@@ -334,6 +340,45 @@ REDIPS.drag = (function () {
         }
     }
 
+    function checkRoute(pos) {
+        var targetRow = pos[1];
+        var targetColumn = pos[2];
+        var sourceRow = pos[4];
+        var sourceColumn = pos[5];
+        var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+
+        if(targetRow - sourceRow == 0) {
+            if(targetColumn > sourceColumn) {
+                for(var i = sourceColumn+1; i<targetColumn;i++) {
+                    if(tds[targetRow + "" + i].getElementsByTagName("div")[0] != undefined) {
+                        return false;
+                    }
+                }
+            } else {
+                for(var i = targetColumn+1; i<sourceColumn;i++) {
+                    if(tds[targetRow + "" + i].getElementsByTagName("div")[0] != undefined) {
+                        return false;
+                    }
+                }
+            }
+        } else if (targetColumn - sourceColumn == 0) {
+            if(targetRow > sourceRow) {
+                for(var i = sourceRow+1; i<targetRow;i++) {
+                    if(tds[i + "" + targetColumn].getElementsByTagName("div")[0] != undefined) {
+                        return false;
+                    }
+                }
+            }  else {
+                for(var i = targetRow+1; i<sourceRow;i++) {
+                    if(tds[i + "" + targetColumn].getElementsByTagName("div")[0] != undefined) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
 
     /**
      * Drag container initialization. It should be called at least once and it's possible to call a method many times.
