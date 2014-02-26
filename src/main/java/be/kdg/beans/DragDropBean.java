@@ -3,18 +3,21 @@ package be.kdg.beans;
 
 import be.kdg.model.*;
 import com.google.common.collect.Lists;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 
 @Component
-@ViewScoped
+@SessionScoped
 public class DragDropBean implements Serializable {
   //  private List<Piece> source;
   //  private List<Piece> target;
@@ -84,6 +87,26 @@ public class DragDropBean implements Serializable {
     }
 
     public void putStartPieces(String pieces){
+        char firstChar = pieces.charAt(0);
+        if (firstChar == ('b')){
+            putStartPiecesBlue(pieces);
+        }
+        else{
+            putStartPiecesRed(pieces);
+        }
+    }
+
+    private void putStartPiecesRed(String pieces) {
+        String[] pieces2 = pieces.split(",");
+        Tile[] tiles = game.getBoard().getTiles();
+        int j = 0;
+        for (int i = 39; i>=0;i--){
+            tiles[i].setPiece(new Piece(Integer.parseInt(pieces2[j].substring(1)), pieces2[j].substring(0, 1)));
+            j++;
+        }
+    }
+
+    private void putStartPiecesBlue(String pieces) {
         String[] pieces2 = pieces.split(",");
         Tile[] tiles = game.getBoard().getTiles();
         for (int i = 60; i<100;i++){

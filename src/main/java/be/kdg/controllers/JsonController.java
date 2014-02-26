@@ -129,12 +129,12 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.GET)
     @ResponseBody
-    public boolean setStartPosition(@RequestParam("pieces")String pieces ){
+    public String setStartPosition(@RequestParam("pieces")String pieces ){
 
         bean.putStartPieces(pieces);
 
 
-        return true;
+        return "true";
     }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)

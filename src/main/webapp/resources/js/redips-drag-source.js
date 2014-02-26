@@ -35,7 +35,12 @@ function ready(button) {
 
     if(content.length>0){
         alert(sources);
-        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources);
+        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources)
+            .done(function (data) {
+                alert(data);
+            }).fail(function () {
+                alert("fail");
+            });
 
         notready = false;
         $("#sideTable").find(".btn").addClass("ready");
