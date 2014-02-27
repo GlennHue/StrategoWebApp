@@ -23,28 +23,8 @@ $ = jQuery;
 var REDIPS = REDIPS || {};
 var notready = true;
 
-function ready(button) {
-    var rd = REDIPS.drag
-
-    var content = document.getElementById("gameBoard").getElementsByTagName('img');
-    var sources = "";
-    for(var i = 0; i < content.length; i += 1) {
-        var source = content[i]['src']; source = source.substring(53);
-        sources += source.split(".")[0] + ","; }
 
 
-    if(content.length>0){
-        alert(sources);
-        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources);
-
-        notready = false;
-        $("#sideTable").find(".btn").addClass("ready");
-    }    else{
-        alert("U hebt geen 40 stukken!")
-    }
-
-    return false;
-}
 
 /**
  * @namespace
@@ -4892,6 +4872,55 @@ REDIPS.drag = (function () {
 }());
 
 
+function ready(button) {
+    var rd = REDIPS.drag
+
+    var content = document.getElementById("gameBoard").getElementsByTagName('img');
+    var sources = "";
+    for(var i = 0; i < content.length; i += 1) {
+        var source = content[i]['src']; source = source.substring(53);
+        sources += source.split(".")[0] + ","; }
+
+
+    if(content.length>0){
+        alert(sources);
+        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources)
+            .done(function(data){
+                alert(data);
+
+
+                var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+                for(var i =0; i < tds.length;i++){
+                    if(data.pieces[i].id != ""){
+                        tds[i].innerHTML = data.pieces[i].id;
+                        if(i >= 59) {
+                            tds[i].innerHTML = "<div class='drag' style='border-style: solid; cursor: move;'><img src='/javax.faces.resource/img/piece/" + data.pieces[i].id + ".png.xhtml?ln=css' alt='SPY'></div>";
+                            var div = document.getElementsByTagName('div');
+
+                            div.onmousedown = handlerOnMouseDown;
+                            div.ontouchstart = handlerOnMouseDown;
+                            div.ondblclick = handlerOnDblClick;
+
+                        }  else{
+                            tds[i].innerHTML = "<img src='/javax.faces.resource/img/piece/" + data.pieces[i].id + ".png.xhtml?ln=css' alt='SPY'>";
+
+                        }
+                    } }
+
+            })
+            .fail(function(){
+                alert("Den toiny failed");
+            });
+
+
+        notready = false;
+        $("#sideTable").find(".btn").addClass("ready");
+    }    else{
+        alert("U hebt geen 40 stukken!")
+    }
+
+    return false;
+}
 
 
 // if REDIPS.event isn't already defined (from other REDIPS file) 

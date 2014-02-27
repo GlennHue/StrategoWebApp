@@ -9,7 +9,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:fb="https://www.facebook.com/2008/fbml"
       xmlns:rich="http://richfaces.org/rich"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:a4j="http://richfaces.org/a4j">
 
 <h:head>
     <title>Stratego</title>
@@ -65,7 +65,8 @@
                     <!--<div id="tableLeft" class="sideTable">-->
                     <td class="mark">
                         <table id="sideTable" class="mark">
-                            <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return ready(this);" action="#">Ready</h:commandLink></h:form></td></tr>
+                            <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return ready(this);" action="#">Ready</h:commandLink>
+                            </h:form></td></tr>
                             <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b0.png" alt="FLAG"/></div></td></tr>
                             <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b1.png" alt="SPY"/></div></td></tr>
                             <tr><td class="mark"><div class="drag clone climit2_8"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b2.png" alt="SCOUT"/></div></td></tr>
@@ -82,7 +83,9 @@
                     </td>
                     <!--</div>-->
                     <!--<div id="gameboard">-->
+
                     <td class="mark">
+
                         <table id="gameBoard">
                             <!--<tr>-->
                                 <ui:repeat var="tile" value="#{dragDropBean.tiles}" varStatus="status">
@@ -100,7 +103,9 @@
                                 </ui:repeat>
                             <!--</tr>-->
                         </table>
+
                     </td>
+
                     <!--</div>-->
                     <!--<div id="tableRight" class="sideTable">-->
                     <td class="mark">
@@ -125,5 +130,9 @@
             </table>
         </div>
     </div>
+
+
+
+
 </h:body>
 </html>

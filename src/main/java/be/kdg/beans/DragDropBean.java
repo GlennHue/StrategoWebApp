@@ -3,6 +3,7 @@ package be.kdg.beans;
 
 import be.kdg.model.*;
 import com.google.common.collect.Lists;
+import org.primefaces.context.RequestContext;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 
 @Component
@@ -26,6 +28,7 @@ public class DragDropBean implements Serializable {
     public DragDropBean() {
         /*initList();*/
         maakLijst();
+
     }
 
     private void maakLijst(){
@@ -38,14 +41,14 @@ public class DragDropBean implements Serializable {
            }
             if(i == 2){
                 tiles[i].setPiece(new Piece(i));
-            }    */
-       /* for(int i = 60;i < 70; i++){
+            }
+       */ for(int i = 60;i < 70; i++){
 
-            board.getTile(i).setPiece(new Piece(1,"b"));
-            board.getTile(i+10).setPiece(new Piece(1,"b"));
-            board.getTile(i+20).setPiece(new Piece(1,"b"));
-            board.getTile(i+30).setPiece(new Piece(1,"b"));
-        }    */
+            game.getBoard().getTile(i).setPiece(new Piece(1,"b"));
+            game.getBoard().getTile(i + 10).setPiece(new Piece(1,"b"));
+            game.getBoard().getTile(i + 20).setPiece(new Piece(1,"b"));
+            game.getBoard().getTile(i + 30).setPiece(new Piece(1,"b"));
+        }
 
           /*  if(i<12) {
                 if(i % 2 == 0) {
@@ -89,6 +92,9 @@ public class DragDropBean implements Serializable {
         for (int i = 60; i<100;i++){
             tiles[i].setPiece(new Piece(Integer.parseInt(pieces2[i-60].substring(1)), pieces2[i-60].substring(0, 1)));
         }
+        game.getBoard().getTiles()[1].setPiece(new Piece(1,1,"r"));
+
+        source = "Er is geklikt!";
     }
 
 

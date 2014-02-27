@@ -129,12 +129,35 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.GET)
     @ResponseBody
-    public boolean setStartPosition(@RequestParam("pieces")String pieces ){
+    public String setStartPosition(@RequestParam("pieces")String pieces ){
 
         bean.putStartPieces(pieces);
+       /* ("b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1," +
+                "b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1," +
+                " , , , , , , , , , , , , , , , , , , , ," +
+                "b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1," +
+                "b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,") */
 
+        String temp = pieces + pieces;
+        String[] piecesArray = pieces.split(",");
+      //  JSONObject jsonObj = new JSONObject("{\"phonetype\":\"N95\",\"cat\":\"WP\"}");
 
-        return true;
+        JSONObject main = new JSONObject();
+        JSONArray array = new JSONArray();
+        try{ for(int i = 0; i<100;i++) {
+            JSONObject arrayElement = new JSONObject();
+            if(i > 59) {
+                arrayElement.put("id",piecesArray[i-60]);
+
+            } else if(i<40 ){ arrayElement.put("id","r2");}
+            else {
+                arrayElement.put("id", "");
+            }
+        array.put(arrayElement);
+        }
+            main.put("pieces", array); } catch (JSONException e) { e.printStackTrace(); }
+
+        return main.toString();
     }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)

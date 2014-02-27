@@ -128,19 +128,23 @@ td, th {
 
 #gameBoard{
     margin-top: 20px;
+    padding-bottom: 20px;
     background: url("#{resource['css:img/board.jpg']}") no-repeat;
     height: 619px;
     width: 621px;
-    padding-left: 6px;
-    padding-top: 5px;
+   /* padding-left: 6px;
+   // padding-top: 5px;  */
+
+    padding: 3px 5px 4px 6px;
     float: left;
-    border-spacing: 0;
-    border: none;
+    border-spacing: 0!important;
+    border: none!important;
 }
 #gameBoard td{
     width: 59px;
+    border-spacing: 0!important;
     height: 59px;
-    padding: 0px;
+    padding: 0;
 }
 
 #gameBoard div{
