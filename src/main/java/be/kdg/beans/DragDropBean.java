@@ -3,20 +3,21 @@ package be.kdg.beans;
 
 import be.kdg.model.*;
 import com.google.common.collect.Lists;
-import org.primefaces.context.RequestContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 
 @Component
-@ViewScoped
+@SessionScoped
 public class DragDropBean implements Serializable {
   //  private List<Piece> source;
   //  private List<Piece> target;
@@ -28,7 +29,6 @@ public class DragDropBean implements Serializable {
     public DragDropBean() {
         /*initList();*/
         maakLijst();
-
     }
 
     private void maakLijst(){
@@ -41,14 +41,14 @@ public class DragDropBean implements Serializable {
            }
             if(i == 2){
                 tiles[i].setPiece(new Piece(i));
-            }
-       */ for(int i = 60;i < 70; i++){
+            }    */
+       /* for(int i = 60;i < 70; i++){
 
-            game.getBoard().getTile(i).setPiece(new Piece(1,"b"));
-            game.getBoard().getTile(i + 10).setPiece(new Piece(1,"b"));
-            game.getBoard().getTile(i + 20).setPiece(new Piece(1,"b"));
-            game.getBoard().getTile(i + 30).setPiece(new Piece(1,"b"));
-        }
+            board.getTile(i).setPiece(new Piece(1,"b"));
+            board.getTile(i+10).setPiece(new Piece(1,"b"));
+            board.getTile(i+20).setPiece(new Piece(1,"b"));
+            board.getTile(i+30).setPiece(new Piece(1,"b"));
+        }    */
 
           /*  if(i<12) {
                 if(i % 2 == 0) {
@@ -87,14 +87,31 @@ public class DragDropBean implements Serializable {
     }
 
     public void putStartPieces(String pieces){
+        char firstChar = pieces.charAt(0);
+        if (firstChar == ('b')){
+            putStartPiecesBlue(pieces);
+        }
+        else{
+            putStartPiecesRed(pieces);
+        }
+    }
+
+    private void putStartPiecesRed(String pieces) {
+        String[] pieces2 = pieces.split(",");
+        Tile[] tiles = game.getBoard().getTiles();
+        int j = 0;
+        for (int i = 39; i>=0;i--){
+            tiles[i].setPiece(new Piece(Integer.parseInt(pieces2[j].substring(1)), pieces2[j].substring(0, 1)));
+            j++;
+        }
+    }
+
+    private void putStartPiecesBlue(String pieces) {
         String[] pieces2 = pieces.split(",");
         Tile[] tiles = game.getBoard().getTiles();
         for (int i = 60; i<100;i++){
             tiles[i].setPiece(new Piece(Integer.parseInt(pieces2[i-60].substring(1)), pieces2[i-60].substring(0, 1)));
         }
-        game.getBoard().getTiles()[1].setPiece(new Piece(1,1,"r"));
-
-        source = "Er is geklikt!";
     }
 
 
