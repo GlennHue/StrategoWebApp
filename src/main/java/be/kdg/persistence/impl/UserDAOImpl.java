@@ -36,8 +36,8 @@ public class UserDAOImpl implements UserDAOApi {
 
     @Override
     public void insertNewUser(User user) {
-        openSessionAndTransaction();
         if(!userExists(user.getUsername())) {
+            openSessionAndTransaction();
             session.saveOrUpdate(user);
             closeAndCommit();
         }
@@ -86,6 +86,8 @@ public class UserDAOImpl implements UserDAOApi {
     @Override
     public boolean checkLogin(String username, String password) {
         User user = getUserByUsername(username);
+        if (user != null)
+        addUser(user);
         return user != null && user.getPassword().equals(password) && user.isVerified();
     }
 

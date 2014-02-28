@@ -17,7 +17,7 @@
     <h:outputScript library="js" name="fblogin.js" />
 </h:head>
 
-<h:body>
+<h:body onload="ini()">
     <h:form>
         <p:menubar styleClass="centeredMenuBar">
             <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
@@ -31,11 +31,17 @@
 
             <p:menuitem value="Achievements" url="achievements.xhtml" />
 
-            <p:menuitem styleClass="invisible" value="name" url="#"/>
-
             <p:menuitem value="Login" url="#" onclick="showLogin()"/>
+
+            <p:menuitem value="name" styleClass="invisible" url="#"/>
+
+            <p:menuitem url="#">
+            <p:commandLink id="logName" onclick="" value="#{userBean.user.username}"/>
+            </p:menuitem>
         </p:menubar>
     </h:form>
+
+
     <div id="fade"></div>
     <div id="loginContainer">
         <div id="loginForm">
@@ -70,5 +76,7 @@
                 <h:graphicImage library="css" name="img/generaal.png" alt="Generaal" styleClass="image"/>
         </div>
     </div>
+
+    <h:form id="logoutFrm"><h:commandLink id="logoutBtn" action="#{userBean.logout()}" /> </h:form>
 </h:body>
 </html>
