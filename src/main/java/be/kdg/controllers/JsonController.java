@@ -127,49 +127,14 @@ public class JsonController {
         return resultObj.toString();
     }
 
-    @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.GET)
+    @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.POST)
     @ResponseBody
-    public String setStartPosition(@RequestParam("pieces")String pieces ){
+    public boolean setStartPosition(@RequestParam("pieces")String pieces ){
 
         bean.putStartPieces(pieces);
-        boolean ready = bean.getReady();
 
-        if(ready) {
-            return "true";
-        } else {
-            return "false";
-        }
-    }
 
-    @RequestMapping(value = "api/game/getReady", method = RequestMethod.GET)
-    @ResponseBody
-    public String getReady(){
-        boolean ready = bean.getReady();
-
-        if(ready) {
-            return "true";
-        } else {
-            return "false";
-        }
-    }
-
-    @RequestMapping(value = "api/game/setReady", method = RequestMethod.GET)
-    @ResponseBody
-    public String setReady(){
-        bean.setReady();
-
-        return "true";
-    }
-
-    @RequestMapping(value = "api/game/movePiece", method = RequestMethod.GET)
-    @ResponseBody
-    public String movePiece(@RequestParam("index")String index){
-        int newIndex = Integer.parseInt(index.split(",")[0]);
-        int oldIndex = Integer.parseInt(index.split(",")[1]);
-
-        bean.movePiece(newIndex, oldIndex);
-
-        return "true";
+        return true;
     }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)

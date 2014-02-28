@@ -5,6 +5,7 @@
 
 
 <hibernate-configuration>
+
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -13,7 +14,7 @@
         <property name="connection.password">GroepI</property>
 
         <!-- <property name="hbm2ddl.auto">create</property>    -->
-
+        <property name="hbm2ddl.auto">create</property>
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
 
@@ -26,8 +27,7 @@
         <property name="use_sql_comments">false</property>
 
         <!-- Reference to all the mapping files used -->
-        <property name="hbm2ddl.auto">create-drop</property>
-        <mapping class="be.kdg.model.User" />
+        <mapping class="be.kdg.model.User"/>
         <mapping class="be.kdg.model.Achievement"/>
     </session-factory>
 </hibernate-configuration>

@@ -16,9 +16,9 @@
        http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- activeer annotion detectie -->
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
 
-    <context:component-scan base-package="be.kdg" />
+    <context:component-scan base-package="be.kdg"/>
 
     <!-- geef de URL "/resources/**" het static content "statuut",  -->
     <!--<mvc:resources mapping="/resources/**" location="/resources/" /> -->

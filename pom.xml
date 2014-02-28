@@ -172,20 +172,19 @@
             <version>4.0</version>
         </dependency>
 
-    <!-- RichFaces for Drag 'n' Drop -->
+        <!-- RichFaces for Drag 'n' Drop -->
 
-    <dependency>
-        <groupId>org.richfaces.ui</groupId>
-        <artifactId>richfaces-components-ui</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.richfaces.core</groupId>
-        <artifactId>richfaces-core-impl</artifactId>
-    </dependency>
+        <dependency>
+            <groupId>org.richfaces.ui</groupId>
+            <artifactId>richfaces-components-ui</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.richfaces.core</groupId>
+            <artifactId>richfaces-core-impl</artifactId>
+        </dependency>
 
 
     </dependencies>
-
 
 
     <build>

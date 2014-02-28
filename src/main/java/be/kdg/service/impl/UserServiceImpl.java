@@ -16,6 +16,7 @@ import java.util.List;
 public class UserServiceImpl implements UserServiceApi {
     @Autowired
     private UserDAOApi userDao;
+
     @Override
     public User getUser(String username) {
         return userDao.getUserByUsername(username);
@@ -28,17 +29,17 @@ public class UserServiceImpl implements UserServiceApi {
 
     @Override
     public void addUser(String username, String password, String email) {
-        userDao.insertNewUser(new User(username,password,email));
+        userDao.insertNewUser(new User(username, password, email));
     }
 
     @Override
     public void updatePassword(String username, String password) {
-        userDao.updatePassword(username,password);
+        userDao.updatePassword(username, password);
     }
 
     @Override
     public void updateEmail(String username, String email) {
-        userDao.updateEmail(username,email);
+        userDao.updateEmail(username, email);
     }
 
     @Override
@@ -52,8 +53,8 @@ public class UserServiceImpl implements UserServiceApi {
     }
 
     @Override
-    public void setAuthenticationCode(String username,String uuid) {
-        userDao.setUserAuthenticationCode(username,uuid);
+    public void setAuthenticationCode(String username, String uuid) {
+        userDao.setUserAuthenticationCode(username, uuid);
     }
 
     @Override

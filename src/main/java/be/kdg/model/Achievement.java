@@ -8,7 +8,8 @@ import javax.persistence.*;
 @Table(name = "T_ACHIEVEMENT")
 @Entity
 public class Achievement {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String title;

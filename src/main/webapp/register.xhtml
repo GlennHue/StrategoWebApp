@@ -11,10 +11,10 @@
 
 <h:head>
     <title>Registreer</title>
-    <h:outputStylesheet library="css" name="styles.css"  />
-    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
-    <h:outputScript library="js" name="script.js" />
-    <h:outputScript library="js" name="fblogin.js" />
+    <h:outputStylesheet library="css" name="styles.css"/>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    <h:outputScript library="js" name="script.js"/>
+    <h:outputScript library="js" name="fblogin.js"/>
 </h:head>
 
 <h:body>
@@ -22,14 +22,14 @@
         <p:menubar styleClass="centeredMenuBar">
             <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
             <p:menuitem value="Home" url="index.xhtml"/>
-            <p:menuitem value="Play" url="game.xhtml" />
+            <p:menuitem value="Play" url="game.xhtml"/>
 
             <p:submenu label="Help">
-                <p:menuitem value="Instructions" url="instructions.xhtml" />
-                <p:menuitem value="FAQ" url="faq.xhtml" />
+                <p:menuitem value="Instructions" url="instructions.xhtml"/>
+                <p:menuitem value="FAQ" url="faq.xhtml"/>
             </p:submenu>
 
-            <p:menuitem value="Achievements" url="achievements.xhtml" />
+            <p:menuitem value="Achievements" url="achievements.xhtml"/>
 
             <p:menuitem styleClass="invisible" value="name" url="#"/>
 
@@ -42,12 +42,37 @@
             <div id="closeButton"></div>
             <table>
                 <h:form>
-                    <tr><td><h:outputLabel for="userNameLogin" value="Username: "/></td><td><h:inputText id="userNameLogin" value="#{userBean.username}" required="true"/></td></tr>
-                    <tr><td><h:outputLabel for="passwordLogin" value="Password: "/></td><td><h:inputSecret id="passwordLogin" value="#{userBean.password}" required="true"/></td></tr>
-                    <tr><td><h:commandButton styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/></td><td><fb:login-button max_rows="1" size="medium" show_faces="false" auto_logout_link="false"/></td></tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="userNameLogin" value="Username: "/>
+                        </td>
+                        <td>
+                            <h:inputText id="userNameLogin" value="#{userBean.username}" required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="passwordLogin" value="Password: "/>
+                        </td>
+                        <td>
+                            <h:inputSecret id="passwordLogin" value="#{userBean.password}" required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:commandButton styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/>
+                        </td>
+                        <td>
+                            <fb:login-button max_rows="1" size="medium" show_faces="false" auto_logout_link="false"/>
+                        </td>
+                    </tr>
                 </h:form>
                 <h:form>
-                    <tr><td><h:commandButton styleClass="btn" value="Register" action="register" /></td></tr>
+                    <tr>
+                        <td>
+                            <h:commandButton styleClass="btn" value="Register" action="register"/>
+                        </td>
+                    </tr>
                 </h:form>
             </table>
         </div>
@@ -58,24 +83,45 @@
             <h:form action="register" method="POST">
                 <table>
                     <tr>
-                        <td><h:outputLabel for="userName" value="User"/> </td>
-                        <td><h:inputText id="userName" value="#{registerBean.username}" required="true"/></td>
+                        <td>
+                            <h:outputLabel for="userName" value="User"/>
+                        </td>
+                        <td>
+                            <h:inputText id="userName" value="#{registerBean.username}" required="true"/>
+                        </td>
                     </tr>
                     <tr>
-                        <td><h:outputLabel for="email" value="E-mail"/> </td>
-                        <td><h:inputText id="email" value="#{registerBean.email}" required="true"/></td>
+                        <td>
+                            <h:outputLabel for="email" value="E-mail"/>
+                        </td>
+                        <td>
+                            <h:inputText id="email" value="#{registerBean.email}" required="true"/>
+                        </td>
                     </tr>
                     <tr>
-                        <td><h:outputLabel for="password" value="Password"/></td>
-                        <td><h:inputSecret id="password" value="#{registerBean.password}" required="true"/></td>
+                        <td>
+                            <h:outputLabel for="password" value="Password"/>
+                        </td>
+                        <td>
+                            <h:inputSecret id="password" value="#{registerBean.password}" required="true"/>
+                        </td>
                     </tr>
                     <tr>
-                        <td><h:outputLabel for="password" value="Confirm Password"/></td>
-                        <td><h:inputSecret id="passwordConfirm" value="#{registerBean.confirmPassword}" required="true"/></td>
+                        <td>
+                            <h:outputLabel for="password" value="Confirm Password"/>
+                        </td>
+                        <td>
+                            <h:inputSecret id="passwordConfirm" value="#{registerBean.confirmPassword}"
+                                           required="true"/>
+                        </td>
                     </tr>
-                    <tr><td></td></tr>
                     <tr>
-                        <td><h:commandButton value="Register now" action="#{registerBean.addNewUser}" styleClass="btn"/></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:commandButton value="Register now" action="#{registerBean.addNewUser}" styleClass="btn"/>
+                        </td>
                     </tr>
                 </table>
             </h:form>

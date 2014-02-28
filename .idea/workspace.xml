@@ -2,13 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b49df447-0925-46d4-b684-156660c13979" name="Default" comment="Added method in JSONController to get achievements by username&#10;         Added class achievement&#10;         Added a list of achievements to class User&#10;         Added achievementDAO&#10;         Added achievementService&#10;         Added class InitDB to insert testdata into database&#10;         Renamed userImplementations (service and dao)&#10;         Set hibernateMySQL.cfg.xml create property to create-drop">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/StrategoWebApp_war.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/StrategoWebApp_war.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/StrategoWebApp_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/StrategoWebApp_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/Java/TestPiece.java" afterPath="$PROJECT_DIR$/src/test/Java/TestPiece.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/controllers/RegistrationController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/wouter.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/controllers/RegistrationController.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/model/Achievement.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/model/Achievement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/AchievementDAOApi.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/AchievementDAOApi.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/beans/DragDropEventBean.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/beans/DragDropEventBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/persistence/HibernateUtil.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/persistence/HibernateUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/controllers/JsonController.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/controllers/JsonController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/model/Piece.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/model/Piece.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/model/Player.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/model/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/beans/RegisterBean.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/beans/RegisterBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/Spring-mail.xml" afterPath="$PROJECT_DIR$/src/main/resources/Spring-mail.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/StrategoWebApp.iml" afterPath="$PROJECT_DIR$/StrategoWebApp.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/Java/TestLog.java" afterPath="$PROJECT_DIR$/src/test/Java/TestLog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/Java/TestPlayer.java" afterPath="$PROJECT_DIR$/src/test/Java/TestPlayer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/model/User.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/model/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/beans/UserBean.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/beans/UserBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/UserDAOApi.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/UserDAOApi.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/UserDAOImpl.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/UserDAOImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/service/api/UserServiceApi.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/service/api/UserServiceApi.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/service/impl/UserServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/service/impl/UserServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/applicationContext.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/applicationContext.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/spring/dispatcher-servlet.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/dragndrop.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/dragndrop.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsf/faces-config.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsf/faces-config.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/fblogin.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/fblogin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/game.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/game.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/hibernate/hibernateMySQL.cfg.xml" afterPath="$PROJECT_DIR$/src/main/resources/hibernate/hibernateMySQL.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/be/kdg/controllers/registrationController.java" afterPath="$PROJECT_DIR$/src/main/java/be/kdg/controllers/registrationController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/index.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/index.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/login.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/login.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/redips-drag-min.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/redips-drag-min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/register.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/register.xhtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/script.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/resources/js/test.js" afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/verifyFailed.xhtml" afterPath="$PROJECT_DIR$/src/main/webapp/verifyFailed.xhtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StrategoWebApp.iws" />
@@ -73,82 +104,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="registrationController.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/controllers/registrationController.java">
+      <file leaf-file-name="RegistrationController.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/controllers/RegistrationController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="66" selection-start="820" selection-end="820" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestPiece.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/Java/TestPiece.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="152" selection-start="1305" selection-end="1305" vertical-scroll-proportion="0.0" vertical-offset="549" max-vertical-offset="1207">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HibernateUtil.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/HibernateUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="55" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hibernateMySQL.cfg.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate/hibernateMySQL.cfg.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="51" selection-start="1357" selection-end="1357" vertical-scroll-proportion="0.9026549" vertical-offset="0" max-vertical-offset="646">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="0" selection-start="2382" selection-end="2382" vertical-scroll-proportion="0.0" vertical-offset="1904" max-vertical-offset="2006">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AchievementServiceImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/impl/AchievementServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="0" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.0" vertical-offset="697" max-vertical-offset="799">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserDAOImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/UserDAOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="13" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="2703">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserDAOApi.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/UserDAOApi.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="17" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="782">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AchievementDAOApi.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/AchievementDAOApi.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="384" selection-end="384" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+            <state line="13" column="11" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="493">
               <folding>
                 <element signature="imports" expanded="false" />
               </folding>
@@ -156,10 +115,93 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AchievementDAOImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/AchievementDAOImpl.java">
+      <file leaf-file-name="JsonController.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/controllers/JsonController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="0" selection-start="1977" selection-end="1977" vertical-scroll-proportion="0.0" vertical-offset="671" max-vertical-offset="1292">
+            <state line="122" column="0" selection-start="5129" selection-end="5129" vertical-scroll-proportion="0.55263156" vertical-offset="1503" max-vertical-offset="1921">
+              <folding>
+                <element signature="e#1926#1939#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.xhtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/login.xhtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DragDropEventBean.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/beans/DragDropEventBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="13" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="782">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Board.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/Board.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="13" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
+              <folding>
+                <element signature="e#0#870#0" expanded="false" />
+                <element signature="e#344#345#0" expanded="false" />
+                <element signature="e#372#373#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Game.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="13" selection-start="78" selection-end="78" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="1513">
+              <folding>
+                <element signature="e#1807#1808#0" expanded="false" />
+                <element signature="e#1835#1836#0" expanded="false" />
+                <element signature="e#1871#1872#0" expanded="false" />
+                <element signature="e#1903#1904#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="13" selection-start="89" selection-end="89" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1445">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserBean.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/beans/UserBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="0" selection-start="687" selection-end="687" vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="952">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.xhtml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/index.xhtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="62" column="126" selection-start="2502" selection-end="2502" vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1870">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegisterBean.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/beans/RegisterBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="63" column="25" selection-start="1630" selection-end="1630" vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="1530">
               <folding />
             </state>
           </provider>
@@ -186,7 +228,6 @@
         <option value="$PROJECT_DIR$/src/main/Source Files/be/kdg/model/Tile.java" />
         <option value="$PROJECT_DIR$/src/main/Source Files/be/kdg/model/Board.java" />
         <option value="$PROJECT_DIR$/src/test/Java/TestBoard.java" />
-        <option value="$PROJECT_DIR$/src/main/java/be/kdg/controllers/JsonController.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/model/Achievement.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/service/api/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/service/api/AchievementServiceApi.java" />
@@ -196,12 +237,22 @@
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/UserDAOApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/AchievementDAOApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/AchievementDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/UserDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/service/api/UserServiceApi.java" />
         <option value="$PROJECT_DIR$/src/main/java/be/kdg/model/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/be/kdg/controllers/registrationController.java" />
         <option value="$PROJECT_DIR$/src/test/Java/TestPiece.java" />
+        <option value="$PROJECT_DIR$/import.sql" />
+        <option value="$PROJECT_DIR$/src/main/import.sql" />
+        <option value="$PROJECT_DIR$/src/main/resources/hibernate/import.sql" />
+        <option value="$PROJECT_DIR$/src/main/resources/import.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/UserDAOImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/hibernate/hibernateMySQL.cfg.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/beans/registrationController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/controllers/registrationController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/controllers/RegistrationController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/index.xhtml" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/beans/UserBean.java" />
+        <option value="$PROJECT_DIR$/src/main/java/be/kdg/controllers/JsonController.java" />
       </list>
     </option>
   </component>
@@ -232,12 +283,8 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="StrategoWebApp Maven Webapp" />
+          <option name="myItemId" value="StrategoWebApp" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Dependencies" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$DependenciesNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -246,21 +293,7 @@
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="StrategoWebApp Maven Webapp" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Plugins" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$PluginsNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="" />
-          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="StrategoWebApp Maven Webapp" />
+          <option name="myItemId" value="StrategoWebApp" />
           <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
@@ -273,8 +306,27 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1552" />
+    <option name="height" value="880" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>SQL</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>SqlNoDataSourceInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -304,8 +356,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -337,12 +387,26 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
+              <option name="myItemId" value="StrategoWebApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StrategoWebApp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Java" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -361,6 +425,74 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StrategoWebApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StrategoWebApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spring" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StrategoWebApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StrategoWebApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webapp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jsf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -494,6 +626,70 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="persistence" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StrategoWebApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StrategoWebApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kdg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StrategoWebApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="StrategoWebApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kdg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -530,15 +726,17 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="preferences.applicationServers" />
+    <property name="options.lastSelected" value="database.main" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -547,14 +745,20 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="be.kdg.model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\wouter\Documents\GitHub\StrategoWebApp\src\main\resources" />
+      <recent name="C:\Users\wouter\Documents\GitHub\StrategoWebApp\src\main\resources\hibernate" />
+      <recent name="C:\Users\wouter\Documents\GitHub\StrategoWebApp\src\main" />
     </key>
   </component>
   <component name="RunManager" selected="Tomcat Server.Unnamed">
@@ -908,6 +1112,12 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
+    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
+      <option name="VM_PARAMETERS" value="" />
+      <option name="USER_CFG_CLASS" />
+      <option name="CONTEXT_PROVIDER" />
+      <method />
+    </configuration>
     <configuration default="false" name="Unnamed" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.50" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -1028,40 +1238,57 @@
       <workItem from="1391695014085" duration="7300000" />
       <workItem from="1392909741463" duration="1149000" />
       <workItem from="1392911044793" duration="1792000" />
+      <workItem from="1392930730210" duration="496000" />
+      <workItem from="1392931267589" duration="142000" />
+      <workItem from="1392931887626" duration="3383000" />
+      <workItem from="1392966418157" duration="35000" />
+      <workItem from="1392966473451" duration="10117000" />
+      <workItem from="1393234763213" duration="4359000" />
+      <workItem from="1393244628185" duration="26000" />
+      <workItem from="1393246244862" duration="3209000" />
+      <workItem from="1393263981059" duration="1263000" />
+      <workItem from="1393268166198" duration="4599000" />
+      <workItem from="1393316979501" duration="3883000" />
+      <workItem from="1393397666776" duration="1215000" />
+      <workItem from="1393419838971" duration="1287000" />
+      <workItem from="1393494305035" duration="3885000" />
+      <workItem from="1393533740704" duration="777000" />
+      <workItem from="1393585799060" duration="5309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10882000" />
+    <option name="totallyTimeSpent" value="54867000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1552" height="880" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3294271" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3994812" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32805908" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32555124" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934442" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32805908" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32555124" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32877603" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32911393" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23333333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32805908" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23307292" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32555124" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1085,123 +1312,88 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="StrategoWebApp" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="StrategoWebApp" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/controllers/JsonController.java">
+    <entry file="file://$PROJECT_DIR$/src/test/Java/TestPiece.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="0" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1394">
-          <folding />
-        </state>
+        <state line="46" column="5" selection-start="1252" selection-end="1252" vertical-scroll-proportion="0.0" vertical-offset="782" max-vertical-offset="1275" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/api/UserServiceApi.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/HibernateUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="1" selection-start="713" selection-end="713" vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="459">
-          <folding />
-        </state>
+        <state line="15" column="55" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="663" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/api/AchievementServiceApi.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate/hibernateMySQL.cfg.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="425">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1173">
+        <state line="30" column="22" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="629">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="0" selection-start="2382" selection-end="2382" vertical-scroll-proportion="0.0" vertical-offset="1904" max-vertical-offset="2006">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/impl/AchievementServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.0" vertical-offset="697" max-vertical-offset="799">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/UserDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="13" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="2703">
-          <folding />
-        </state>
+        <state line="70" column="0" selection-start="1344" selection-end="1344" vertical-scroll-proportion="0.0" vertical-offset="1190" max-vertical-offset="1292" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/UserDAOApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="17" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="782">
-          <folding />
-        </state>
+        <state line="9" column="17" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="714" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/AchievementDAOApi.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/controllers/JsonController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="384" selection-end="384" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="442">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
+        <state line="59" column="0" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1394" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/AchievementDAOImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="0" selection-start="1977" selection-end="1977" vertical-scroll-proportion="0.0" vertical-offset="671" max-vertical-offset="1292">
-          <folding />
-        </state>
+        <state line="112" column="0" selection-start="2382" selection-end="2382" vertical-scroll-proportion="0.0" vertical-offset="1904" max-vertical-offset="2006" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/UserDAOApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="17" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="782" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="42" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="4607">
-          <folding />
-        </state>
+        <state line="12" column="42" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="4607" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/Java/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="392" selection-end="392" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="918">
-          <folding />
-        </state>
+        <state line="15" column="13" selection-start="392" selection-end="392" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="918" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/Java/TestBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="612">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/junit/framework/Assert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="19" selection-start="2015" selection-end="2015" vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="5865" />
+        <state line="11" column="0" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="612" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="40" selection-start="1387" selection-end="1387" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1615">
-          <folding />
-        </state>
+        <state line="36" column="40" selection-start="1387" selection-end="1387" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1615" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="18" selection-start="2418" selection-end="2419" vertical-scroll-proportion="0.0" vertical-offset="682" max-vertical-offset="1360">
-          <folding />
-        </state>
+        <state line="56" column="18" selection-start="2418" selection-end="2419" vertical-scroll-proportion="0.0" vertical-offset="682" max-vertical-offset="1360" />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar!/com/mysql/jdbc/SQLError.class">
@@ -1220,12 +1412,12 @@
           <ID>MAVEN</ID>
           <OriginalElement>StrategoWebApp:StrategoWebApp:1.0-SNAPSHOT</OriginalElement>
           <nodes>
-            <node x="" y="">org.hibernate:hibernate-core:jar:4.2.1.Final/org.jboss.logging:jboss-logging:jar:3.1.0.GA</node>
             <node x="" y="">org.hibernate:hibernate-core:jar:4.2.1.Final</node>
-            <node x="" y="">mysql:mysql-connector-java:jar:5.1.6</node>
+            <node x="" y="">org.hibernate:hibernate-core:jar:4.2.1.Final/org.jboss.logging:jboss-logging:jar:3.1.0.GA</node>
             <node x="" y="">junit:junit:jar:4.11/org.hamcrest:hamcrest-core:jar:1.3</node>
-            <node x="" y="">org.hibernate:hibernate-core:jar:4.2.1.Final/org.hibernate.common:hibernate-commons-annotations:jar:4.0.1.Final/org.jboss.logging:jboss-logging:jar:3.1.0.CR2</node>
+            <node x="" y="">mysql:mysql-connector-java:jar:5.1.6</node>
             <node x="" y="">org.hibernate:hibernate-core:jar:4.2.1.Final/dom4j:dom4j:jar:1.6.1</node>
+            <node x="" y="">org.hibernate:hibernate-core:jar:4.2.1.Final/org.hibernate.common:hibernate-commons-annotations:jar:4.0.1.Final/org.jboss.logging:jboss-logging:jar:3.1.0.CR2</node>
             <node x="" y="">org.hibernate:hibernate-core:jar:4.2.1.Final/org.javassist:javassist:jar:3.15.0-GA</node>
             <node x="" y="">org.hibernate:hibernate-core:jar:4.2.1.Final/org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:jar:1.0.1.Final</node>
             <node x="" y="">org.hibernate:hibernate-core:jar:4.2.1.Final/org.hibernate.javax.persistence:hibernate-jpa-2.0-api:jar:1.0.1.Final</node>
@@ -1246,98 +1438,201 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/Java/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="918">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11-sources.jar!/junit/framework/Assert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="19" selection-start="2015" selection-end="2015" vertical-scroll-proportion="0.0" vertical-offset="935" max-vertical-offset="5865" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="4607">
-          <folding />
-        </state>
+        <state line="15" column="0" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="918" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/Java/TestBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/Achievement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="0" selection-start="889" selection-end="889" vertical-scroll-proportion="0.0" vertical-offset="89" max-vertical-offset="731">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/impl/AchievementServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.0" vertical-offset="76" max-vertical-offset="697">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/AchievementDAOImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="0" selection-start="1977" selection-end="1977" vertical-scroll-proportion="0.0" vertical-offset="671" max-vertical-offset="1292">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/api/UserServiceApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="1" selection-start="713" selection-end="713" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/impl/UserServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="13" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1054">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="0" selection-start="2382" selection-end="2382" vertical-scroll-proportion="0.0" vertical-offset="817" max-vertical-offset="1428">
-          <folding />
-        </state>
+        <state line="11" column="0" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/UserDAOApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="17" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="748">
+        <state line="12" column="0" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="782" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/Java/TestPiece.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="5" selection-start="1178" selection-end="1178" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1207" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/HibernateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="55" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="680" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/api/UserServiceApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="19" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0" vertical-offset="37" max-vertical-offset="544" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="825" selection-end="825" vertical-scroll-proportion="0.0" vertical-offset="258" max-vertical-offset="1071" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate/hibernateMySQL.cfg.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="51" selection-start="650" selection-end="650" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="4607" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/AchievementDAOImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="13" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0" vertical-offset="513" max-vertical-offset="1156" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="26" selection-start="535" selection-end="535" vertical-scroll-proportion="0.46469247" vertical-offset="153" max-vertical-offset="1700" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/Achievement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="145" selection-end="145" vertical-scroll-proportion="0.0" vertical-offset="109" max-vertical-offset="748" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/beans/DragDropBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="13" selection-start="387" selection-end="387" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1785" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/play.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="20" selection-start="1144" selection-end="1144" vertical-scroll-proportion="0.0" vertical-offset="1865" max-vertical-offset="2278" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/img/piece/b0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/img/piece/b1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/img/piece/b2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/img/piece/r0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/img/bg.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/img/generaal.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/img/generaal2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/img/stratego.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/resources/css/img/board.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/impl/UserDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="13" selection-start="386" selection-end="386" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2567">
+        <state line="56" column="20" selection-start="1585" selection-end="1585" vertical-scroll-proportion="0.0" vertical-offset="952" max-vertical-offset="2839" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="22" selection-start="2406" selection-end="2406" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1360">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/service/api/AchievementServiceApi.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/login.xhtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/api/AchievementDAOApi.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/beans/DragDropEventBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="384" selection-end="384" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
+        <state line="12" column="13" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="186" max-vertical-offset="646">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="89" selection-end="89" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1326">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/beans/RegisterBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="25" selection-start="1630" selection-end="1630" vertical-scroll-proportion="0.0" vertical-offset="535" max-vertical-offset="1088">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.xhtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="126" selection-start="2502" selection-end="2502" vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/beans/UserBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="687" selection-end="687" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="78" selection-end="78" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1513">
+          <folding>
+            <element signature="e#1807#1808#0" expanded="false" />
+            <element signature="e#1835#1836#0" expanded="false" />
+            <element signature="e#1871#1872#0" expanded="false" />
+            <element signature="e#1903#1904#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/model/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="107" selection-end="107" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="765">
+          <folding>
+            <element signature="e#0#870#0" expanded="false" />
+            <element signature="e#344#345#0" expanded="false" />
+            <element signature="e#372#373#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/controllers/RegistrationController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="11" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0" vertical-offset="33" max-vertical-offset="493">
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
@@ -1346,36 +1641,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/controllers/JsonController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="54" selection-start="2132" selection-end="2133" vertical-scroll-proportion="0.19322033" vertical-offset="583" max-vertical-offset="1173">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/controllers/registrationController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="66" selection-start="820" selection-end="820" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/Java/TestPiece.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="152" selection-start="1305" selection-end="1305" vertical-scroll-proportion="0.0" vertical-offset="549" max-vertical-offset="1207">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/be/kdg/persistence/HibernateUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="55" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate/hibernateMySQL.cfg.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="51" selection-start="1357" selection-end="1357" vertical-scroll-proportion="0.9026549" vertical-offset="0" max-vertical-offset="646">
-          <folding />
+        <state line="122" column="0" selection-start="5129" selection-end="5129" vertical-scroll-proportion="0.55263156" vertical-offset="1503" max-vertical-offset="1921">
+          <folding>
+            <element signature="e#1926#1939#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1438,6 +1707,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -1458,6 +1728,17 @@
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
           <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>
