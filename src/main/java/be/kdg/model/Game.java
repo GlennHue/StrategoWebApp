@@ -7,6 +7,7 @@ public class Game {
     private Board board;
     private Player[] players;
     private int time;
+    private int playerCount;
 
     public Game(Player playerOne, Player playerTwo) {
         board = new Board();
@@ -15,26 +16,22 @@ public class Game {
         players[0] = playerOne;
         playerTwo.setColor(Player.Color.b);
         players[1] = playerTwo;
+        playerCount = 0;
     }
 
-    public boolean setPiece(Player player, Piece piece, int x, int y) {
-        if(player.getColor() == Player.Color.r) {
-            if(y>3) {
-                return false;
-            }
-        } else {
-            if(y<7) {
-                return false;
-            }
-        }
-        board.getTile(x).setPiece(piece);
-        piece.setxCoordinate(x);
-        piece.setyCoordinate(y);
+    public boolean setPiece(int newIndex, int oldIndex) {
+        Tile[] tiles = board.getTiles();
+        tiles[newIndex].setPiece(tiles[oldIndex].getPiece());
+        tiles[oldIndex].setPiece(null);
         return true;
     }
 
     public void setPlayerReady(int i) {
         players[i].setReady(true);
+    }
+
+    public boolean getPlayerReady(int i) {
+        return players[i].getReady();
     }
 
     public void setArmy(Player player, String[] names) {
@@ -44,7 +41,7 @@ public class Game {
             y = 9;
             for (int i = names.length-1; i != -1; i--) {
                 Piece currentPiece = player.getPieceByName(names[i]);
-                setPiece(player, currentPiece, x, y);
+                //setPiece(player, currentPiece, x, y);
                 x++;
                 if (x == 10) {
                     x = 0;
@@ -55,7 +52,7 @@ public class Game {
         } else {
             for (int i = 0; i < names.length; i++) {
                 Piece currentPiece = player.getPieceByName(names[i]);
-                setPiece(player, currentPiece, x, y);
+                //setPiece(player, currentPiece, x, y);
                 x++;
                 if (x == 10) {
                     x = 0;
@@ -85,4 +82,15 @@ public class Game {
             return "You can't move here";
         }
     }
+
+     public String getPlayerColor(int userId){
+         if(players[0].getUserId() == userId){
+             return players[0].getColor().toString();
+         }
+         else if(players[1].getUserId() == userId){
+            return players[1].getColor().toString();
+         }    else{
+             return "NO, JUST NO";
+         }
+     }
 }

@@ -9,6 +9,7 @@ public class Player {
     private List<Piece> army;
     private List<Piece> graveyard;
     private Color color;
+    private int userId;
     boolean ready;
 
     public enum Color {
@@ -17,11 +18,11 @@ public class Player {
 
 
 
-    public Player(String name) {
+    public Player(String name,int userId) {
         this.name = name;
         ready = false;
         createArmy();
-
+        this.userId = userId;
         graveyard = new ArrayList<Piece>();
     }
 
@@ -82,4 +83,8 @@ public class Player {
         this.color = color;
     }
 
+
+    public int getUserId() {
+        return userId;
+    }
 }

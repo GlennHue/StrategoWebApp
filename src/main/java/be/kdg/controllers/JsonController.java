@@ -132,32 +132,44 @@ public class JsonController {
     public String setStartPosition(@RequestParam("pieces")String pieces ){
 
         bean.putStartPieces(pieces);
-       /* ("b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1," +
-                "b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1," +
-                " , , , , , , , , , , , , , , , , , , , ," +
-                "b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1," +
-                "b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,b1,") */
+        boolean ready = bean.getReady();
 
-        String temp = pieces + pieces;
-        String[] piecesArray = pieces.split(",");
-      //  JSONObject jsonObj = new JSONObject("{\"phonetype\":\"N95\",\"cat\":\"WP\"}");
-
-        JSONObject main = new JSONObject();
-        JSONArray array = new JSONArray();
-        try{ for(int i = 0; i<100;i++) {
-            JSONObject arrayElement = new JSONObject();
-            if(i > 59) {
-                arrayElement.put("id",piecesArray[i-60]);
-
-            } else if(i<40 ){ arrayElement.put("id","r2");}
-            else {
-                arrayElement.put("id", "");
-            }
-        array.put(arrayElement);
+        if(ready) {
+            return "true";
+        } else {
+            return "false";
         }
-            main.put("pieces", array); } catch (JSONException e) { e.printStackTrace(); }
+    }
 
-        return main.toString();
+    @RequestMapping(value = "api/game/getReady", method = RequestMethod.GET)
+    @ResponseBody
+    public String getReady(){
+        boolean ready = bean.getReady();
+
+        if(ready) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
+    @RequestMapping(value = "api/game/setReady", method = RequestMethod.GET)
+    @ResponseBody
+    public String setReady(){
+        bean.setReady();
+
+        return "true";
+    }
+
+    @RequestMapping(value = "api/game/movePiece", method = RequestMethod.GET)
+    @ResponseBody
+    public String movePiece(@RequestParam("index")String index){
+        int newIndex = Integer.parseInt(index.split(",")[0]);
+        int oldIndex = Integer.parseInt(index.split(",")[1]);
+
+        bean.movePiece(newIndex, oldIndex);
+
+        return "true";
     }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)

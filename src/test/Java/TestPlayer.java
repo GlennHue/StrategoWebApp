@@ -5,7 +5,7 @@ import static junit.framework.Assert.assertEquals;
 
 public class TestPlayer {
 
-     private Player player = new Player("De Fons");
+     private Player player = new Player("De Fons",1);
     int flag=0,spy=0,scout=0,miner=0,sergeant=0,lieutenant=0,captain=0,major=0,
             colonel=0, general=0, marshal=0, bomb =0 ;
 

@@ -32,7 +32,7 @@ public class DragDropBean implements Serializable {
     }
 
     private void maakLijst(){
-        game = new Game(new Player("player a"), new Player("player b"));
+        game = new Game(new Player("player a", 1), new Player("player b",2));
 
     /*    for(int i = 0;i < 100; i++){
       /*      tiles[i] = new Tile();            */
@@ -42,13 +42,13 @@ public class DragDropBean implements Serializable {
             if(i == 2){
                 tiles[i].setPiece(new Piece(i));
             }    */
-       /* for(int i = 60;i < 70; i++){
+       for(int i = 60;i < 70; i++){
 
-            board.getTile(i).setPiece(new Piece(1,"b"));
-            board.getTile(i+10).setPiece(new Piece(1,"b"));
-            board.getTile(i+20).setPiece(new Piece(1,"b"));
-            board.getTile(i+30).setPiece(new Piece(1,"b"));
-        }    */
+            game.getBoard().getTile(i).setPiece(new Piece(1,"b"));
+           game.getBoard().getTile(i + 10).setPiece(new Piece(1,"b"));
+           game.getBoard().getTile(i + 20).setPiece(new Piece(1,"b"));
+           game.getBoard().getTile(i + 30).setPiece(new Piece(1,"b"));
+        }
 
           /*  if(i<12) {
                 if(i % 2 == 0) {
@@ -78,13 +78,12 @@ public class DragDropBean implements Serializable {
     }
 
 
-    public void movePiece(int oldTile, int newTile) {
+    public void movePiece(int newIndex, int oldIndex) {
       //  source.remove(p);
       //  target.add(p);
 
-       pieces[newTile] = pieces[oldTile];
-        pieces[oldTile] = null;
-    }
+        game.setPiece(newIndex, oldIndex);
+}
 
     public void putStartPieces(String pieces){
         char firstChar = pieces.charAt(0);
@@ -93,6 +92,20 @@ public class DragDropBean implements Serializable {
         }
         else{
             putStartPiecesRed(pieces);
+        }
+
+        game.setPlayerReady(0);
+    }
+
+    public void setReady() {
+        game.setPlayerReady(1);
+    }
+
+    public boolean getReady() {
+        if(game.getPlayerReady(0) && game.getPlayerReady(1)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -137,5 +150,11 @@ public class DragDropBean implements Serializable {
 
     public Tile[] getTiles() {
         return game.getBoard().getTiles();
+    }
+
+    public String getColor(int userId,int rank){
+
+
+        return "img/piece/" + game.getPlayerColor(userId) + rank + ".png";
     }
 }

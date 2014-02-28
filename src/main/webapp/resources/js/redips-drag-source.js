@@ -204,6 +204,21 @@ REDIPS.drag = (function () {
                 if(pos[3] == 1) {
                     img.removeClass("sideImg");
                 }
+
+                var oldIndex = pos[4] + "" + pos[5];
+                var newIndex = pos[1] + "" + pos[2];
+                var index = newIndex + "," + oldIndex;
+
+                $.getJSON("http://localhost:8080/api/game/movePiece?index=" + index)
+                    .done(function(data) {
+                        if(data == true) {
+                            alert("Piece moved")
+                            //updatePieces(newIndex, oldIndex);
+                        }
+                    })
+                    .fail(function() {
+                        alert("Move piece fail");
+                    });
             },
             droppedBefore : function () {
                 var rd = REDIPS.drag;
@@ -4872,6 +4887,8 @@ REDIPS.drag = (function () {
 }());
 
 
+var readyTimer;
+
 function ready(button) {
     var rd = REDIPS.drag
 
@@ -4882,34 +4899,22 @@ function ready(button) {
         sources += source.split(".")[0] + ","; }
 
 
-    if(content.length>0){
-        alert(sources);
+    if(content.length==40){
         $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources)
             .done(function(data){
-                alert(data);
-
-
                 var tds = document.getElementById("gameBoard").getElementsByTagName('td');
-                for(var i =0; i < tds.length;i++){
-                    if(data.pieces[i].id != ""){
-                        tds[i].innerHTML = data.pieces[i].id;
-                        if(i >= 59) {
-                            tds[i].innerHTML = "<div class='drag' style='border-style: solid; cursor: move;'><img src='/javax.faces.resource/img/piece/" + data.pieces[i].id + ".png.xhtml?ln=css' alt='SPY'></div>";
-                            var div = document.getElementsByTagName('div');
+                for(var i =0; i < 40;i++){
+                    tds[i].innerHTML = "<img src='/javax.faces.resource/img/piece/redpiece.png.xhtml?ln=css' alt='SPY'>";
+                }
 
-                            div.onmousedown = handlerOnMouseDown;
-                            div.ontouchstart = handlerOnMouseDown;
-                            div.ondblclick = handlerOnDblClick;
-
-                        }  else{
-                            tds[i].innerHTML = "<img src='/javax.faces.resource/img/piece/" + data.pieces[i].id + ".png.xhtml?ln=css' alt='SPY'>";
-
-                        }
-                    } }
-
+                if(data == true) {
+                    alert('Game start');
+                } else {
+                    readyTimer = setInterval(function(){getReady()}, 2000);
+                }
             })
             .fail(function(){
-                alert("Den toiny failed");
+                alert("Set Start Position Fail");
             });
 
 
@@ -4920,6 +4925,34 @@ function ready(button) {
     }
 
     return false;
+}
+
+function ready2() {
+    $.getJSON("http://localhost:8080/api/game/setReady")
+        .done(function(data) {
+            alert(data);
+        })
+        .fail(function() {
+            alert("READY 2 FAIL")
+        });
+
+    return false;
+}
+
+function getReady() {
+    $.getJSON("http://localhost:8080/api/game/getReady")
+        .done(function(data) {
+            if(data == true) {
+                alert("Game start");
+                document.getElementById("readyPlayer2").innerHTML = "Ready!"
+                clearInterval(readyTimer);
+            } else {
+                alert("Other player not ready yet");
+            }
+        })
+        .fail(function() {
+            alert("ready fail");
+        });
 }
 
 
