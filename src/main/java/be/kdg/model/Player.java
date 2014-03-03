@@ -5,20 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
+
     private String name;
     private List<Piece> army;
     private List<Piece> graveyard;
     private Color color;
+    private int userId;
+    boolean ready;
+
 
     public enum Color {
         b, r
     }
 
 
-    public Player(String name) {
+    public Player(String name,int userId) {
         this.name = name;
+        ready = false;
         createArmy();
-
+        this.userId = userId;
         graveyard = new ArrayList<Piece>();
     }
 
@@ -76,4 +81,11 @@ public class Player {
         this.color = color;
     }
 
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public boolean getReady() { return ready; }
+    public void setReady(boolean ready) { this.ready = ready;}
 }

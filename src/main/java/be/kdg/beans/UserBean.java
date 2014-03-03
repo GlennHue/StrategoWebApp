@@ -39,13 +39,27 @@ public class UserBean implements Serializable {
     }
 
 
-    public String checkCredentials() {
-        if (userService.userIsValid(username, password)) {
+    public String checkCredentials()
+    {
+        if(userService.userIsValid(username,password))
+        {
+            user = userService.getUser(username);
             return "index.xhtml";
         }
-
         return null;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void logout() {
+        if(user != null)
+            this.user = null;
+    }
 
 }
