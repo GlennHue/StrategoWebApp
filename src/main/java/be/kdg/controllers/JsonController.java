@@ -170,6 +170,7 @@ public class JsonController {
         bean.movePiece(newIndex, oldIndex);
 
         return "true";
+        //
     }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)
