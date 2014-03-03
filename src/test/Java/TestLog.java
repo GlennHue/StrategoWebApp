@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  */
 public class TestLog {
 
-    String tUser= "testUser";
+    String tUser = "testUser";
     String tPass = "testPassword";
     String tEmail = "testEmail";
     WebDriver driver = new FirefoxDriver();

@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Component("userBean")
 @Scope("session")
-public class UserBean implements Serializable{
+public class UserBean implements Serializable {
     private String username;
     private String password;
     private User user;
@@ -39,26 +39,13 @@ public class UserBean implements Serializable{
     }
 
 
-    public String checkCredentials()
-    {
-        if(userService.userIsValid(username,password))
-        {
-            user = userService.getUser(username);
+    public String checkCredentials() {
+        if (userService.userIsValid(username, password)) {
             return "index.xhtml";
         }
+
         return null;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void logout() {
-        if(user != null)
-        this.user = null;
-    }
 }

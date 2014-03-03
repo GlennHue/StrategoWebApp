@@ -36,8 +36,8 @@ public class UserDAOImpl implements UserDAOApi {
 
     @Override
     public void insertNewUser(User user) {
-        if(!userExists(user.getUsername())) {
-            openSessionAndTransaction();
+        openSessionAndTransaction();
+        if (!userExists(user.getUsername())) {
             session.saveOrUpdate(user);
             closeAndCommit();
         }
@@ -86,8 +86,6 @@ public class UserDAOImpl implements UserDAOApi {
     @Override
     public boolean checkLogin(String username, String password) {
         User user = getUserByUsername(username);
-        if (user != null)
-        addUser(user);
         return user != null && user.getPassword().equals(password) && user.isVerified();
     }
 
@@ -114,12 +112,12 @@ public class UserDAOImpl implements UserDAOApi {
     }
 
     @Override
-    public void setUserAuthenticationCode(String username,String uuid) {
+    public void setUserAuthenticationCode(String username, String uuid) {
         openSessionAndTransaction();
         Query query = session.createQuery("update User u set u.uuid = :uuid" +
                 " where u.username = :username");
-        query.setString("uuid",uuid);
-        query.setString("username",username);
+        query.setString("uuid", uuid);
+        query.setString("username", username);
         query.executeUpdate();
         closeAndCommit();
     }
@@ -129,10 +127,9 @@ public class UserDAOImpl implements UserDAOApi {
         openSessionAndTransaction();
 
         Query query = session.createQuery("from User u where u.uuid = :uuid");
-        query.setString("uuid",uuid);
-        User user = (User)query.uniqueResult();
-        if (user!=null)
-        {
+        query.setString("uuid", uuid);
+        User user = (User) query.uniqueResult();
+        if (user != null) {
             user.setVerified(true);
             session.saveOrUpdate(user);
             closeAndCommit();
@@ -148,7 +145,7 @@ public class UserDAOImpl implements UserDAOApi {
         closeAndCommit();
     }
 
-    private void openSessionAndTransaction(){
+    private void openSessionAndTransaction() {
         session = HibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();
     }

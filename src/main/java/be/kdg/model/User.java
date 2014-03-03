@@ -32,7 +32,7 @@ public class User {
     private List<User> friends = new ArrayList<User>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable (
+    @JoinTable(
             name = "T_USERACHIEVEMENTS",
             joinColumns = {@JoinColumn(name = "userId")},
             inverseJoinColumns = {@JoinColumn(name = "achievementId")}

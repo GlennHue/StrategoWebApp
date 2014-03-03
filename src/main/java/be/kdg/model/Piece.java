@@ -1,10 +1,12 @@
 package be.kdg.model;
 
 
-public class Piece implements Comparable<Piece>{
+public class Piece implements Comparable<Piece> {
 
-    public enum NameEnum {FLAG,SPY,SCOUT,MINER,SERGEANT,LIEUTENANT,
-        CAPTAIN,MAJOR,COLONEL,GENERAL,MARSHAL,BOMB}
+    public enum NameEnum {
+        FLAG, SPY, SCOUT, MINER, SERGEANT, LIEUTENANT,
+        CAPTAIN, MAJOR, COLONEL, GENERAL, MARSHAL, BOMB
+    }
 
     private int rank;
     private NameEnum name;
@@ -19,13 +21,12 @@ public class Piece implements Comparable<Piece>{
         assignName();
     }
 
-    public Piece(int rank , int place, String color) {
+    public Piece(int rank, int place, String color) {
         url = "img/piece/" + color + rank + ".png";
         this.rank = rank;
         xCoordinate = place;
         assignName();
     }
-
 
 
     public boolean isPlaced() {
@@ -44,7 +45,7 @@ public class Piece implements Comparable<Piece>{
         return xCoordinate;
     }
 
-    private void assignName(){
+    private void assignName() {
         name = NameEnum.values()[rank];
     }
 
@@ -60,15 +61,17 @@ public class Piece implements Comparable<Piece>{
         return name.toString();
     }
 
-    /**public List getCoordinatesOfViableTiles(Board board) {
-        List result = new ArrayList<String>();
-        Tile left = board.getTile(xCoordinate - 1, yCoordinate);
-        Tile front = board.getTile(xCoordinate, yCoordinate + 1);
-        Tile right = board.getTile(xCoordinate + 1, yCoordinate);
-        Tile back = board.getTile(xCoordinate, yCoordinate - 1);
-        if(left.getPiece())
-        return result;
-    }  **/
+    /**
+     * public List getCoordinatesOfViableTiles(Board board) {
+     * List result = new ArrayList<String>();
+     * Tile left = board.getTile(xCoordinate - 1, yCoordinate);
+     * Tile front = board.getTile(xCoordinate, yCoordinate + 1);
+     * Tile right = board.getTile(xCoordinate + 1, yCoordinate);
+     * Tile back = board.getTile(xCoordinate, yCoordinate - 1);
+     * if(left.getPiece())
+     * return result;
+     * }  *
+     */
 
     public int getRank() {
         return rank;
@@ -80,11 +83,17 @@ public class Piece implements Comparable<Piece>{
 
     @Override
     public int compareTo(Piece p) {
-        if(name == NameEnum.MINER && p.name == NameEnum.BOMB){ return 1;}
-        else if(name == NameEnum.SPY && p.name == NameEnum.MARSHAL){return 1;}
-        else if(p.name == NameEnum.FLAG){return 2;}
-        else if(rank > p.rank){return 1;}
-        else if(rank < p.rank){return -1;}
+        if (name == NameEnum.MINER && p.name == NameEnum.BOMB) {
+            return 1;
+        } else if (name == NameEnum.SPY && p.name == NameEnum.MARSHAL) {
+            return 1;
+        } else if (p.name == NameEnum.FLAG) {
+            return 2;
+        } else if (rank > p.rank) {
+            return 1;
+        } else if (rank < p.rank) {
+            return -1;
+        }
 
         return 0;
     }

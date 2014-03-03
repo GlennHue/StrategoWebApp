@@ -17,6 +17,6 @@
 
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="be.kdg" />
+    <context:component-scan base-package="be.kdg"/>
 
 </beans>

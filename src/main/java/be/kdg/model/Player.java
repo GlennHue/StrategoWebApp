@@ -9,20 +9,16 @@ public class Player {
     private List<Piece> army;
     private List<Piece> graveyard;
     private Color color;
-    private int userId;
-    boolean ready;
 
     public enum Color {
         b, r
     }
 
 
-
-    public Player(String name,int userId) {
+    public Player(String name) {
         this.name = name;
-        ready = false;
         createArmy();
-        this.userId = userId;
+
         graveyard = new ArrayList<Piece>();
     }
 
@@ -30,24 +26,21 @@ public class Player {
         return army.size();
     }
 
-    public boolean getReady() { return ready; }
-    public void setReady(boolean ready) { this.ready = ready;}
-
     public String getName() {
         return name;
     }
 
-    private void createArmy(){
+    private void createArmy() {
         army = new ArrayList<Piece>();
-        int[] countPieces = {1,1,8,5,4,4,4,3,2,1,1,6};
+        int[] countPieces = {1, 1, 8, 5, 4, 4, 4, 3, 2, 1, 1, 6};
 
-        for(int i = 0;i < countPieces.length;i++) {
-            createPiece(i,countPieces[i]);
+        for (int i = 0; i < countPieces.length; i++) {
+            createPiece(i, countPieces[i]);
         }
     }
 
-    private void createPiece(int rank,int count){
-        for(int i = 0;i<count;i++){
+    private void createPiece(int rank, int count) {
+        for (int i = 0; i < count; i++) {
             Piece piece = new Piece(rank, "b");
             army.add(piece);
         }
@@ -75,7 +68,7 @@ public class Player {
         return graveyard.size();
     }
 
-   public Color getColor() {
+    public Color getColor() {
         return color;
     }
 
@@ -83,8 +76,4 @@ public class Player {
         this.color = color;
     }
 
-
-    public int getUserId() {
-        return userId;
-    }
 }

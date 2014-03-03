@@ -13,7 +13,7 @@ public interface UserDAOApi {
 
     public User getUserByEmail(String email);
 
-    public void insertNewUser (User user);
+    public void insertNewUser(User user);
 
     public List<User> getAllUsers();
 
@@ -29,7 +29,7 @@ public interface UserDAOApi {
 
     public boolean userExists(String username);
 
-    public void setUserAuthenticationCode(String username,String uuid);
+    public void setUserAuthenticationCode(String username, String uuid);
 
     public boolean uuidIsVerified(String uuid);
 

@@ -14,7 +14,7 @@
 </h:head>
 
 <h:body>
-    <h:outputScript library="js" name="fblogin.js" />
+    <h:outputScript library="js" name="fblogin.js"/>
     <div id="fb-root"></div>
     <h2>Login</h2>
     <h:form>
@@ -26,7 +26,7 @@
 
         <h:commandButton value="Login" action="#{userBean.checkCredentials()}"/>
 
-        <h:commandButton value="Register" action="register" />
+        <h:commandButton value="Register" action="register"/>
     </h:form>
     <fb:login-button show-faces="true" width="200" max-rows="1" autologoutlink="true"/>
 </h:body>

@@ -18,5 +18,4 @@ public interface AchievementDAOApi {
     public Achievement getAchievementById(int id);
 
 
-
 }
