@@ -55,7 +55,9 @@ public class JsonController {
     }
     //todo behaalde achievemtns + alle achievements, getvriendenlijst
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
+
+
+    @RequestMapping(value = "/api/verifyuser", method = RequestMethod.POST)
     @ResponseBody
     public String showData(@RequestParam("username")String username,@RequestParam("password")String password) throws JSONException {
         JSONObject jSonVerified = new JSONObject();
@@ -129,12 +131,14 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.POST)
     @ResponseBody
-    public boolean setStartPosition(@RequestParam("pieces")String pieces ){
+    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("username")String username ) throws JSONException {
+        JSONObject jSonVerified = new JSONObject();
+        if (pieces != null && !pieces.isEmpty() && username != null && !username.isEmpty()) {
+            bean.putStartPieces(pieces);
+            return jSonVerified.put("verified",true).toString();
 
-        bean.putStartPieces(pieces);
-
-
-        return true;
+        }
+        else return jSonVerified.put("verified",false).toString();
     }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)
