@@ -1,5 +1,17 @@
 $ = jQuery;
 
+function ini(){
+        var element = document.getElementById("j_idt9:logName");
+        if (element.innerHTML !=""){
+                var elements = $(".ui-menuitem-text");
+                for(var i = 0;i<elements.length;i++) {
+                        var element = elements[i];
+                        if(element.innerHTML == "Login") {
+                                element.innerHTML = "Logout";
+                            }
+                }
+        }
+    }
 
 function showLogin() {
     var elements = $(".ui-menuitem-text");
@@ -15,6 +27,11 @@ function showLogin() {
                 $(".visible").addClass("invisible");
                 $(".visible").removeClass("visible");
             });
+            element.innerHTML = "Login";
+                        if (document.getElementById("j_idt9:logName").innerHTML != ""){
+                            var logout = document.getElementById("logoutFrm:logoutBtn");
+                            logout.click();
+                            }
         }
     }
 }

@@ -129,4 +129,13 @@ public class User {
     public void addFriend(User user) {
         friends.add(user);
     }
+
+    public boolean equals(Object other){
+        User otherUser = (User) other;
+        if (otherUser == null)
+            return false;
+        else if (otherUser.getId() == this.getId())
+            return true;
+        return false;
+    }
 }
