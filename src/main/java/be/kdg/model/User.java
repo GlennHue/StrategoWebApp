@@ -21,6 +21,7 @@ public class User {
     private String password;
     private String eMail;
     private String uuid;
+    private String status;
     private boolean verified;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -47,6 +48,7 @@ public class User {
         this.password = password;
         this.eMail = eMail;
         this.verified = false;
+        this.status = "offline";
     }
 
     public int getId() {
@@ -104,6 +106,14 @@ public class User {
 
     public void seteMail(String eMail) {
         this.eMail = eMail;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public List<Achievement> getAchievements() {

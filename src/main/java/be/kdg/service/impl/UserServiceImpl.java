@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserServiceApi {
         return userDao.getUserByUsername(username);
     }
 
+    //TODO: checken of de user al ingelogd is en een foutmelding tonen indien dit zo is
     @Override
     public boolean userIsValid(String username, String password) {
         return userDao.checkLogin(username, password);
@@ -65,6 +66,21 @@ public class UserServiceImpl implements UserServiceApi {
     @Override
     public List<User> getFriendsByUsername(String username) {
         return userDao.getFriendsByUsername(username);
+    }
+
+    @Override
+    public void userLogout(String username) {
+        userDao.userLogout(username);
+    }
+
+    @Override
+    public User insertFriend(String username,String friendname) {
+        return userDao.insertFriend(username,friendname);
+    }
+
+    @Override
+    public Boolean userAndFriendAreFriends(String username, String friendname) {
+        return userDao.userAndFriendAreFriends(username,friendname);
     }
 
 }

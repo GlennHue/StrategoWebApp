@@ -38,4 +38,12 @@ public interface UserDAOApi {
     public List getAchievementsByUsername(String username);
 
     public List<User> getFriendsByUsername(String username);
+
+    public void userLogout(String username);
+
+    public User insertFriend(String username,String friendname);
+
+    public User getUserByUsernameWithoutSessionClose(String username);
+
+    public Boolean userAndFriendAreFriends(String username, String friendname);
 }

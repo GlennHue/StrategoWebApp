@@ -62,6 +62,54 @@ public class UserDAOImpl implements UserDAOApi {
     }
 
     @Override
+    public void userLogout(String username) {
+        User user = getUserByUsername(username);
+        openSessionAndTransaction();
+        user.setStatus("offline");
+        session.saveOrUpdate(user);
+        closeAndCommit();
+
+    }
+
+    @Override
+    //TODO property request ofzo die friendrequest bijhoudt
+    public User insertFriend(String username,String friendname) {
+        openSessionAndTransaction();
+        User friend = getUserByUsernameWithoutSessionClose(friendname);
+        User loggedInUser = getUserByUsernameWithoutSessionClose(username);
+
+        if (friend != null) {
+            loggedInUser.addFriend(friend);
+            session.saveOrUpdate(loggedInUser);
+            closeAndCommit();
+        }
+        return friend;
+    }
+
+    @Override
+    public User getUserByUsernameWithoutSessionClose(String username) {
+        String querystring = "from User u where u.username = :username";
+        Query query = session.createQuery(querystring).setString("username", username);
+        User user = (User) query.uniqueResult();
+        return user;
+    }
+
+    @Override
+    public Boolean userAndFriendAreFriends(String username, String friendname) {
+        openSessionAndTransaction();
+        String queryString = "select friends from User u join u.friends friends where u.username = :username";
+        List<User> userFriends = session.createQuery(queryString).setString("username", username).list();
+        String queryStringFriend = "select friends from User u join u.friends friends where u.username = :username";
+        List<User> friendFriends = session.createQuery(queryStringFriend).setString("username", friendname).list();
+        User user = getUserByUsernameWithoutSessionClose(username);
+        User friend = getUserByUsernameWithoutSessionClose(friendname);
+        if (userFriends.contains(friend) && friendFriends.contains(user)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return null;
     }
@@ -86,19 +134,26 @@ public class UserDAOImpl implements UserDAOApi {
     @Override
     public boolean checkLogin(String username, String password) {
         User user = getUserByUsername(username);
-        return user != null && user.getPassword().equals(password) && user.isVerified();
+        if (user != null && user.getPassword().equals(password) && user.isVerified()) {
+            openSessionAndTransaction();
+            user.setStatus("online");
+            session.saveOrUpdate(user);
+            closeAndCommit();
+           return true;
+        }
+        return false;
     }
 
     @Override
     public User getUserByUsername(String username) {
         openSessionAndTransaction();
-
         String querystring = "from User u where u.username = :username";
         Query query = session.createQuery(querystring).setString("username", username);
         User user = (User) query.uniqueResult();
         close();
         return user;
     }
+
 
     @Override
     public boolean userExists(String username) {
