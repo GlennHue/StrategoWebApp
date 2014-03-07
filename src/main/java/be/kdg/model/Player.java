@@ -1,58 +1,41 @@
 package be.kdg.model;
 
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
+@Table(name = "T_PLAYER")
 public class Player {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    private String name;
-    private List<Piece> army;
-    private List<Piece> graveyard;
+    @Enumerated(EnumType.STRING)
     private Color color;
-    private int userId;
-    boolean ready;
+    private boolean ready;
+    @ManyToOne
+    private User user;
 
+    @Transient
+    private List<Piece> graveyard = new ArrayList<Piece>();
 
-    public enum Color {
-        b, r
+    @Transient
+    private List<Piece> army = new ArrayList<Piece>();
+
+    public Player(){
+
     }
 
-
-    public Player(String name,int userId) {
-        this.name = name;
+    public Player(User user) {
         ready = false;
-        createArmy();
-        this.userId = userId;
-        graveyard = new ArrayList<Piece>();
+        this.user = user;
     }
 
     public int armyGetSize() {
         return army.size();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    private void createArmy() {
-        army = new ArrayList<Piece>();
-        int[] countPieces = {1, 1, 8, 5, 4, 4, 4, 3, 2, 1, 1, 6};
-
-        for (int i = 0; i < countPieces.length; i++) {
-            createPiece(i, countPieces[i]);
-        }
-    }
-
-    private void createPiece(int rank, int count) {
-        for (int i = 0; i < count; i++) {
-            Piece piece = new Piece(rank, "b");
-            army.add(piece);
-        }
-
-    }
-
-    public Piece getPieceByName(String name) {
+   /* public Piece getPieceByName(String name) {
         Piece piece = null;
         for (Piece p : army) {
             if (!p.isPlaced()) {
@@ -63,7 +46,7 @@ public class Player {
             }
         }
         return piece;
-    }
+    }*/
 
     public Piece getPiece(int i) {
         return army.get(i);
@@ -81,9 +64,40 @@ public class Player {
         this.color = color;
     }
 
+    public int getId() {
+        return id;
+    }
 
-    public int getUserId() {
-        return userId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Piece> getArmy() {
+        return army;
+    }
+
+    public void setArmy(List<Piece> army) {
+        this.army = army;
+    }
+
+    public List<Piece> getGraveyard() {
+        return graveyard;
+    }
+
+    public void setGraveyard(List<Piece> graveyard) {
+        this.graveyard = graveyard;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public boolean getReady() { return ready; }

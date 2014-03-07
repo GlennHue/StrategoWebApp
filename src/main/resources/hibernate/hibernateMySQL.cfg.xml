@@ -9,11 +9,9 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/GroepI</property>
-        <property name="connection.username">GroepI</property>
-        <property name="connection.password">GroepI</property>
-
-        <!-- <property name="hbm2ddl.auto">create</property>    -->
+        <property name="connection.url">jdbc:mysql://localhost:3306/groepi</property>
+        <property name="connection.username">groepi</property>
+        <property name="connection.password">groepi</property>
         <property name="hbm2ddl.auto">create</property>
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
@@ -29,5 +27,9 @@
         <!-- Reference to all the mapping files used -->
         <mapping class="be.kdg.model.User"/>
         <mapping class="be.kdg.model.Achievement"/>
+        <mapping class="be.kdg.model.Player"/>
+        <mapping class="be.kdg.model.Game"/>
+        <mapping class="be.kdg.model.StartPosition"/>
+        <mapping class="be.kdg.model.Move"/>
     </session-factory>
 </hibernate-configuration>

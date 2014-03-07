@@ -1,11 +1,17 @@
 import be.kdg.model.Piece;
 import be.kdg.model.Player;
+import be.kdg.model.User;
+import be.kdg.service.api.PlayerServiceApi;
+import be.kdg.service.impl.PlayerServiceImpl;
 
 import static junit.framework.Assert.assertEquals;
 
 public class TestPlayer {
 
-    private Player player = new Player("De Fons",1);
+    private User user = new User("de fons", "w/e", "defons@gmail.com");
+    PlayerServiceApi playerService = new PlayerServiceImpl();
+
+    private Player player = playerService.createPlayer(user);
     int flag = 0, spy = 0, scout = 0, miner = 0, sergeant = 0, lieutenant = 0, captain = 0, major = 0,
             colonel = 0, general = 0, marshal = 0, bomb = 0;
 

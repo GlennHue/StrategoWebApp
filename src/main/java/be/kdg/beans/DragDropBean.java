@@ -2,18 +2,13 @@ package be.kdg.beans;
 
 
 import be.kdg.model.*;
-import com.google.common.collect.Lists;
-import org.springframework.context.annotation.Scope;
+import be.kdg.service.api.GameServiceApi;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 
 @Component
@@ -26,21 +21,24 @@ public class DragDropBean implements Serializable {
     private String  source = "Source";
     private String target = "target";
 
+    @Autowired
+    private GameServiceApi gameService;
+
     public DragDropBean() {
         /*initList();*/
         maakLijst();
     }
 
     private void maakLijst(){
-        game = new Game(new Player("player a", 1), new Player("player b",2));
+        game = new Game(new Player(new User()), new Player(new User()));
 
     /*    for(int i = 0;i < 100; i++){
       /*      tiles[i] = new Tile();            */
            /*if(i == 1){
-               //    tiles[i].setPiece(new Piece(i));
+               //    tiles[i].movePiece(new Piece(i));
            }
             if(i == 2){
-                tiles[i].setPiece(new Piece(i));
+                tiles[i].movePiece(new Piece(i));
             }    */
        for(int i = 60;i < 70; i++){
 
@@ -52,9 +50,9 @@ public class DragDropBean implements Serializable {
 
           /*  if(i<12) {
                 if(i % 2 == 0) {
-                    tiles[i].setPiece(new Piece(i, "b"));
+                    tiles[i].movePiece(new Piece(i, "b"));
                 } else {
-                    tiles[i].setPiece(new Piece(i, "r"));
+                    tiles[i].movePiece(new Piece(i, "r"));
                 }
             }
            /*
@@ -82,7 +80,8 @@ public class DragDropBean implements Serializable {
       //  source.remove(p);
       //  target.add(p);
 
-        game.setPiece(newIndex, oldIndex);
+        //todo: get gameid
+        gameService.movePiece(1, newIndex, oldIndex);
 }
 
     public void putStartPieces(String pieces){
@@ -155,6 +154,6 @@ public class DragDropBean implements Serializable {
     public String getColor(int userId,int rank){
 
 
-        return "img/piece/" + game.getPlayerColor(userId) + rank + ".png";
+        return "img/piece/" + gameService.getPlayerColor(userId) + rank + ".png";
     }
 }

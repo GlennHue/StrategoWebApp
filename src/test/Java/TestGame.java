@@ -25,16 +25,16 @@ public class TestGame {
     @org.junit.Test
     public void testSetPiecePlayerOne() {
 
-        assertTrue("Player must be able to put a piece on his side of the field", setPiece(playerOne, 0, 0, 0));
-        assertFalse("Player mustn't be able to put a piece on other side of the field",setPiece(playerOne, 1, 9, 9));
+        assertTrue("Player must be able to put a piece on his side of the field", movePiece(playerOne, 0, 0, 0));
+        assertFalse("Player mustn't be able to put a piece on other side of the field",movePiece(playerOne, 1, 9, 9));
         assertEquals("Flag piece must've been placed on the board", playerOne.getPiece(0), getPieceOnBoard(0, 0));
     }
 
     @Test
     public void testSetPiecePlayerTwo() {
 
-        assertTrue("Player must be able to put a piece on his side of the field", setPiece(playerTwo, 0, 9, 9));
-        assertFalse("Player mustn't be able to put a piece on other side of the field", setPiece(playerTwo, 1, 0, 0));
+        assertTrue("Player must be able to put a piece on his side of the field", movePiece(playerTwo, 0, 9, 9));
+        assertFalse("Player mustn't be able to put a piece on other side of the field", movePiece(playerTwo, 1, 0, 0));
         assertEquals("Flag piece must've been placed on the board", playerTwo.getPiece(0), getPieceOnBoard(9, 9));
     }
 
@@ -73,8 +73,8 @@ public class TestGame {
         game.setArmy(playerOne, names);
     }
 
-    private boolean setPiece(Player player, int piece, int x, int y) {
-        return game.setPiece(player, player.getPiece(piece), x, y);
+    private boolean movePiece(Player player, int piece, int x, int y) {
+        return game.movePiece(player, player.getPiece(piece), x, y);
     }
 
     private Piece getPieceOnBoard(int x, int y) {

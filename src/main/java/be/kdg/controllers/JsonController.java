@@ -8,6 +8,7 @@ import be.kdg.persistence.api.UserDAOApi;
 import be.kdg.persistence.impl.AchievementDAOImpl;
 import be.kdg.persistence.impl.UserDAOImpl;
 import be.kdg.service.api.AchievementServiceApi;
+import be.kdg.service.api.GameServiceApi;
 import be.kdg.service.api.UserServiceApi;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,8 +32,8 @@ public class JsonController {
     private UserServiceApi userService;
     @Autowired
     private DragDropBean bean;
-
-    private boolean zever = true;
+    @Autowired
+    private GameServiceApi gameService;
 
     @Autowired
     private AchievementServiceApi achievementService;
@@ -66,26 +67,6 @@ public class JsonController {
     @RequestMapping(value = "/api/getachievements", method = RequestMethod.GET)
     @ResponseBody
     public String getAchievements(@RequestParam("username")String username){
-        if(zever)  {
-        List<Achievement> achievementArrayList = new ArrayList<Achievement>();
-        achievementArrayList.add(new Achievement("Minesweeper", "Sweep 5 mines with one miner"));
-        achievementArrayList.add(new Achievement("Win", "Win one game"));
-        achievementArrayList.add(new Achievement("more wins", "win 10 games"));
-        achievementArrayList.add(new Achievement("im a pro", "win 100 games"));
-        achievementArrayList.add(new Achievement("do you even lift bro", "beat a marshal with a spy 10 times"));
-        User user1 = new User("andy", "andy", "jefke@gmail.com");
-        user1.setVerified(true);
-        for(Achievement a : achievementArrayList) {
-            user1.addAchievement(a);
-        }
-        AchievementDAOApi achievementDAO = new AchievementDAOImpl();
-        UserDAOApi userDAO = new UserDAOImpl();
-        for(Achievement a : achievementArrayList) {
-            achievementDAO.addAchievement(a);
-        }
-        userDAO.addUser(user1);
-        zever = false;
-        }
         JSONObject resultObj = new JSONObject();
         try {
             List<Achievement> achievements = userService.getAchievementsByUsername(username);
@@ -129,10 +110,11 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.GET)
     @ResponseBody
-    public String setStartPosition(@RequestParam("pieces")String pieces ){
+    public String setStartPosition(@RequestParam("pieces")String pieces, @RequestParam("gameId")int gameId){
 
-        bean.putStartPieces(pieces);
-        boolean ready = bean.getReady();
+        gameService.setStartPosition(gameId, pieces);
+
+        boolean ready = gameService.getReady(gameId);
 
         if(ready) {
             return "true";
@@ -143,8 +125,8 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/getReady", method = RequestMethod.GET)
     @ResponseBody
-    public String getReady(){
-        boolean ready = bean.getReady();
+    public String getReady(@RequestParam("gameId")int gameId){
+        boolean ready = gameService.getReady(gameId);
 
         if(ready) {
             return "true";
