@@ -19,16 +19,15 @@ public class Game {
     @OneToMany(mappedBy = "game")
     private List<StartPosition> startPositions;
 
-    @ManyToMany
-    @JoinTable(
-            name = "T_PLAYERGAMES",
-            joinColumns = {@JoinColumn(name = "gameId")},
-            inverseJoinColumns = {@JoinColumn(name = "playerId")}
-    )
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     private List<Player> players;
 
     private int time;
     private int playerCount;
+
+    public Game() {
+        setBoard(new Board());
+    }
 
     public int getId() {
         return id;

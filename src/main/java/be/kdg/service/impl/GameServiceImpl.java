@@ -19,6 +19,7 @@ public class GameServiceImpl implements GameServiceApi {
     @Override
     public void setStartPosition(int gameId, String pieces) {
         Game game = gameDao.getGame(gameId);
+        game.setBoard(new Board());
         char firstChar = pieces.charAt(0);
         if (firstChar == ('b')){
             putStartPiecesBlue(pieces, game);
@@ -26,8 +27,6 @@ public class GameServiceImpl implements GameServiceApi {
         else{
             putStartPiecesRed(pieces, game);
         }
-
-        game.setPlayerReady(0);
     }
 
     private void putStartPiecesRed(String pieces, Game game) {

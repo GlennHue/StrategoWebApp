@@ -45,8 +45,8 @@ public class LobbyBean {
             User u1 = users.get(0);
             User u2 = users.get(1);
 
-            Player p1 = new Player( u1.getUsername(), u1.getId());
-            Player p2 = new Player( u2.getUsername(), u2.getId());
+            Player p1 = new Player( u1);
+            Player p2 = new Player( u2);
             Game game = new Game(p1,p2);
 
              removeUser(u1);

@@ -14,9 +14,14 @@ public class Player {
     private Color color;
     private boolean ready;
     @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "gameId")
+    private Game game;
+
+   @Transient
     private List<Piece> graveyard = new ArrayList<Piece>();
 
     @Transient
