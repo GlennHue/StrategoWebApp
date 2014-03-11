@@ -2,7 +2,6 @@ package be.kdg.persistence.api;
 
 import be.kdg.model.Piece;
 import be.kdg.model.Player;
-import be.kdg.model.User;
 
 import java.util.List;
 
@@ -19,4 +18,7 @@ public interface PlayerDAOApi {
 
     public boolean getReady(int playerId);
 
+    public void setReady(int playerId);
+
+    public void savePlayer(Player p1);
 }

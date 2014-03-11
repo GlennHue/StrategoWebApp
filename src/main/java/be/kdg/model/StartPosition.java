@@ -27,6 +27,12 @@ public class StartPosition {
         this.piece = piece;
     }
 
+    public StartPosition(Game game, String piece, String color) {
+        this.game = game;
+        this.piece = piece;
+        this.color = color;
+    }
+
     public int getId() {
         return id;
     }

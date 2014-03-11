@@ -1,10 +1,12 @@
 package be.kdg.controllers;
 
 import be.kdg.beans.DragDropBean;
+import be.kdg.beans.LobbyBean;
 import be.kdg.model.Achievement;
 import be.kdg.model.User;
 import be.kdg.service.api.AchievementServiceApi;
 import be.kdg.service.api.GameServiceApi;
+import be.kdg.service.api.PlayerServiceApi;
 import be.kdg.service.api.UserServiceApi;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +31,10 @@ public class JsonController {
     private DragDropBean bean;
     @Autowired
     private GameServiceApi gameService;
+    @Autowired
+    private PlayerServiceApi playerService;
+    @Autowired
+    private LobbyBean lobbyBean;
 
     @Autowired
     private AchievementServiceApi achievementService;
@@ -106,15 +112,18 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/getReady", method = RequestMethod.GET)
     @ResponseBody
-    public String getReady(@RequestParam("gameId")int gameId){
+    public String getReady(@RequestParam("gameId")int gameId) {
         boolean ready = gameService.getReady(gameId);
-
-        if(ready) {
-            return "true";
-        } else {
-            return "false";
+        JSONObject jSonResult = new JSONObject();
+        try {
+            jSonResult.put("isReady",ready);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return jSonResult.toString();
     }
+
+
 
     @RequestMapping(value = "api/game/setReady", method = RequestMethod.GET)
     @ResponseBody
@@ -142,15 +151,23 @@ public class JsonController {
                                   */
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.POST)
     @ResponseBody
-    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("username")String username ) throws JSONException {
-        JSONObject jSonVerified = new JSONObject();
-        if (pieces != null && !pieces.isEmpty() && username != null && !username.isEmpty()) {
+    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId,@RequestParam("gameId")String gameId ) throws JSONException {
+        JSONObject jSonPieces = new JSONObject();
+        gameService.setStartPosition(Integer.parseInt(gameId),pieces);
+        gameService.addStartPosition(Integer.parseInt(gameId),pieces);
+        playerService.setReady(Integer.parseInt(playerId));
+        Boolean enemyReady = gameService.getReady(Integer.parseInt(gameId));
+        if (pieces != null && !pieces.isEmpty()) {
             bean.putStartPieces(pieces);
-            return jSonVerified.put("verified",true).toString();
         }
-        return jSonVerified.put("verified",false).toString();
-
-
+        if (enemyReady) {
+            gameService.getStartingPositions(Integer.parseInt(gameId));
+        }
+        jSonPieces.put("0","b0");
+        jSonPieces.put("1","b1");
+        jSonPieces.put("2","b5");
+        jSonPieces.put("3","b11");
+        return jSonPieces.toString();
     }
 
     @RequestMapping(value = "api/logout",method = RequestMethod.POST)
@@ -163,7 +180,7 @@ public class JsonController {
     @RequestMapping(value = "api/addFriend",method = RequestMethod.POST)
     @ResponseBody
     public String addFriend(@RequestParam("username")String username,@RequestParam("friend")String friendname) {
-       User friend =  userService.insertFriend(username,friendname);
+        User friend =  userService.insertFriend(username,friendname);
         Boolean userAndFriendAreFriends = userService.userAndFriendAreFriends(username, friendname);
         JSONObject resultObject = new JSONObject();
         JSONObject friendObject = new JSONObject();
@@ -182,10 +199,49 @@ public class JsonController {
         }
         return resultObject.toString();
     }
+
+    @RequestMapping(value = "api/game/fight",method = RequestMethod.GET)
+    @ResponseBody
+    public String fight(@RequestParam("piecePlayer")String piecePlayer,@RequestParam("pieceEnemy")String pieceEnemy) {
+        int result =  gameService.fight(piecePlayer,pieceEnemy);
+        JSONObject resultObject = new JSONObject();
+        try {
+            resultObject.put("result",result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return resultObject.toString();
+    }
     /*
     @RequestMapping(value = "api/acceptInvite",method = RequestMethod.POST)
     @ResponseBody
     public String acceptInvite(@RequestParam("username")String username,@RequestParam("friend")String friendname){
         User friend = userService.acceptFriend(username,friendname);
     }*/
+
+    @RequestMapping(value = "api/addUserToQueue",method = RequestMethod.GET)
+    @ResponseBody
+    public String addUserToQueue(@RequestParam("username")String username) {
+        JSONObject jSonResult = new JSONObject();
+        User user = userService.getUser(username);
+        lobbyBean.addUser(user);
+        int[]idArray = lobbyBean.checkGames(user);
+        try {
+            if (idArray != null) {
+
+                jSonResult.put("gameId",idArray[0]);
+                jSonResult.put("playerId",idArray[1]);
+            }
+            else {
+                jSonResult.put("gameId",0);
+                jSonResult.put("playerId",0);
+            }
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jSonResult.toString();
+    }
+
+
 }

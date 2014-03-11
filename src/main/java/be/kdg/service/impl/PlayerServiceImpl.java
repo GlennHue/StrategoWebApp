@@ -63,4 +63,16 @@ public class PlayerServiceImpl implements PlayerServiceApi{
             army.add(piece);
         }
     }
+
+
+    @Override
+    public void setReady(int playerId) {
+        playerDao.setReady(playerId);
+    }
+
+    @Override
+    public void savePlayer(Player p1) {
+        playerDao.savePlayer(p1);
+    }
+
 }

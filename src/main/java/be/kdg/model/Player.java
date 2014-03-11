@@ -36,6 +36,11 @@ public class Player {
         this.user = user;
     }
 
+    public Player(User user, Game game) {
+        this.user = user;
+        this.game = game;
+    }
+
     public int armyGetSize() {
         return army.size();
     }

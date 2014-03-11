@@ -1,8 +1,6 @@
 package be.kdg.beans;
 
 
-import be.kdg.model.Game;
-import be.kdg.model.Player;
 import be.kdg.model.User;
 import be.kdg.service.api.UserServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wouter on 6/02/14.
@@ -86,7 +85,7 @@ public class UserBean implements Serializable {
         User us = userService.getUser(un);
         if(!users.contains(us)){
             lobby.addUser(us);
-            lobby.checkGames();
+            lobby.checkGames(us);
          }
     }
 

@@ -20,4 +20,6 @@ public interface GameDAOApi {
     public void addStartPosition(int gameId, StartPosition sp);
 
     public List<StartPosition> getStartingPositions(int gameId);
+
+    public int saveGame(Game game);
 }

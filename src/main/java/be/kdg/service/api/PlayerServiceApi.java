@@ -20,4 +20,8 @@ public interface PlayerServiceApi {
     public List<Piece> getArmyByPlayerId(int playerId);
 
     public List<Piece> getGraveyardByPlayerId(int playerId);
+
+    public void setReady(int playerId);
+
+    public void savePlayer(Player p1);
 }

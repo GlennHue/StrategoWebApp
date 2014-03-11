@@ -92,4 +92,16 @@ public class GameServiceImpl implements GameServiceApi {
     public List<StartPosition> getStartingPositions(int gameId) {
         return gameDao.getStartingPositions(gameId);
     }
+
+    @Override
+    public int fight(String piecePlayerStr, String pieceEnemyStr) {
+        Piece piecePlayer = new Piece(Integer.parseInt(piecePlayerStr.substring(1)),piecePlayerStr.substring(0,1));
+        Piece pieceEnemy = new Piece(Integer.parseInt(pieceEnemyStr.substring(1)),pieceEnemyStr.substring(0,1));
+        return piecePlayer.compareTo(pieceEnemy);
+    }
+
+    @Override
+    public int saveGame(Game game) {
+        return gameDao.saveGame(game);
+    }
 }

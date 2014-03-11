@@ -13,11 +13,13 @@ public class Piece implements Comparable<Piece> {
     private boolean isPlaced;
     private int xCoordinate;
     private int yCoordinate;
+    private String color;
     private String url;
 
     public Piece(int rank, String color) {
         url = "img/piece/" + color + rank + ".png";
         this.rank = rank;
+        this.color = color;
         assignName();
     }
 
@@ -25,6 +27,7 @@ public class Piece implements Comparable<Piece> {
         url = "img/piece/" + color + rank + ".png";
         this.rank = rank;
         xCoordinate = place;
+        this.color = color;
         assignName();
     }
 
@@ -59,6 +62,14 @@ public class Piece implements Comparable<Piece> {
 
     public String getName() {
         return name.toString();
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     /**

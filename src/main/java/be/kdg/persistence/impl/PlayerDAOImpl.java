@@ -58,11 +58,20 @@ public class PlayerDAOImpl implements PlayerDAOApi{
         return result;
     }
 
+
+    @Override
     public void setReady(int playerId) {
         openSessionAndTransaction();
         Player player = getPlayerOpenSession(playerId);
         player.setReady(true);
         session.saveOrUpdate(player);
+        closeAndCommit();
+    }
+
+    @Override
+    public void savePlayer(Player p1) {
+        openSessionAndTransaction();
+        session.saveOrUpdate(p1);
         closeAndCommit();
     }
 
@@ -76,6 +85,8 @@ public class PlayerDAOImpl implements PlayerDAOApi{
         session = HibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();
     }
+
+
 
     private void close() {
         session.close();
