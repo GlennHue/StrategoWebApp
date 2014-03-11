@@ -56,6 +56,8 @@ public class GameServiceImpl implements GameServiceApi {
         tiles[newIndex].setPiece(null);
     }
 
+
+
     @Override
     public String getPlayerColor(int playerId) {
         return gameDao.getPlayerColor(playerId);

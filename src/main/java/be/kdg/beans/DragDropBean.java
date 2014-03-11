@@ -154,6 +154,6 @@ public class DragDropBean implements Serializable {
     public String getColor(int userId,int rank){
 
 
-        return "img/piece/" + gameService.getPlayerColor(userId) + rank + ".png";
+        return "img/piece/" + gameService.getPlayerColor(userId).substring(0, 1) + rank + ".png";
     }
 }
