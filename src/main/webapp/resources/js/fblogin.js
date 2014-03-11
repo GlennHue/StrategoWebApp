@@ -1,17 +1,20 @@
 $ = jQuery;
+var fbName = "";
 
 function ini(){
-        var element = document.getElementById("j_idt9:logName");
+    var element = document.getElementById("j_idt11:logName");
+    if(element != null) {
         if (element.innerHTML !=""){
-                var elements = $(".ui-menuitem-text");
-                for(var i = 0;i<elements.length;i++) {
-                        var element = elements[i];
-                        if(element.innerHTML == "Login") {
-                                element.innerHTML = "Logout";
-                            }
+            var elements = $(".ui-menuitem-text");
+            for(var i = 0;i<elements.length;i++) {
+                var element = elements[i];
+                if(element.innerHTML == "Login") {
+                    element.innerHTML = "Logout";
                 }
+            }
         }
     }
+}
 
 function showLogin() {
     var elements = $(".ui-menuitem-text");
@@ -28,10 +31,10 @@ function showLogin() {
                 $(".visible").removeClass("visible");
             });
             element.innerHTML = "Login";
-                        if (document.getElementById("j_idt9:logName").innerHTML != ""){
-                            var logout = document.getElementById("logoutFrm:logoutBtn");
-                            logout.click();
-                            }
+            if (document.getElementById("j_idt11:logName").innerHTML != ""){
+                var logout = document.getElementById("logoutFrm:logoutBtn");
+                logout.click();
+            }
         }
     }
 }
@@ -89,5 +92,12 @@ function testAPI() {
                 $(".invisible").removeClass("invisible");
             }
         }
+
+        fbName = response.name;
     });
+}
+
+function getFBName() {
+    alert(fbName);
+    return fbName;
 }
