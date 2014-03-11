@@ -54,8 +54,8 @@ public class GameDAOImpl implements GameDAOApi {
     public void addStartPosition(int gameId, StartPosition sp) {
         openSessionAndTransaction();
         Game game = getGameOpenSession(gameId);
-        game.addStartPosition(sp);
-        session.saveOrUpdate(game);
+        sp.setGame(game);
+        session.saveOrUpdate(sp);
         closeAndCommit();
     }
 

@@ -58,6 +58,20 @@ public class PlayerDAOImpl implements PlayerDAOApi{
         return result;
     }
 
+    public void setReady(int playerId) {
+        openSessionAndTransaction();
+        Player player = getPlayerOpenSession(playerId);
+        player.setReady(true);
+        session.saveOrUpdate(player);
+        closeAndCommit();
+    }
+
+    private Player getPlayerOpenSession(int playerId) {
+        String queryString = "from Player p where p.id = :id";
+        Query query = session.createQuery(queryString).setInteger("id", playerId);
+        return (Player) query.uniqueResult();
+    }
+
     private void openSessionAndTransaction() {
         session = HibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();

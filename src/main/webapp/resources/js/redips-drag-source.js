@@ -4900,7 +4900,7 @@ function ready(button) {
 
 
     if(content.length==40){
-        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources)
+        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources + "&gameId=1")
             .done(function(data){
                 var tds = document.getElementById("gameBoard").getElementsByTagName('td');
                 for(var i =0; i < 40;i++){
