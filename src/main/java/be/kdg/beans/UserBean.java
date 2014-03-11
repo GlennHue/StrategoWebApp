@@ -28,6 +28,7 @@ public class UserBean implements Serializable {
     @Inject
     private LobbyBean lobby;
     private List<User> users;
+    private String fbUsername = "";
 
     @PostConstruct
     public void initLobby(){
@@ -94,8 +95,22 @@ public class UserBean implements Serializable {
         return params.get("action");
     }
 
+    public String addTempUser(){
+        String s =   fbUsername;
+        userService.addUser(s, "x", "x");
+        return null;
+    }
+
     public List<User> getUsers() {
         return users;
     }
 
+    public String getFbUsername() {
+        return fbUsername;
+    }
+
+    public void setFbUsername(String fbUsername) {
+        this.fbUsername = fbUsername;
+    }
 }
+

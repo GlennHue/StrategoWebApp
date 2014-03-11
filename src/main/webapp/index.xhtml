@@ -7,7 +7,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:fb="https://www.facebook.com/2008/fbml">
+      xmlns:fb="https://www.facebook.com/2008/fbml"
+      xmlns:a4j="http://richfaces.org/a4j">
 
 <h:head>
     <title>Stratego</title>
@@ -18,6 +19,13 @@
 </h:head>
 
 <h:body onload="ini()">
+    <h:form id="logFrm">
+        <a4j:jsFunction name="tempUser" action="#{userBean.addTempUser()}">
+            <a4j:param name="userName" assignTo="#{userBean.fbUsername}" />
+        </a4j:jsFunction>
+
+        <h:commandLink id="tempUs" value="lkjlkjdf" onclick="tempUser(getFBName())" action="#"/>
+    </h:form>
     <h:form>
         <p:menubar styleClass="centeredMenuBar">
             <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
@@ -36,7 +44,7 @@
             <p:menuitem value="name" styleClass="invisible" url="#"/>
 
             <p:menuitem url="#">
-            <p:commandLink id="logName" onclick="" value="#{userBean.user.username}"/>
+                <p:commandLink id="logName" onclick="" value="#{userBean.user.username}"/>
             </p:menuitem>
         </p:menubar>
     </h:form>
