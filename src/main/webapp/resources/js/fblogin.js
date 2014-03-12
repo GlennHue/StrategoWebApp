@@ -112,7 +112,9 @@ function testAPI() {
                 $(".invisible").addClass("visible");
                 $(".invisible").removeClass("invisible");
             }
+
         }
+
         fbName = response.name;
         tempUs.click();
         tempUs.innerHTML = fbName;

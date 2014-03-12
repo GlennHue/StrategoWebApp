@@ -79,6 +79,8 @@ public class UserBean implements Serializable {
         }
     }
 
+
+
     public void findUsers(){
 
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -89,6 +91,16 @@ public class UserBean implements Serializable {
             lobby.addUser(us);
             lobby.checkGames(us);
          }
+    }
+
+    public void leaveQueue(){
+        FacesContext fc = FacesContext.getCurrentInstance();
+
+        String un =  getUserParam(fc);
+        User us = userService.getUser(un);
+        if(users.contains(us)){
+            lobby.removeUser(us);
+        }
     }
 
     public String getUserParam(FacesContext fc){
@@ -102,7 +114,8 @@ public class UserBean implements Serializable {
         if (userService.getUser(fn) == null){
         userService.addFbUser(fn, uuid, "x");
         }
-        user = userService.getUser(username);
+        user = userService.getUser(fbUsername);
+        user.setUsername(fbUsername);
         return null;
     }
 
