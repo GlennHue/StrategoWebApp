@@ -1,9 +1,11 @@
 package be.kdg.service.impl;
 
+import be.kdg.model.Game;
 import be.kdg.model.Piece;
 import be.kdg.model.Player;
 import be.kdg.model.User;
 import be.kdg.persistence.api.PlayerDAOApi;
+import be.kdg.service.api.GameServiceApi;
 import be.kdg.service.api.PlayerServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class PlayerServiceImpl implements PlayerServiceApi{
     @Autowired
     private PlayerDAOApi playerDao;
 
+    @Autowired
+    private GameServiceApi gameService;
+
     @Override
     public Player createPlayer(User user) {
         Player player = new Player(user);
@@ -34,7 +39,7 @@ public class PlayerServiceImpl implements PlayerServiceApi{
 
     @Override
     public Player getPlayerById(int playerId) {
-        return null;
+        return playerDao.getPlayerById(playerId);
     }
 
     @Override
@@ -73,6 +78,18 @@ public class PlayerServiceImpl implements PlayerServiceApi{
     @Override
     public void savePlayer(Player p1) {
         playerDao.savePlayer(p1);
+    }
+
+    @Override
+    public boolean getEnemyStatus(int playerId) {
+        Player player = getPlayerById(playerId);
+        Player enemy;
+        Game game = gameService.getGame(player.getGame().getId());
+        if (game.getPlayers().get(0).getId() == player.getId()) {
+            enemy = game.getPlayers().get(1);
+        } else enemy = game.getPlayers().get(0);
+
+        return enemy.getReady();
     }
 
 }

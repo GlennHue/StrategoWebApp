@@ -21,4 +21,6 @@ public interface PlayerDAOApi {
     public void setReady(int playerId);
 
     public void savePlayer(Player p1);
+
+    public Player getPlayerById(int playerId);
 }

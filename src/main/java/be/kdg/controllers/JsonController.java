@@ -2,10 +2,7 @@ package be.kdg.controllers;
 
 import be.kdg.beans.DragDropBean;
 import be.kdg.beans.LobbyBean;
-import be.kdg.model.Achievement;
-import be.kdg.model.Game;
-import be.kdg.model.Player;
-import be.kdg.model.User;
+import be.kdg.model.*;
 import be.kdg.service.api.AchievementServiceApi;
 import be.kdg.service.api.GameServiceApi;
 import be.kdg.service.api.PlayerServiceApi;
@@ -38,9 +35,11 @@ public class JsonController {
     @Autowired
     private LobbyBean lobbyBean;
 
-    // Declare this array here so when the second user pols the queue status, he also knows a player has been found!!
-    //private int[]idArray;
-    Player player;
+    // Declare this Player here so when the second user pols the queue status, he also knows a player has been found!!
+    private Player player;
+    private boolean isPlayerTurn;
+
+
 
     @Autowired
     private AchievementServiceApi achievementService;
@@ -157,24 +156,43 @@ public class JsonController {
                                   */
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.POST)
     @ResponseBody
-    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId,@RequestParam("gameId")String gameId ) throws JSONException {
+    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId,@RequestParam("gameId")String gameId) throws JSONException {
         JSONObject jSonPieces = new JSONObject();
         //gameService.setStartPosition(Integer.parseInt(gameId),pieces);
         gameService.addStartPosition(Integer.parseInt(gameId),pieces);
         playerService.setReady(Integer.parseInt(playerId));
         Boolean enemyReady = gameService.getReady(Integer.parseInt(gameId));
-        if (pieces != null && !pieces.isEmpty()) {
-            bean.putStartPieces(pieces);
-        }
+        Player player1 = playerService.getPlayerById(Integer.parseInt(playerId));
+        Color color = player1.getColor();
         if (enemyReady) {
-            gameService.getStartingPositions(Integer.parseInt(gameId));
+            List<StartPosition> startPositions = gameService.getStartingPositions(Integer.parseInt(gameId));
+            if (startPositions.get(0).getColor().equalsIgnoreCase(color.toString())) {
+                jSonPieces.put("pieces", startPositions.get(1).getPiece());
+            } else jSonPieces.put("pieces", startPositions.get(0).getPiece());
+        } else {
+            jSonPieces = null;
         }
-        jSonPieces.put("0","b0");
-        jSonPieces.put("1","b1");
-        jSonPieces.put("2","b5");
-        jSonPieces.put("3","b11");
         return jSonPieces.toString();
     }
+
+
+    @RequestMapping(value = "api/game/getStartPosition", method = RequestMethod.GET)
+    @ResponseBody
+    public String getStartPosition(@RequestParam("gameId")String gameId,@RequestParam("color")String color ){
+        JSONObject jSonPieces = new JSONObject();
+
+        List<StartPosition>startPositions =  gameService.getStartingPositions(Integer.parseInt(gameId));
+        try {
+            if (startPositions.get(0).getColor().equalsIgnoreCase(color)) {
+                jSonPieces.put("pieces",startPositions.get(1).getPiece());
+
+            } else jSonPieces.put("pieces",startPositions.get(0).getPiece());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jSonPieces.toString();
+    }
+
 
     @RequestMapping(value = "api/logout",method = RequestMethod.POST)
     @ResponseBody
@@ -252,6 +270,7 @@ public class JsonController {
                 jSonResult.put("playerId", player.getId());
                 jSonResult.put("gameId", player.getGame().getId());
                 jSonResult.put("color", player.getColor());
+                jSonResult.put("isReady",player.getReady());
             } else {
                 jSonResult = null;
             }
@@ -263,6 +282,30 @@ public class JsonController {
         }
         return jSonResult.toString();
     }
+
+    @RequestMapping(value = "api/game/switchTurn",method = RequestMethod.GET)
+    @ResponseBody
+    public String switchTurn(@RequestParam("playerId")String playerId) {
+        Player player1 = playerService.getPlayerById(Integer.parseInt(playerId));
+        player1.setReady(false);
+        playerService.savePlayer(player1);
+        return "true";
+    }
+
+    @RequestMapping(value = "api/game/getEnemyStatus", method = RequestMethod.GET)
+    @ResponseBody
+    public String getEnemyStatus(@RequestParam("gameId")int playerId) {
+        boolean enemyStatus = playerService.getEnemyStatus(playerId);
+
+        JSONObject jSonResult = new JSONObject();
+        try {
+            jSonResult.put("isReady",enemyStatus);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jSonResult.toString();
+    }
+
 
 
 }

@@ -1,5 +1,8 @@
 package be.kdg.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +20,11 @@ public class Game {
     private Board board;
 
     @OneToMany(mappedBy = "game")
+    @LazyCollection(LazyCollectionOption.FALSE) // sets fetch type to EAGER
     private List<StartPosition> startPositions;
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "game")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Player> players;
 
     private int time;
