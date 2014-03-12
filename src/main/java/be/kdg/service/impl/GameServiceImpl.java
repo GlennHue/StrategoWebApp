@@ -100,6 +100,13 @@ public class GameServiceImpl implements GameServiceApi {
     }
 
     @Override
+    public int fight(int gameId,int playerIndex, int enemyIndex){
+        Piece piecePlayer = gameDao.getGame(gameId).getBoard().getTile(playerIndex).getPiece();
+        Piece pieceEnemy = gameDao.getGame(gameId).getBoard().getTile(enemyIndex).getPiece();
+        return piecePlayer.compareTo(pieceEnemy);
+    }
+
+    @Override
     public Game getGame(int gameId) {
         return gameDao.getGame(gameId);
     }

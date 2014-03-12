@@ -62,19 +62,6 @@ public class DragDropBean implements Serializable {
       //  }
     }
 
-    private void initList() {
-       // source = Lists.newArrayList();
-       // target = Lists.newArrayList();
-        pieces = new Piece[100];
-        //source.add(new Piece(0));
-
-
-        for(int i = 0;i < 10; i++){
-             pieces[i] = new Piece(i,i, "r");
-             pieces[i*10] = new Piece(i,i*10, "b") ;
-        }
-    }
-
 
     public void movePiece(int newIndex, int oldIndex) {
       //  source.remove(p);
@@ -155,5 +142,9 @@ public class DragDropBean implements Serializable {
 
 
         return "img/piece/" + gameService.getPlayerColor(userId).substring(0, 1) + rank + ".png";
+    }
+
+    public void setGame(Game game){
+        this.game = game;
     }
 }

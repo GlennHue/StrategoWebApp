@@ -1,5 +1,8 @@
 package be.kdg.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +19,16 @@ public class Game {
     @Transient
     private Board board;
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "game")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<StartPosition> startPositions = new ArrayList<StartPosition>();
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "game")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Player> players = new ArrayList<Player>();
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "game")
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OrderBy(value = "number ASC")
     private List<Move> moves = new ArrayList<Move>();
 

@@ -68,6 +68,11 @@
                         <table id="sideTable" class="mark">
                             <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return ready(this);" action="#">Ready</h:commandLink>
                             </h:form></td></tr>
+
+                            <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return addMark();" action="#">Mark, begint al mor te rennen</h:commandLink>
+                            </h:form></td></tr>
+                            <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return removeMark();" action="#">Mark, stopt mor</h:commandLink>
+                            </h:form></td></tr>
                             <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="#{dragDropBean.getColor(0,0)}" alt="FLAG"/></div></td></tr>
                             <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b1.png" alt="SPY"/></div></td></tr>
                             <tr><td class="mark"><div class="drag clone climit2_8"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b2.png" alt="SCOUT"/></div></td></tr>
