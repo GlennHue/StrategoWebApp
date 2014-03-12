@@ -97,7 +97,12 @@ public class UserBean implements Serializable {
 
     public String addTempUser(){
         String s =   fbUsername;
-        userService.addUser(s, "x", "x");
+        String split[] = s.split(" ");
+        String fn = split[0];
+        if (userService.getUser(fn) == null){
+        userService.addFbUser(fn, "x", "x");
+        }
+        user = userService.getUser(username);
         return null;
     }
 

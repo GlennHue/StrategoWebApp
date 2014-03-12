@@ -46,4 +46,6 @@ public interface UserDAOApi {
     public User getUserByUsernameWithoutSessionClose(String username);
 
     public Boolean userAndFriendAreFriends(String username, String friendname);
+
+    public void addFbUser(User user);
 }

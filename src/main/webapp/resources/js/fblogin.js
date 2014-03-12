@@ -3,6 +3,7 @@ var fbName = "";
 
 function ini(){
     var element = document.getElementById("j_idt11:logName");
+
     if(element != null) {
         if (element.innerHTML !=""){
             var elements = $(".ui-menuitem-text");
@@ -10,10 +11,18 @@ function ini(){
                 var element = elements[i];
                 if(element.innerHTML == "Login") {
                     element.innerHTML = "Logout";
+
                 }
             }
+
         }
+
     }
+
+
+
+
+
 }
 
 function showLogin() {
@@ -80,6 +89,8 @@ function testAPI() {
 
     FB.api('/me', function (response) {
         var elements = $(".ui-menuitem-text");
+        var tempUs = document.getElementById("logFrm:tempUs");
+
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i];
             if (element.innerHTML == "Login") {
@@ -92,12 +103,13 @@ function testAPI() {
                 $(".invisible").removeClass("invisible");
             }
         }
-
         fbName = response.name;
+        tempUs.click();
+        tempUs.innerHTML = fbName;
     });
 }
 
 function getFBName() {
-    alert(fbName);
+    //alert(fbName);
     return fbName;
 }
