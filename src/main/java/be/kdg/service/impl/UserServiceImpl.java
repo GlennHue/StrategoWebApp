@@ -83,4 +83,8 @@ public class UserServiceImpl implements UserServiceApi {
         return userDao.userAndFriendAreFriends(username,friendname);
     }
 
+    @Override
+    public void addFbUser(String fn, String x, String x1) {
+        userDao.addFbUser(new User(fn, x, x1));
+    }
 }

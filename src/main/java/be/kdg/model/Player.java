@@ -37,8 +37,16 @@ public class Player {
     }
 
     public Player(User user, Game game) {
+        ready = false;
         this.user = user;
         this.game = game;
+    }
+
+    public Player(User user, Game game, Color color) {
+        ready = false;
+        this.user = user;
+        this.game = game;
+        this.color = color;
     }
 
     public int armyGetSize() {
@@ -112,4 +120,12 @@ public class Player {
 
     public boolean getReady() { return ready; }
     public void setReady(boolean ready) { this.ready = ready;}
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }

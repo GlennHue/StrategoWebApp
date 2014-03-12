@@ -36,4 +36,6 @@ public interface UserServiceApi {
     public User insertFriend(String username,String friendname);
 
     public Boolean userAndFriendAreFriends(String username, String friendname);
+
+    public void addFbUser(String fn, String x, String x1);
 }

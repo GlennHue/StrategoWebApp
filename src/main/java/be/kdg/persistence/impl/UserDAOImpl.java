@@ -36,8 +36,8 @@ public class UserDAOImpl implements UserDAOApi {
 
     @Override
     public void insertNewUser(User user) {
-        openSessionAndTransaction();
         if (!userExists(user.getUsername())) {
+            openSessionAndTransaction();
             session.saveOrUpdate(user);
             closeAndCommit();
         }
@@ -212,5 +212,16 @@ public class UserDAOImpl implements UserDAOApi {
     private void closeAndCommit() {
         tx.commit();
         session.close();
+    }
+
+
+    @Override
+    public void addFbUser(User user) {
+        if (!userExists(user.getUsername())) {
+            openSessionAndTransaction();
+            user.setVerified(true);
+            session.saveOrUpdate(user);
+            closeAndCommit();
+        }
     }
 }

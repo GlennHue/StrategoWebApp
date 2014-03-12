@@ -4900,14 +4900,13 @@ function ready(button) {
 
 
     if(content.length==40){
-        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources + "&gameId=1")
+        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources + "&playerId=1&gameId=1")
             .done(function(data){
-                var tds = document.getElementById("gameBoard").getElementsByTagName('td');
-                for(var i =0; i < 40;i++){
-                    tds[i].innerHTML = "<img src='/javax.faces.resource/img/piece/redpiece.png.xhtml?ln=css' alt='SPY'>";
-                }
-
                 if(data == true) {
+                    var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+                    for(var i =0; i < 40;i++){
+                        tds[i].innerHTML = "<img src='/javax.faces.resource/img/piece/redpiece.png.xhtml?ln=css' alt='SPY'>";
+                    }
                     alert('Game start');
                 } else {
                     readyTimer = setInterval(function(){getReady()}, 2000);
@@ -4928,7 +4927,7 @@ function ready(button) {
 }
 
 function ready2() {
-    $.getJSON("http://localhost:8080/api/game/setReady")
+    $.getJSON("http://localhost:8080/api/game/setReady?playerId=2")
         .done(function(data) {
             alert(data);
         })
@@ -4940,11 +4939,12 @@ function ready2() {
 }
 
 function getReady() {
-    $.getJSON("http://localhost:8080/api/game/getReady")
+    $.getJSON("http://localhost:8080/api/game/getReady?gameId=1")
         .done(function(data) {
-            if(data == true) {
+
+            if(data.isReady == true) {
                 alert("Game start");
-                document.getElementById("readyPlayer2").innerHTML = "Ready!"
+                document.getElementById("readyPlayer2").innerHTML = "Ready!";
                 clearInterval(readyTimer);
             } else {
                 alert("Other player not ready yet");

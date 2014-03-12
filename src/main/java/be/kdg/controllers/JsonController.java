@@ -3,6 +3,8 @@ package be.kdg.controllers;
 import be.kdg.beans.DragDropBean;
 import be.kdg.beans.LobbyBean;
 import be.kdg.model.Achievement;
+import be.kdg.model.Game;
+import be.kdg.model.Player;
 import be.kdg.model.User;
 import be.kdg.service.api.AchievementServiceApi;
 import be.kdg.service.api.GameServiceApi;
@@ -35,6 +37,10 @@ public class JsonController {
     private PlayerServiceApi playerService;
     @Autowired
     private LobbyBean lobbyBean;
+
+    // Declare this array here so when the second user pols the queue status, he also knows a player has been found!!
+    //private int[]idArray;
+    Player player;
 
     @Autowired
     private AchievementServiceApi achievementService;
@@ -98,10 +104,11 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.GET)
     @ResponseBody
-    public String setStartPosition(@RequestParam("pieces")String pieces, @RequestParam("gameId")int gameId){
+    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId, @RequestParam("gameId")int gameId){
 
         gameService.setStartPosition(gameId, pieces);
-        gameService.addStartPosition(gameId, pieces);
+        gameService.addStartPosition(gameId,pieces);
+        playerService.setReady(Integer.parseInt(playerId));
         boolean ready = gameService.getReady(gameId);
 
         if(ready) {
@@ -110,6 +117,32 @@ public class JsonController {
             return "false";
         }
     }
+
+
+    /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)
+    @ResponseBody
+    public String setStartPosition(@RequestParam("gameid")int gameid, )
+
+    @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.POST)
+    @ResponseBody
+    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId,@RequestParam("gameId")String gameId ) throws JSONException {
+        JSONObject jSonPieces = new JSONObject();
+        //gameService.setStartPosition(Integer.parseInt(gameId),pieces);
+        gameService.addStartPosition(Integer.parseInt(gameId),pieces);
+        playerService.setReady(Integer.parseInt(playerId));
+        Boolean enemyReady = gameService.getReady(Integer.parseInt(gameId));
+        if (pieces != null && !pieces.isEmpty()) {
+            bean.putStartPieces(pieces);
+        }
+        if (enemyReady) {
+            gameService.getStartingPositions(Integer.parseInt(gameId));
+        }
+        jSonPieces.put("0","b0");
+        jSonPieces.put("1","b1");
+        jSonPieces.put("2","b5");
+        jSonPieces.put("3","b11");
+        return jSonPieces.toString();
+    }*/
 
     @RequestMapping(value = "api/game/getReady", method = RequestMethod.GET)
     @ResponseBody
@@ -171,6 +204,7 @@ public class JsonController {
         return jSonPieces.toString();
     }
 
+
     @RequestMapping(value = "api/logout",method = RequestMethod.POST)
     @ResponseBody
     public String logout(@RequestParam("username")String username) {
@@ -220,25 +254,40 @@ public class JsonController {
         User friend = userService.acceptFriend(username,friendname);
     }*/
 
-    @RequestMapping(value = "api/addUserToQueue",method = RequestMethod.GET)
+    @RequestMapping(value = "api/addUserToQueue",method = RequestMethod.POST)
     @ResponseBody
     public String addUserToQueue(@RequestParam("username")String username) {
-        JSONObject jSonResult = new JSONObject();
-        User user = userService.getUser(username);
-        lobbyBean.addUser(user);
-        int[]idArray = lobbyBean.checkGames(user);
-        try {
-            if (idArray != null) {
+        boolean secondPLayerPulled = false;
+        //check if someone else already pulled the data
+        if (player == null) {
+            User user = userService.getUser(username);
+            lobbyBean.addUser(user);
+            player = lobbyBean.checkGames(user);
 
-                jSonResult.put("gameId",idArray[0]);
-                jSonResult.put("playerId",idArray[1]);
+            // in case someone else already pulled --> get playerId of other user for second user !
+        } else {
+            Game game = gameService.getGame(player.getGame().getId());
+            if (game.getPlayers().get(0).getId() == player.getId()) {
+                player = game.getPlayers().get(1);
+            } else {
+                player = game.getPlayers().get(0);
             }
-            else {
-                jSonResult.put("gameId",0);
-                jSonResult.put("playerId",0);
-            }
+            secondPLayerPulled = true;
         }
-        catch (JSONException e) {
+
+        JSONObject jSonResult = new JSONObject();
+        try {
+            if (player != null) {
+                jSonResult.put("playerId", player.getId());
+                jSonResult.put("gameId", player.getGame().getId());
+                jSonResult.put("color", player.getColor());
+            } else {
+                jSonResult = null;
+            }
+            if (secondPLayerPulled) {
+                player = null;
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         return jSonResult.toString();

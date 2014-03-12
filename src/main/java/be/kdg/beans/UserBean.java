@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by wouter on 6/02/14.
@@ -96,8 +97,12 @@ public class UserBean implements Serializable {
     }
 
     public String addTempUser(){
-        String s =   fbUsername;
-        userService.addUser(s, "x", "x");
+        String fn =   fbUsername;
+        String uuid = UUID.randomUUID().toString();
+        if (userService.getUser(fn) == null){
+        userService.addFbUser(fn, uuid, "x");
+        }
+        user = userService.getUser(username);
         return null;
     }
 

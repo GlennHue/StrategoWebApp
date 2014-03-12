@@ -100,8 +100,13 @@ public class GameServiceImpl implements GameServiceApi {
     }
 
     @Override
-    public int saveGame(Game game) {
-        return gameDao.saveGame(game);
+    public Game getGame(int gameId) {
+        return gameDao.getGame(gameId);
+    }
+
+    @Override
+    public void saveGame(Game game) {
+        gameDao.saveGame(game);
     }
 
     @Override
