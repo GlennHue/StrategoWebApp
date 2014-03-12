@@ -69,11 +69,10 @@ public class GameDAOImpl implements GameDAOApi {
     }
 
     @Override
-    public int saveGame(Game game) {
+    public void saveGame(Game game) {
         openSessionAndTransaction();
         session.saveOrUpdate(game);
         closeAndCommit();
-        return game.getId();
     }
 
     private void openSessionAndTransaction() {

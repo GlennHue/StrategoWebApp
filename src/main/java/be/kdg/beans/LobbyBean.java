@@ -1,5 +1,6 @@
 package be.kdg.beans;
 
+import be.kdg.model.Color;
 import be.kdg.model.Game;
 import be.kdg.model.Player;
 import be.kdg.model.User;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import javax.faces.bean.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Thomas on 25/02/14.
@@ -34,8 +36,10 @@ public class LobbyBean {
     }
     */
 
-    public void addUser(User user){
-        users.add(user);
+    public void addUser(User user) {
+        if (!users.contains(user)) {
+            users.add(user);
+        }
     }
 
     public List<User> getUsers() {
@@ -47,7 +51,7 @@ public class LobbyBean {
             users.remove(user);
     }
 
-    public int[] checkGames(User user) {
+    public Player checkGames(User user) {
         if(users.size()>=2){
             User u1 = users.get(0);
             if(u1.equals(user)){
@@ -55,17 +59,21 @@ public class LobbyBean {
             }
 
             Game game = new Game();
-            int gameId = gameService.saveGame(game);
-            Player p1 = new Player(user,game);
-            Player p2 = new Player(u1,game);
+            gameService.saveGame(game);
+            be.kdg.model.Color[]colors = new be.kdg.model.Color[]{Color.BLUE,Color.RED};
+            Random randomColor = new Random();
+            Color color = colors[randomColor.nextInt(2)];
+            Player p1 = new Player(user,game,color);
+            Player p2;
+            if (color == Color.BLUE) {
+                p2 = new Player(u1,game,Color.RED);
+            } else p2 = new Player(u1,game,Color.BLUE);
+
             playerService.savePlayer(p1);
             playerService.savePlayer(p2);
-            int playerId = p1.getId();
             removeUser(user);
             removeUser(u1);
-
-            int[]idArray = new int[]{gameId,playerId};
-            return idArray;
+            return p1;
         }
         return null;
     }

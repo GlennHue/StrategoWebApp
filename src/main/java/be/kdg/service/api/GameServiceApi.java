@@ -24,6 +24,7 @@ public interface GameServiceApi {
 
     public int fight(String piecePlayer, String pieceEnemy);
 
+    public Game getGame(int gameId);
 
-    public int saveGame(Game game);
+    public void saveGame(Game game);
 }
