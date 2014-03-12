@@ -20,12 +20,12 @@ public class Game {
     private Board board;
 
     @OneToMany(mappedBy = "game")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<StartPosition> startPositions = new ArrayList<StartPosition>();
+    @LazyCollection(LazyCollectionOption.FALSE) // sets fetch type to EAGER
+    private List<StartPosition> startPositions;
 
     @OneToMany(mappedBy = "game")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Player> players = new ArrayList<Player>();
+    private List<Player> players;
 
     @OneToMany(mappedBy = "game")
     @LazyCollection(LazyCollectionOption.FALSE)

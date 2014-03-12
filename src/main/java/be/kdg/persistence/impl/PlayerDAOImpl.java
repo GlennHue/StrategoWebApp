@@ -75,6 +75,16 @@ public class PlayerDAOImpl implements PlayerDAOApi{
         closeAndCommit();
     }
 
+    @Override
+    public Player getPlayerById(int playerId) {
+        openSessionAndTransaction();
+        String queryString = "from Player p where p.id = :id";
+        Query query = session.createQuery(queryString).setInteger("id", playerId);
+        Player player = (Player) query.uniqueResult();
+        close();
+        return player;
+    }
+
     private Player getPlayerOpenSession(int playerId) {
         String queryString = "from Player p where p.id = :id";
         Query query = session.createQuery(queryString).setInteger("id", playerId);

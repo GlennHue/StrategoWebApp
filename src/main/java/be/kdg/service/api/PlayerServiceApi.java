@@ -24,4 +24,6 @@ public interface PlayerServiceApi {
     public void setReady(int playerId);
 
     public void savePlayer(Player p1);
+
+    public boolean getEnemyStatus(int playerId);
 }
