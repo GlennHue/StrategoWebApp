@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ApplicationScoped;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -73,6 +74,7 @@ public class LobbyBean {
             playerService.savePlayer(p2);
             removeUser(user);
             removeUser(u1);
+            game.setPlayers(new ArrayList<Player>(Arrays.asList(p1, p2)));
             return p1;
         }
         return null;

@@ -4985,7 +4985,7 @@ function removeMark() {
 
 
     for(var i =0; i < 100;i++){
-        if(i = 42 || i == 43 || i == 46 || i == 47 || i == 52 || i == 53 || i == 56 || i == 57){}
+        if(i == 42 || i == 43 || i == 46 || i == 47 || i == 52 || i == 53 || i == 56 || i == 57){}
         else{
         $(tds[i]).removeClass("mark");}
     }

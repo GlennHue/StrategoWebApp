@@ -17,6 +17,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    //private String fbUsername;
+
     private String username;
     private String password;
     private String eMail;
@@ -148,4 +150,12 @@ public class User {
             return true;
         return false;
     }
+
+    /*public String getFbUsername() {
+        return fbUsername;
+    }
+
+    public void setFbUsername(String fbUsername) {
+        this.fbUsername = fbUsername;
+    }*/
 }
