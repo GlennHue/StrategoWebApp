@@ -22,7 +22,7 @@ public interface GameDAOApi {
 
     public List<StartPosition> getStartingPositions(int gameId);
 
-    public int saveGame(Game game);
+    public void saveGame(Game game);
 
     public void addMove(Move move);
 
