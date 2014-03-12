@@ -24,7 +24,7 @@
 
     <rich:dragIndicator id="indicator" />
 
-    <h:form id="menuFrm">
+    <h:form>
         <p:menubar styleClass="centeredMenuBar">
             <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
             <p:menuitem value="Home" url="index.xhtml"/>
@@ -42,12 +42,11 @@
             <p:menuitem value="name" styleClass="invisible" url="#"/>
 
             <p:menuitem url="#">
-                <p:commandLink id="logName" onclick="" value="#{userBean.user.username}" />
+                <p:commandLink id="logName" onclick="" value="#{userBean.user.username}"/>
             </p:menuitem>
         </p:menubar>
     </h:form>
     <div id="fade"></div>
-    <div id="fade2"></div>
     <div id="loginContainer">
         <div id="loginForm">
             <table>
@@ -74,7 +73,7 @@
         </ul>
 
         <br />
-        <h:commandLink id="jQ" styleClass="btn" value="Start spel" onclick="queue()">
+        <h:commandLink styleClass="btn" value="Start spel" onclick="queue()">
             <f:ajax execute="@form" render="@none" />
         </h:commandLink>
         <h:commandLink id="lQ" styleClass="btn" value="Cancel" onclick="cnclQueue()">
