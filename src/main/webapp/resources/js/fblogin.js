@@ -2,7 +2,7 @@ $ = jQuery;
 var fbName = "";
 
 function ini(){
-    var element = document.getElementById("j_idt11:logName");
+    var element = document.getElementById("menuFrm:logName");
 
     if(element != null) {
         if (element.innerHTML !=""){
@@ -12,6 +12,12 @@ function ini(){
                 if(element.innerHTML == "Login") {
                     element.innerHTML = "Logout";
 
+                }
+                if (element.innerHTML == "name") {
+                    var el = document.getElementById("menuFrm:logName");
+                    element.innerHTML = "Welcome, " + el.innerHTML;
+                    $(".invisible").addClass("visible");
+                    $(".invisible").removeClass("invisible");
                 }
             }
 
@@ -40,7 +46,7 @@ function showLogin() {
                 $(".visible").removeClass("visible");
             });
             element.innerHTML = "Login";
-            if (document.getElementById("j_idt11:logName").innerHTML != ""){
+            if (document.getElementById("menuFrm:logName").innerHTML != ""){
                 var logout = document.getElementById("logoutFrm:logoutBtn");
                 logout.click();
             }
@@ -99,6 +105,10 @@ function testAPI() {
 
             if (element.innerHTML == "name" || element.innerHTML == "Welcome, " + response.name) {
                 element.innerHTML = "Welcome, " + response.name;
+                var el = document.getElementById("menuFrm:logName");
+                if (el.innerHTML != null && el.innerHTML != "") {
+                    element.innerHTML = "Welcome, " + el.innerHTML;
+                }
                 $(".invisible").addClass("visible");
                 $(".invisible").removeClass("invisible");
             }
