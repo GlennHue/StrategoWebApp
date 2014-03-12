@@ -27,6 +27,11 @@ public class Game {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Player> players;
 
+    @OneToMany(mappedBy = "game")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OrderBy(value = "number ASC")
+    private List<Move> moves = new ArrayList<Move>();
+
     private int time;
     private int playerCount;
 
@@ -46,6 +51,13 @@ public class Game {
         }
     }
 
+    public List<Move> getMoves() {
+        return moves;
+    }
+
+    public void setMoves(List<Move> moves) {
+        this.moves = moves;
+    }
 
     public void setId(int id) {
         this.id = id;

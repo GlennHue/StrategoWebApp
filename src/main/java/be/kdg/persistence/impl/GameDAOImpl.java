@@ -1,6 +1,7 @@
 package be.kdg.persistence.impl;
 
 import be.kdg.model.Game;
+import be.kdg.model.Move;
 import be.kdg.model.Player;
 import be.kdg.model.StartPosition;
 import be.kdg.persistence.HibernateUtil;
@@ -73,6 +74,22 @@ public class GameDAOImpl implements GameDAOApi {
         openSessionAndTransaction();
         session.saveOrUpdate(game);
         closeAndCommit();
+    }
+
+    @Override
+    public void addMove(Move move) {
+        openSessionAndTransaction();
+        session.saveOrUpdate(move);
+        closeAndCommit();
+    }
+
+    @Override
+    public int getLatestMoveNr(int gameId) {
+        openSessionAndTransaction();
+        Game game = getGameOpenSession(gameId);
+        int result = game.getMoves().size();
+        close();
+        return result;
     }
 
     private void openSessionAndTransaction() {

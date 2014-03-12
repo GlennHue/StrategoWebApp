@@ -76,11 +76,33 @@
         <h:commandLink styleClass="btn" value="Start spel" onclick="queue()">
             <f:ajax execute="@form" render="@none" />
         </h:commandLink>
+        <h:commandLink id="lQ" styleClass="btn" value="Cancel" onclick="cnclQueue()">
+            <f:ajax execute="@form" render="@none" />
+        </h:commandLink>
     </h:form>
+
+    <div id="queueContainer">
+        <div id="queueScherm">
+            <table>
+                <h:form>
+                    <tr>
+                        <td colspan="2"><h:graphicImage library="css" name="img/loader.GIF" alt="Loading" style="width:50px;height:50px;"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><h:commandButton styleClass="btn" value="cancel" onclick="cnclQueue()"></h:commandButton></td>
+                    </tr>
+                </h:form>
+            </table>
+        </div>
+    </div>
 
     <h:form id="joinQueue"><h:commandLink id="joinBtn" action="#{userBean.findUsers()}" >
         <f:param name="action" value="#{userBean.user.username}" />
-    </h:commandLink>></h:form>
+    </h:commandLink>
+        <h:commandLink id="leaveBtn" action="#{userBean.leaveQueue()}">
+            <f:param name="action" value="#{userBean.user.username}" />
+        </h:commandLink></h:form>
+
 
     <h:form id="logoutFrm"><h:commandLink id="logoutBtn" action="#{userBean.logout()}" /> </h:form>
 </h:body>

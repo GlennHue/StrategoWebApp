@@ -22,7 +22,7 @@
 $ = jQuery;
 var REDIPS = REDIPS || {};
 var notready = true;
-
+var gameId = 1;
 
 
 
@@ -200,6 +200,14 @@ REDIPS.drag = (function () {
                 var rd = REDIPS.drag;
                 var pos = rd.getPosition();
                 var img = $(td.target).find("div").find("img");
+                var imgg = $(td.target).find("img");
+
+                var oldIndex = pos[4] + "" + pos[5];
+                var newIndex = pos[1] + "" + pos[2];
+
+                if(imgg.length > 1){
+                    fight(oldIndex,newIndex);
+                }
 
                 if(pos[3] == 1) {
                     img.removeClass("sideImg");
@@ -209,7 +217,7 @@ REDIPS.drag = (function () {
                 var newIndex = pos[1] + "" + pos[2];
                 var index = newIndex + "," + oldIndex;
 
-                $.getJSON("http://localhost:8080/api/game/movePiece?index=" + index)
+                $.getJSON("http://localhost:8080/api/game/movePiece?index=" + index + "&gameId=1")
                     .done(function(data) {
                         if(data == true) {
                             alert("Piece moved")
@@ -313,6 +321,20 @@ REDIPS.drag = (function () {
         var div = source.getElementsByTagName("div")[0];
         var img = div.getElementsByTagName("img")[0];
         return img.alt.toLowerCase();
+    }
+
+    function fight(oldIndex,newIndex){
+
+
+        $.getJSON("http://localhost:8080/api/game/fightWeb?gameId=" + gameId + "&playerIndex=" + oldIndex + "&enemyIndex=" + newIndex)
+            .done(function(data) {
+
+                alert("fight succeed" + data.result);
+            })
+            .fail(function() {
+                alert("fight fail");
+            });
+
     }
 
     function checkTarget(source, target) {
@@ -4900,14 +4922,12 @@ function ready(button) {
 
 
     if(content.length==40){
-        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources + "&gameId=1")
+        $.getJSON("http://localhost:8080/api/game/setStartPosition?pieces=" + sources + "&playerId=1&gameId=" + gameId)
             .done(function(data){
-                var tds = document.getElementById("gameBoard").getElementsByTagName('td');
-                for(var i =0; i < 40;i++){
-                    tds[i].innerHTML = "<img src='/javax.faces.resource/img/piece/redpiece.png.xhtml?ln=css' alt='SPY'>";
-                }
+
 
                 if(data == true) {
+                     showEnemy();
                     alert('Game start');
                 } else {
                     readyTimer = setInterval(function(){getReady()}, 2000);
@@ -4927,8 +4947,16 @@ function ready(button) {
     return false;
 }
 
+function showEnemy() {
+alert("enemy");
+    var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+    for(var i =0; i < 40;i++){
+        tds[i].innerHTML = "<img src='/javax.faces.resource/img/piece/redpiece.png.xhtml?ln=css' alt='SPY'>";
+    }
+}
+
 function ready2() {
-    $.getJSON("http://localhost:8080/api/game/setReady")
+    $.getJSON("http://localhost:8080/api/game/setReady?playerId=2")
         .done(function(data) {
             alert(data);
         })
@@ -4939,13 +4967,42 @@ function ready2() {
     return false;
 }
 
+
+function addMark() {
+    var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+
+
+    for(var i =0; i < 100;i++){
+
+        $(tds[i]).addClass("mark");
+    }
+
+    return false;
+}
+
+function removeMark() {
+    var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+
+
+    for(var i =0; i < 100;i++){
+        if(i == 42 || i == 43 || i == 46 || i == 47 || i == 52 || i == 53 || i == 56 || i == 57){}
+        else{
+        $(tds[i]).removeClass("mark");}
+    }
+
+
+    return false;
+}
+
 function getReady() {
-    $.getJSON("http://localhost:8080/api/game/getReady")
+    $.getJSON("http://localhost:8080/api/game/getReady?gameId=" + gameId)
         .done(function(data) {
-            if(data == true) {
+
+            if(data.isReady == true) {
                 alert("Game start");
-                document.getElementById("readyPlayer2").innerHTML = "Ready!"
+                document.getElementById("readyPlayer2").innerHTML = "Ready!";
                 clearInterval(readyTimer);
+                showEnemy();
             } else {
                 alert("Other player not ready yet");
             }

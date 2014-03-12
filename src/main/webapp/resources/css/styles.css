@@ -236,6 +236,10 @@ td, th {
 }
 
 .invisible {
+     display: none !important;
+ }
+
+.permInvisible {
     display: none !important;
 }
 

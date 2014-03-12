@@ -39,8 +39,6 @@ public class JsonController {
     private Player player;
     private boolean isPlayerTurn;
 
-
-
     @Autowired
     private AchievementServiceApi achievementService;
     //todo behaalde achievemtns + alle achievements, getvriendenlijst
@@ -103,9 +101,11 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.GET)
     @ResponseBody
-    public String setStartPosition(@RequestParam("pieces")String pieces, @RequestParam("gameId")int gameId){
+    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId, @RequestParam("gameId")int gameId){
 
         gameService.setStartPosition(gameId, pieces);
+        gameService.addStartPosition(gameId,pieces);
+        playerService.setReady(Integer.parseInt(playerId));
         boolean ready = gameService.getReady(gameId);
 
         if(ready) {
@@ -132,20 +132,24 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/setReady", method = RequestMethod.GET)
     @ResponseBody
-    public String setReady(){
-        bean.setReady();
+    public String setReady(@RequestParam("playerId")int playerId){
+        playerService.setReady(playerId);
+        String pieces = "r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,";
+        int gameId = 1;
+        gameService.setStartPosition(gameId, pieces);
+        gameService.addStartPosition(gameId,pieces);
+        playerService.setReady(playerId);
 
         return "true";
     }
 
     @RequestMapping(value = "api/game/movePiece", method = RequestMethod.GET)
     @ResponseBody
-    public String movePiece(@RequestParam("index")String index){
+    public String movePiece(@RequestParam("index")String index,@RequestParam("gameId")int gameId){
         int newIndex = Integer.parseInt(index.split(",")[0]);
         int oldIndex = Integer.parseInt(index.split(",")[1]);
 
-        bean.movePiece(newIndex, oldIndex);
-
+        gameService.addMove(gameId,newIndex,oldIndex);
         return "true";
         //
     }
@@ -174,25 +178,6 @@ public class JsonController {
         }
         return jSonPieces.toString();
     }
-
-
-    @RequestMapping(value = "api/game/getStartPosition", method = RequestMethod.GET)
-    @ResponseBody
-    public String getStartPosition(@RequestParam("gameId")String gameId,@RequestParam("color")String color ){
-        JSONObject jSonPieces = new JSONObject();
-
-        List<StartPosition>startPositions =  gameService.getStartingPositions(Integer.parseInt(gameId));
-        try {
-            if (startPositions.get(0).getColor().equalsIgnoreCase(color)) {
-                jSonPieces.put("pieces",startPositions.get(1).getPiece());
-
-            } else jSonPieces.put("pieces",startPositions.get(0).getPiece());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jSonPieces.toString();
-    }
-
 
     @RequestMapping(value = "api/logout",method = RequestMethod.POST)
     @ResponseBody
@@ -236,6 +221,20 @@ public class JsonController {
         }
         return resultObject.toString();
     }
+
+    @RequestMapping(value = "api/game/fightWeb",method = RequestMethod.GET)
+    @ResponseBody
+    public String fightWeb(@RequestParam("gameId")int gameId,@RequestParam("playerIndex")int playerIndex,@RequestParam("enemyIndex")int enemyIndex) {
+        int result =  gameService.fight(gameId,playerIndex,enemyIndex);
+        JSONObject resultObject = new JSONObject();
+        try {
+            resultObject.put("result",result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return resultObject.toString();
+    }
+
     /*
     @RequestMapping(value = "api/acceptInvite",method = RequestMethod.POST)
     @ResponseBody
