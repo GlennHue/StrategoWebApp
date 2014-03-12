@@ -1,6 +1,7 @@
 package be.kdg.persistence.api;
 
 import be.kdg.model.Game;
+import be.kdg.model.Move;
 import be.kdg.model.Player;
 import be.kdg.model.StartPosition;
 
@@ -22,4 +23,8 @@ public interface GameDAOApi {
     public List<StartPosition> getStartingPositions(int gameId);
 
     public int saveGame(Game game);
+
+    public void addMove(Move move);
+
+    public int getLatestMoveNr(int gameId);
 }

@@ -19,7 +19,6 @@ public class GameServiceImpl implements GameServiceApi {
     @Override
     public void setStartPosition(int gameId, String pieces) {
         Game game = gameDao.getGame(gameId);
-        game.setBoard(new Board());
         char firstChar = pieces.charAt(0);
         if (firstChar == ('b')){
             putStartPiecesBlue(pieces, game);
@@ -103,5 +102,26 @@ public class GameServiceImpl implements GameServiceApi {
     @Override
     public int saveGame(Game game) {
         return gameDao.saveGame(game);
+    }
+
+    @Override
+    public void addMove(int gameId, int oldIndex, int newIndex) {
+        Move move = new Move(oldIndex, newIndex);
+        Game game = gameDao.getGame(gameId);
+        move.setGame(game);
+        move.setNumber(gameDao.getLatestMoveNr(gameId)+1);
+        gameDao.addMove(move);
+    }
+
+    @Override
+    public Game reconstructGame(int gameId) {
+        Game game = gameDao.getGame(gameId);
+        for(StartPosition position : game.getStartPositions()) {
+            setStartPosition(gameId, position.getPiece());
+        }
+        for(Move move : game.getMoves()) {
+            movePiece(gameId, move.getOldIndex(), move.getNewIndex());
+        }
+        return game;
     }
 }

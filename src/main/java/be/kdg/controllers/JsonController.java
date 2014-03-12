@@ -101,6 +101,7 @@ public class JsonController {
     public String setStartPosition(@RequestParam("pieces")String pieces, @RequestParam("gameId")int gameId){
 
         gameService.setStartPosition(gameId, pieces);
+        gameService.addStartPosition(gameId, pieces);
         boolean ready = gameService.getReady(gameId);
 
         if(ready) {

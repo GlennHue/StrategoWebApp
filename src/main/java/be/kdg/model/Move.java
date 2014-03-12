@@ -13,9 +13,27 @@ public class Move {
 
     private int oldIndex;
     private int newIndex;
-    private String pieceCode;
+    private int number;
+
+    @ManyToOne
+    @JoinColumn(name = "gameId")
+    private Game game;
 
     public Move() {
+        number = 0;
+    }
+
+    public Move(int oldIndex, int newIndex) {
+        this.oldIndex = oldIndex;
+        this.newIndex = newIndex;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public int getId() {
@@ -42,11 +60,11 @@ public class Move {
         this.newIndex = newIndex;
     }
 
-    public String getPieceCode() {
-        return pieceCode;
+    public int getNumber() {
+        return number;
     }
 
-    public void setPieceCode(String pieceCode) {
-        this.pieceCode = pieceCode;
+    public void setNumber(int pieceCode) {
+        this.number = pieceCode;
     }
 }

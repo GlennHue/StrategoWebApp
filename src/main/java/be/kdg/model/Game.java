@@ -16,11 +16,15 @@ public class Game {
     @Transient
     private Board board;
 
-    @OneToMany(mappedBy = "game")
-    private List<StartPosition> startPositions;
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    private List<StartPosition> startPositions = new ArrayList<StartPosition>();
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
-    private List<Player> players;
+    private List<Player> players = new ArrayList<Player>();
+
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    @OrderBy(value = "number ASC")
+    private List<Move> moves = new ArrayList<Move>();
 
     private int time;
     private int playerCount;
@@ -41,6 +45,13 @@ public class Game {
         }
     }
 
+    public List<Move> getMoves() {
+        return moves;
+    }
+
+    public void setMoves(List<Move> moves) {
+        this.moves = moves;
+    }
 
     public void setId(int id) {
         this.id = id;
