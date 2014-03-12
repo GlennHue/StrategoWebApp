@@ -104,10 +104,11 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.GET)
     @ResponseBody
-    public String setStartPosition(@RequestParam("pieces")String pieces, @RequestParam("gameId")int gameId){
+    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId, @RequestParam("gameId")int gameId){
 
         gameService.setStartPosition(gameId, pieces);
         gameService.addStartPosition(gameId,pieces);
+        playerService.setReady(Integer.parseInt(playerId));
         boolean ready = gameService.getReady(gameId);
 
         if(ready) {
@@ -117,45 +118,11 @@ public class JsonController {
         }
     }
 
-    @RequestMapping(value = "api/game/getReady", method = RequestMethod.GET)
-    @ResponseBody
-    public String getReady(@RequestParam("gameId")int gameId) {
-        boolean ready = gameService.getReady(gameId);
-        JSONObject jSonResult = new JSONObject();
-        try {
-            jSonResult.put("isReady",ready);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jSonResult.toString();
-    }
-
-
-
-    @RequestMapping(value = "api/game/setReady", method = RequestMethod.GET)
-    @ResponseBody
-    public String setReady(@RequestParam("gameId")int gameId){
-        bean.setReady();
-
-        return "true";
-    }
-
-    @RequestMapping(value = "api/game/movePiece", method = RequestMethod.GET)
-    @ResponseBody
-    public String movePiece(@RequestParam("index")String index){
-        int newIndex = Integer.parseInt(index.split(",")[0]);
-        int oldIndex = Integer.parseInt(index.split(",")[1]);
-
-        bean.movePiece(newIndex, oldIndex);
-
-        return "true";
-        //
-    }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)
     @ResponseBody
     public String setStartPosition(@RequestParam("gameid")int gameid, )
-                                  */
+
     @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.POST)
     @ResponseBody
     public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId,@RequestParam("gameId")String gameId ) throws JSONException {
@@ -175,7 +142,43 @@ public class JsonController {
         jSonPieces.put("2","b5");
         jSonPieces.put("3","b11");
         return jSonPieces.toString();
+    }*/
+
+    @RequestMapping(value = "api/game/getReady", method = RequestMethod.GET)
+    @ResponseBody
+    public String getReady(@RequestParam("gameId")int gameId) {
+        boolean ready = gameService.getReady(gameId);
+        JSONObject jSonResult = new JSONObject();
+        try {
+            jSonResult.put("isReady",ready);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jSonResult.toString();
     }
+
+
+
+    @RequestMapping(value = "api/game/setReady", method = RequestMethod.GET)
+    @ResponseBody
+    public String setReady(@RequestParam("playerId")int playerId){
+        playerService.setReady(playerId);
+        return "true";
+    }
+
+    @RequestMapping(value = "api/game/movePiece", method = RequestMethod.GET)
+    @ResponseBody
+    public String movePiece(@RequestParam("index")String index){
+        int newIndex = Integer.parseInt(index.split(",")[0]);
+        int oldIndex = Integer.parseInt(index.split(",")[1]);
+
+        bean.movePiece(newIndex, oldIndex);
+
+        return "true";
+        //
+    }
+
+
 
     @RequestMapping(value = "api/logout",method = RequestMethod.POST)
     @ResponseBody
