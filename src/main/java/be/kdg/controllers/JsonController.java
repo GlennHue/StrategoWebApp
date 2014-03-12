@@ -107,7 +107,7 @@ public class JsonController {
     public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId, @RequestParam("gameId")int gameId){
 
         gameService.setStartPosition(gameId, pieces);
-        gameService.addStartPosition(gameId,pieces);
+        gameService.addStartPosition(gameId, pieces);
         playerService.setReady(Integer.parseInt(playerId));
         boolean ready = gameService.getReady(gameId);
 
@@ -183,6 +183,30 @@ public class JsonController {
         //
     }
 
+    /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)
+    @ResponseBody
+    public String setStartPosition(@RequestParam("gameid")int gameid, )
+                                  */
+    @RequestMapping(value = "api/game/setStartPosition", method = RequestMethod.POST)
+    @ResponseBody
+    public String setStartPosition(@RequestParam("pieces")String pieces,@RequestParam("playerId")String playerId,@RequestParam("gameId")String gameId ) throws JSONException {
+        JSONObject jSonPieces = new JSONObject();
+        gameService.setStartPosition(Integer.parseInt(gameId),pieces);
+        gameService.addStartPosition(Integer.parseInt(gameId),pieces);
+        playerService.setReady(Integer.parseInt(playerId));
+        Boolean enemyReady = gameService.getReady(Integer.parseInt(gameId));
+        if (pieces != null && !pieces.isEmpty()) {
+            bean.putStartPieces(pieces);
+        }
+        if (enemyReady) {
+            gameService.getStartingPositions(Integer.parseInt(gameId));
+        }
+        jSonPieces.put("0","b0");
+        jSonPieces.put("1","b1");
+        jSonPieces.put("2","b5");
+        jSonPieces.put("3", "b11");
+        return jSonPieces.toString();
+    }
 
 
     @RequestMapping(value = "api/logout",method = RequestMethod.POST)
@@ -247,6 +271,43 @@ public class JsonController {
     public String acceptInvite(@RequestParam("username")String username,@RequestParam("friend")String friendname){
         User friend = userService.acceptFriend(username,friendname);
     }*/
+
+    @RequestMapping(value = "api/game/win", method = RequestMethod.GET)
+    @ResponseBody
+    public String win(@RequestParam("winnerId")String winnerId) {
+        Game game = null;
+        Player winner = playerService.getPlayerById(Integer.parseInt(winnerId));
+        game = winner.getGame();
+        Player loser = null;
+        for(Player player : game.getPlayers()) {
+            if(player != winner) {
+                loser = player;
+            }
+        }
+        if(loser != null && winner != null) {
+            User winnerUser = winner.getUser();
+            User loserUser = loser.getUser();
+            int difference = winnerUser.getScore() - loserUser.getScore();
+            if (difference > 50) {
+                winnerUser.setScore(winnerUser.getScore() + 10);
+                loserUser.setScore(loserUser.getScore() - 10);
+            } else if(difference > 20) {
+                winnerUser.setScore(winnerUser.getScore() + 11);
+                loserUser.setScore(loserUser.getScore() - 11);
+            } else if(difference > 0) {
+                winnerUser.setScore(winnerUser.getScore() + 12);
+                loserUser.setScore(loserUser.getScore() - 12);
+            } else if(difference > -20) {
+                winnerUser.setScore(winnerUser.getScore() + 13);
+                loserUser.setScore(loserUser.getScore() - 13);
+            } else {
+                winnerUser.setScore(winnerUser.getScore() + 15);
+                loserUser.setScore(loserUser.getScore() - 14);
+            }
+
+        }
+        return "goed bezig";
+    }
 
     @RequestMapping(value = "api/addUserToQueue",method = RequestMethod.POST)
     @ResponseBody

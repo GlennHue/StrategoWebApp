@@ -33,6 +33,7 @@ public interface UserServiceApi {
     public void userLogout(String username);
 
 
+
     public User insertFriend(String username,String friendname);
 
     public Boolean userAndFriendAreFriends(String username, String friendname);
