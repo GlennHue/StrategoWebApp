@@ -4928,7 +4928,7 @@ function ready(button) {
 }
 
 function ready2() {
-    $.getJSON("http://localhost:8080/api/game/setReady")
+    $.getJSON("http://localhost:8080/api/game/setReady?gameId=1")
         .done(function(data) {
             alert(data);
         })
@@ -4940,11 +4940,11 @@ function ready2() {
 }
 
 function getReady() {
-    $.getJSON("http://localhost:8080/api/game/getReady")
+    $.getJSON("http://localhost:8080/api/game/getReady?gameId=1")
         .done(function(data) {
             if(data == true) {
                 alert("Game start");
-                document.getElementById("readyPlayer2").innerHTML = "Ready!"
+                document.getElementById("readyPlayer2").innerHTML = "Ready!";
                 clearInterval(readyTimer);
             } else {
                 alert("Other player not ready yet");
