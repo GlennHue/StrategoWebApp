@@ -35,9 +35,9 @@ public class JsonController {
     @Autowired
     private LobbyBean lobbyBean;
 
-    // Declare this array here so when the second user pols the queue status, he also knows a player has been found!!
-    //private int[]idArray;
-    Player player;
+    // Declare this Player here so when the second user pols the queue status, he also knows a player has been found!!
+    private Player player;
+    
 
     @Autowired
     private AchievementServiceApi achievementService;
@@ -132,10 +132,30 @@ public class JsonController {
         }
     }
 
+    @RequestMapping(value = "api/game/getStartPosition", method = RequestMethod.GET)
+    @ResponseBody
+    public String getStartPosition(@RequestParam("gameId")String gameId,@RequestParam("color")String color ){
+        JSONObject jSonPieces = new JSONObject();
+
+        List<StartPosition>startPositions =  gameService.getStartingPositions(Integer.parseInt(gameId));
+        try {
+            if (startPositions.get(0).getColor().equalsIgnoreCase(color)) {
+                jSonPieces.put("pieces",startPositions.get(1).getPiece());
+
+            } else jSonPieces.put("pieces",startPositions.get(0).getPiece());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jSonPieces.toString();
+    }
+
     @RequestMapping(value = "api/game/getReady", method = RequestMethod.GET)
     @ResponseBody
     public String getReady(@RequestParam("gameId")int gameId) {
         boolean ready = gameService.getReady(gameId);
+        if (ready) {
+            gameService.setStartingPlayer(gameId);
+        }
         JSONObject jSonResult = new JSONObject();
         try {
             jSonResult.put("isReady",ready);
@@ -160,11 +180,18 @@ public class JsonController {
         return "true";
     }
 
-    @RequestMapping(value = "api/game/movePiece", method = RequestMethod.GET)
+    @RequestMapping(value = "api/game/movePiece", method = RequestMethod.POST)
     @ResponseBody
-    public String movePiece(@RequestParam("index")String index,@RequestParam("gameId")int gameId){
+    public String movePiece(@RequestParam("index")String index,@RequestParam("playerId") int playerId){
         int newIndex = Integer.parseInt(index.split(",")[0]);
         int oldIndex = Integer.parseInt(index.split(",")[1]);
+        gameService.addMove(playerId,newIndex,oldIndex);
+        Player player1 = playerService.getPlayerById(playerId);
+        player1.setReady(false);
+        Player enemy = playerService.getEnemy(playerId);
+        enemy.setReady(true);
+        playerService.savePlayer(player1);
+        playerService.savePlayer(enemy);
 
         gameService.addMove(gameId,newIndex,oldIndex);
         return "true";
@@ -191,11 +218,10 @@ public class JsonController {
                 jSonPieces.put("pieces", startPositions.get(1).getPiece());
             } else jSonPieces.put("pieces", startPositions.get(0).getPiece());
         } else {
-            jSonPieces = null;
+            jSonPieces.put("pieces","-1");
         }
         return jSonPieces.toString();
     }
-
 
     @RequestMapping(value = "api/logout",method = RequestMethod.POST)
     @ResponseBody
@@ -341,22 +367,22 @@ public class JsonController {
     @RequestMapping(value = "api/addUserToQueue",method = RequestMethod.POST)
     @ResponseBody
     public String addUserToQueue(@RequestParam("username")String username) {
-        boolean secondPLayerPulled = false;
+        boolean secondPlayerPulled = false;//--> set player back to "null" so we can start over when we get 2 new players from the queue
         //check if someone else already pulled the data
         if (player == null) {
             User user = userService.getUser(username);
             lobbyBean.addUser(user);
             player = lobbyBean.checkGames(user);
 
-            // in case someone else already pulled --> get playerId of other user for second user !
+            // in case someone else already pulled --> get playerId of other user to return second user !
         } else {
-            Game game = gameService.getGame(player.getGame().getId());
+            Game game = player.getGame();
             if (game.getPlayers().get(0).getId() == player.getId()) {
                 player = game.getPlayers().get(1);
             } else {
                 player = game.getPlayers().get(0);
             }
-            secondPLayerPulled = true;
+            secondPlayerPulled = true;
         }
 
         JSONObject jSonResult = new JSONObject();
@@ -365,11 +391,10 @@ public class JsonController {
                 jSonResult.put("playerId", player.getId());
                 jSonResult.put("gameId", player.getGame().getId());
                 jSonResult.put("color", player.getColor());
-                jSonResult.put("isReady",player.getReady());
             } else {
-                jSonResult = null;
+                jSonResult.put("playerId",-1);
             }
-            if (secondPLayerPulled) {
+            if (secondPlayerPulled) {
                 player = null;
             }
         } catch (JSONException e) {
@@ -377,30 +402,34 @@ public class JsonController {
         }
         return jSonResult.toString();
     }
-
-    @RequestMapping(value = "api/game/switchTurn",method = RequestMethod.GET)
+/* normaal gezien kan dit in addMove method
+    @RequestMapping(value = "api/game/switchTurn",method = RequestMethod.POST)
     @ResponseBody
     public String switchTurn(@RequestParam("playerId")String playerId) {
         Player player1 = playerService.getPlayerById(Integer.parseInt(playerId));
         player1.setReady(false);
+        Player enemy = playerService.getEnemy(Integer.parseInt(playerId));
+        enemy.setReady(true);
         playerService.savePlayer(player1);
+        playerService.savePlayer(enemy);
         return "true";
-    }
+    }*/
 
     @RequestMapping(value = "api/game/getEnemyStatus", method = RequestMethod.GET)
     @ResponseBody
-    public String getEnemyStatus(@RequestParam("gameId")int playerId) {
-        boolean enemyStatus = playerService.getEnemyStatus(playerId);
-
+    public String getEnemyStatus(@RequestParam("playerId")int playerId) {
+        boolean enemyStatus = playerService.getEnemy(playerId).getReady();
         JSONObject jSonResult = new JSONObject();
         try {
+            if (enemyStatus == false) {
+                Move move = gameService.getMove(playerId);
+                jSonResult.put("oldIndex",move.getOldIndex());
+                jSonResult.put("newIndex",move.getNewIndex());
+            }
             jSonResult.put("isReady",enemyStatus);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return jSonResult.toString();
     }
-
-
-
 }

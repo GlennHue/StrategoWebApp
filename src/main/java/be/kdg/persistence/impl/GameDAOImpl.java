@@ -92,6 +92,16 @@ public class GameDAOImpl implements GameDAOApi {
         return result;
     }
 
+    @Override
+    public Move getLastMove(int gameId) {
+        openSessionAndTransaction();
+        String queryString = "from Move m where m.game.id = :gameId order by m.id desc ";
+        Query query = session.createQuery(queryString).setInteger("gameId", gameId).setMaxResults(1);
+        Move move = (Move)query.uniqueResult();
+        close();
+        return move;
+    }
+
     private void openSessionAndTransaction() {
         session = HibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();

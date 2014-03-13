@@ -68,12 +68,8 @@ public class LobbyBean {
             Player p2;
             if (color == Color.BLUE) {
                 p2 = new Player(u1,game,Color.RED);
-                p2.setReady(true);
-                p1.setReady(false);
             } else{
                 p2 = new Player(u1,game,Color.BLUE);
-                p2.setReady(false);
-                p1.setReady(true);
             }
 
             playerService.savePlayer(p1);

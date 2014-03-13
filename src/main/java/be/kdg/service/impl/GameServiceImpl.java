@@ -3,6 +3,7 @@ package be.kdg.service.impl;
 import be.kdg.model.*;
 import be.kdg.persistence.api.GameDAOApi;
 import be.kdg.service.api.GameServiceApi;
+import be.kdg.service.api.PlayerServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import java.util.List;
 public class GameServiceImpl implements GameServiceApi {
     @Autowired
     private GameDAOApi gameDao;
+    @Autowired
+    private PlayerServiceApi playerService;
 
     @Override
     public void setStartPosition(int gameId, String pieces) {
@@ -117,11 +120,36 @@ public class GameServiceImpl implements GameServiceApi {
     }
 
     @Override
-    public void addMove(int gameId, int oldIndex, int newIndex) {
+    public void setStartingPlayer(int gameId) {
+        List<Player> players = gameDao.getGame(gameId).getPlayers();
+        for (Player player : players) {
+            if (player.getColor().equals(Color.RED)) {
+                player.setReady(true);
+            } else player.setReady(false);
+            playerService.savePlayer(player);
+
+        }
+    }
+
+    @Override
+    public Move getMove(int playerId) {
+        Player player = playerService.getPlayerById(playerId);
+        int gameId = player.getGame().getId();
+        Move move = getLastMove(gameId);
+        return move;
+    }
+
+    private Move getLastMove(int gameId) {
+        return gameDao.getLastMove(gameId);
+    }
+
+    @Override
+    public void addMove(int playerId, int oldIndex, int newIndex) {
         Move move = new Move(oldIndex, newIndex);
-        Game game = gameDao.getGame(gameId);
+        Player player = playerService.getPlayerById(playerId);
+        Game game = gameDao.getGame(player.getGame().getId());
         move.setGame(game);
-        move.setNumber(gameDao.getLatestMoveNr(gameId)+1);
+        move.setNumber(gameDao.getLatestMoveNr(game.getId())+1);
         gameDao.addMove(move);
     }
 

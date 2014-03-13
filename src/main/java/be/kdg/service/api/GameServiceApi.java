@@ -1,6 +1,7 @@
 package be.kdg.service.api;
 
 import be.kdg.model.Game;
+import be.kdg.model.Move;
 import be.kdg.model.StartPosition;
 
 import java.util.List;
@@ -25,11 +26,15 @@ public interface GameServiceApi {
     public int fight(String piecePlayer, String pieceEnemy);
     public int fight(int gameId,int playerIndex, int enemyIndex);
 
-    public void addMove(int gameId, int oldIndex, int newIndex);
+    public void addMove(int playerId, int oldIndex, int newIndex);
 
     public Game reconstructGame(int gameId);
     
     public Game getGame(int gameId);
 
     public void saveGame(Game game);
+
+    public void setStartingPlayer(int gameId);
+
+    public Move getMove(int playerId);
 }
