@@ -2,6 +2,7 @@ package be.kdg.service.api;
 
 
 import be.kdg.model.Achievement;
+import be.kdg.model.Game;
 import be.kdg.model.User;
 
 import java.util.List;
@@ -32,11 +33,17 @@ public interface UserServiceApi {
 
     public void userLogout(String username);
 
-
-
     public User insertFriend(String username,String friendname);
 
     public Boolean userAndFriendAreFriends(String username, String friendname);
 
     public void addFbUser(String fn, String x, String x1);
+
+    public void updateUser(User user);
+
+    public int getRank(User user);
+
+    public int getMaxRank();
+
+    public List<Game> getGamesByUsername(String username);
 }

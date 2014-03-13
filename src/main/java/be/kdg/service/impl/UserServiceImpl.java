@@ -1,6 +1,7 @@
 package be.kdg.service.impl;
 
 import be.kdg.model.Achievement;
+import be.kdg.model.Game;
 import be.kdg.model.User;
 import be.kdg.persistence.api.UserDAOApi;
 import be.kdg.service.api.UserServiceApi;
@@ -86,5 +87,25 @@ public class UserServiceImpl implements UserServiceApi {
     @Override
     public void addFbUser(String fn, String x, String x1) {
         userDao.addFbUser(new User(fn, x, x1));
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userDao.updateUser(user);
+    }
+
+    @Override
+    public int getRank(User user) {
+        return userDao.getRank(user);
+    }
+
+    @Override
+    public int getMaxRank() {
+        return userDao.getMaxRank();
+    }
+
+    @Override
+    public List<Game> getGamesByUsername(String username) {
+        return userDao.getGamesByUsername(username);
     }
 }

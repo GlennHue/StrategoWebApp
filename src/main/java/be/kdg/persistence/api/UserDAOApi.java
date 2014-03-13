@@ -1,5 +1,6 @@
 package be.kdg.persistence.api;
 
+import be.kdg.model.Game;
 import be.kdg.model.User;
 
 import java.util.List;
@@ -33,8 +34,6 @@ public interface UserDAOApi {
 
     public boolean uuidIsVerified(String uuid);
 
-    public void addUser(User user);
-
     public List getAchievementsByUsername(String username);
 
     public List<User> getFriendsByUsername(String username);
@@ -43,9 +42,15 @@ public interface UserDAOApi {
 
     public User insertFriend(String username,String friendname);
 
-    public User getUserByUsernameWithoutSessionClose(String username);
-
     public Boolean userAndFriendAreFriends(String username, String friendname);
 
     public void addFbUser(User user);
+
+    public void updateUser(User user);
+
+    public int getRank(User user);
+
+    public int getMaxRank();
+
+    public List<Game> getGamesByUsername(String username);
 }

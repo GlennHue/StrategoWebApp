@@ -18,7 +18,7 @@ public class User {
     private int id;
 
     //private String fbUsername;
-
+    @Column(unique = true)
     private String username;
     private String password;
     private String eMail;
@@ -45,6 +45,10 @@ public class User {
     )
     private List<Achievement> achievements = new ArrayList<Achievement>();
 
+    @OneToMany(mappedBy = "user")
+    @OrderBy(value = "id desc")
+    private List<Player> players = new ArrayList<Player>();
+
     public User() {
         score = 1200;
     }
@@ -55,6 +59,14 @@ public class User {
         this.eMail = eMail;
         this.verified = false;
         this.status = "offline";
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     public int getScore() {

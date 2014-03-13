@@ -73,6 +73,23 @@ public class JsonController {
         return resultObj.toString();
     }
 
+    @RequestMapping(value = "api/user/getStats", method = RequestMethod.GET)
+    @ResponseBody
+    public String getStats(@RequestParam("username")String username) {
+        JSONObject obj = new JSONObject();
+        User user = userService.getUser(username);
+        try {
+            obj.put("maxRank", userService.getMaxRank());
+            obj.put("myRank", userService.getRank(user));
+            obj.put("wins", user.getWins());
+            obj.put("losses", user.getLosses());
+            obj.put("gamesPlayer", user.getWins() + user.getLosses());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj.toString();
+    }
+
     @RequestMapping(value = "api/getFriends", method = RequestMethod.GET)
     @ResponseBody
     public String getFriends(@RequestParam("username")String username) {
@@ -275,9 +292,50 @@ public class JsonController {
                 winnerUser.setScore(winnerUser.getScore() + 15);
                 loserUser.setScore(loserUser.getScore() - 14);
             }
-
+            winnerUser.setWins(winnerUser.getWins()+1);
+            loserUser.setLosses(loserUser.getLosses()+1);
+            userService.updateUser(winnerUser);
+            userService.updateUser(loserUser);
         }
         return "goed bezig";
+    }
+
+    @RequestMapping(value = "api/user/getGameHistory", method = RequestMethod.GET)
+    @ResponseBody
+    public String getGameHistory(@RequestParam("username")String username) {
+        User user = userService.getUser(username);
+        JSONObject obj = new JSONObject();
+        try{
+            List<Game> games = userService.getGamesByUsername(username);
+            Move lastMove = null;
+            JSONArray array = new JSONArray();
+            for(Game game : games) {
+                int max = 0;
+                for(Move move: game.getMoves()) {
+                    if (max < move.getNumber()) {
+                        lastMove = move;
+                    }
+                }
+                JSONObject arrayElement = new JSONObject();
+                arrayElement.put("gameId", game.getId());
+                arrayElement.put("timePerTurn", game.getTime());
+                JSONArray innerArray = new JSONArray();
+                for(Player player : game.getPlayers()) {
+                    JSONObject innerArrayElement = new JSONObject();
+                    innerArrayElement.put("userId", player.getUser().getId());
+                    innerArrayElement.put("username", player.getUser().getUsername());
+                    innerArrayElement.put("score", player.getUser().getScore());
+                    innerArray.put(innerArrayElement);
+                }
+                arrayElement.put("players", innerArray);
+                array.put(arrayElement);
+            }
+            obj.put("games", array);
+            obj.put("username", username);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj.toString();
     }
 
     @RequestMapping(value = "api/addUserToQueue",method = RequestMethod.POST)
