@@ -164,13 +164,20 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/movePiece", method = RequestMethod.GET)
     @ResponseBody
-    public String movePiece(@RequestParam("index")String index,@RequestParam("gameId")int gameId){
+    public String movePiece(@RequestParam("index")String index,@RequestParam("gameId")int gameId, @RequestParam("playerId") int playerId){
         int newIndex = Integer.parseInt(index.split(",")[0]);
         int oldIndex = Integer.parseInt(index.split(",")[1]);
 
         gameService.addMove(gameId,newIndex,oldIndex);
+
+        Player player1 = playerService.getPlayerById(playerId);
+        player1.setReady(false);
+        Player enemy = playerService.getEnemy(playerId);
+        enemy.setReady(true);
+        playerService.savePlayer(player1);
+        playerService.savePlayer(enemy);
+
         return "true";
-        //
     }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)
@@ -325,7 +332,4 @@ public class JsonController {
         }
         return jSonResult.toString();
     }
-
-
-
 }
