@@ -40,7 +40,6 @@ public class JsonController {
 
     @Autowired
     private AchievementServiceApi achievementService;
-    //todo behaalde achievemtns + alle achievements, getvriendenlijst
 
     @RequestMapping(value = "/api/verifyuser", method = RequestMethod.POST)
     @ResponseBody
@@ -162,14 +161,12 @@ public class JsonController {
         return "true";
     }
 
-    @RequestMapping(value = "api/game/movePiece", method = RequestMethod.GET)
+    @RequestMapping(value = "api/game/movePiece", method = RequestMethod.POST)
     @ResponseBody
-    public String movePiece(@RequestParam("index")String index,@RequestParam("gameId")int gameId, @RequestParam("playerId") int playerId){
+    public String movePiece(@RequestParam("index")String index,@RequestParam("playerId") int playerId){
         int newIndex = Integer.parseInt(index.split(",")[0]);
         int oldIndex = Integer.parseInt(index.split(",")[1]);
-
-        gameService.addMove(gameId,newIndex,oldIndex);
-
+        gameService.addMove(playerId,newIndex,oldIndex);
         Player player1 = playerService.getPlayerById(playerId);
         player1.setReady(false);
         Player enemy = playerService.getEnemy(playerId);
@@ -200,7 +197,7 @@ public class JsonController {
                 jSonPieces.put("pieces", startPositions.get(1).getPiece());
             } else jSonPieces.put("pieces", startPositions.get(0).getPiece());
         } else {
-            jSonPieces = null;
+            jSonPieces.put("pieces","-1");
         }
         return jSonPieces.toString();
     }
@@ -280,7 +277,7 @@ public class JsonController {
 
             // in case someone else already pulled --> get playerId of other user to return second user !
         } else {
-            Game game = gameService.getGame(player.getGame().getId());
+            Game game = player.getGame();
             if (game.getPlayers().get(0).getId() == player.getId()) {
                 player = game.getPlayers().get(1);
             } else {
@@ -296,7 +293,7 @@ public class JsonController {
                 jSonResult.put("gameId", player.getGame().getId());
                 jSonResult.put("color", player.getColor());
             } else {
-                jSonResult = null;
+                jSonResult.put("playerId",-1);
             }
             if (secondPlayerPulled) {
                 player = null;
@@ -306,7 +303,7 @@ public class JsonController {
         }
         return jSonResult.toString();
     }
-
+/* normaal gezien kan dit in addMove method
     @RequestMapping(value = "api/game/switchTurn",method = RequestMethod.POST)
     @ResponseBody
     public String switchTurn(@RequestParam("playerId")String playerId) {
@@ -317,15 +314,19 @@ public class JsonController {
         playerService.savePlayer(player1);
         playerService.savePlayer(enemy);
         return "true";
-    }
+    }*/
 
     @RequestMapping(value = "api/game/getEnemyStatus", method = RequestMethod.GET)
     @ResponseBody
     public String getEnemyStatus(@RequestParam("playerId")int playerId) {
         boolean enemyStatus = playerService.getEnemy(playerId).getReady();
-
         JSONObject jSonResult = new JSONObject();
         try {
+            if (enemyStatus == false) {
+                Move move = gameService.getMove(playerId);
+                jSonResult.put("oldIndex",move.getOldIndex());
+                jSonResult.put("newIndex",move.getNewIndex());
+            }
             jSonResult.put("isReady",enemyStatus);
         } catch (JSONException e) {
             e.printStackTrace();

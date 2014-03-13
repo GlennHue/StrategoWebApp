@@ -132,11 +132,24 @@ public class GameServiceImpl implements GameServiceApi {
     }
 
     @Override
-    public void addMove(int gameId, int oldIndex, int newIndex) {
+    public Move getMove(int playerId) {
+        Player player = playerService.getPlayerById(playerId);
+        int gameId = player.getGame().getId();
+        Move move = getLastMove(gameId);
+        return move;
+    }
+
+    private Move getLastMove(int gameId) {
+        return gameDao.getLastMove(gameId);
+    }
+
+    @Override
+    public void addMove(int playerId, int oldIndex, int newIndex) {
         Move move = new Move(oldIndex, newIndex);
-        Game game = gameDao.getGame(gameId);
+        Player player = playerService.getPlayerById(playerId);
+        Game game = gameDao.getGame(player.getGame().getId());
         move.setGame(game);
-        move.setNumber(gameDao.getLatestMoveNr(gameId)+1);
+        move.setNumber(gameDao.getLatestMoveNr(game.getId())+1);
         gameDao.addMove(move);
     }
 

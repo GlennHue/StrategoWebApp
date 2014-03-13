@@ -27,4 +27,6 @@ public interface GameDAOApi {
     public void addMove(Move move);
 
     public int getLatestMoveNr(int gameId);
+
+    public Move getLastMove(int gameId);
 }
