@@ -1,6 +1,4 @@
 package be.kdg.controllers;
-
-import be.kdg.beans.DragDropBean;
 import be.kdg.beans.LobbyBean;
 import be.kdg.model.*;
 import be.kdg.service.api.AchievementServiceApi;
@@ -26,8 +24,6 @@ import java.util.List;
 public class JsonController {
     @Autowired
     private UserServiceApi userService;
-    @Autowired
-    private DragDropBean bean;
     @Autowired
     private GameServiceApi gameService;
     @Autowired
@@ -193,7 +189,7 @@ public class JsonController {
         playerService.savePlayer(player1);
         playerService.savePlayer(enemy);
 
-        gameService.addMove(gameId,newIndex,oldIndex);
+        gameService.addMove(playerId,newIndex,oldIndex);
         return "true";
         //
     }
