@@ -37,7 +37,6 @@ public class JsonController {
 
     // Declare this Player here so when the second user pols the queue status, he also knows a player has been found!!
     private Player player;
-    private boolean isPlayerTurn;
 
     @Autowired
     private AchievementServiceApi achievementService;
@@ -115,10 +114,30 @@ public class JsonController {
         }
     }
 
+    @RequestMapping(value = "api/game/getStartPosition", method = RequestMethod.GET)
+    @ResponseBody
+    public String getStartPosition(@RequestParam("gameId")String gameId,@RequestParam("color")String color ){
+        JSONObject jSonPieces = new JSONObject();
+
+        List<StartPosition>startPositions =  gameService.getStartingPositions(Integer.parseInt(gameId));
+        try {
+            if (startPositions.get(0).getColor().equalsIgnoreCase(color)) {
+                jSonPieces.put("pieces",startPositions.get(1).getPiece());
+
+            } else jSonPieces.put("pieces",startPositions.get(0).getPiece());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jSonPieces.toString();
+    }
+
     @RequestMapping(value = "api/game/getReady", method = RequestMethod.GET)
     @ResponseBody
     public String getReady(@RequestParam("gameId")int gameId) {
         boolean ready = gameService.getReady(gameId);
+        if (ready) {
+            gameService.setStartingPlayer(gameId);
+        }
         JSONObject jSonResult = new JSONObject();
         try {
             jSonResult.put("isReady",ready);
@@ -245,14 +264,14 @@ public class JsonController {
     @RequestMapping(value = "api/addUserToQueue",method = RequestMethod.POST)
     @ResponseBody
     public String addUserToQueue(@RequestParam("username")String username) {
-        boolean secondPLayerPulled = false;
+        boolean secondPlayerPulled = false;//--> set player back to "null" so we can start over when we get 2 new players from the queue
         //check if someone else already pulled the data
         if (player == null) {
             User user = userService.getUser(username);
             lobbyBean.addUser(user);
             player = lobbyBean.checkGames(user);
 
-            // in case someone else already pulled --> get playerId of other user for second user !
+            // in case someone else already pulled --> get playerId of other user to return second user !
         } else {
             Game game = gameService.getGame(player.getGame().getId());
             if (game.getPlayers().get(0).getId() == player.getId()) {
@@ -260,7 +279,7 @@ public class JsonController {
             } else {
                 player = game.getPlayers().get(0);
             }
-            secondPLayerPulled = true;
+            secondPlayerPulled = true;
         }
 
         JSONObject jSonResult = new JSONObject();
@@ -269,11 +288,10 @@ public class JsonController {
                 jSonResult.put("playerId", player.getId());
                 jSonResult.put("gameId", player.getGame().getId());
                 jSonResult.put("color", player.getColor());
-                jSonResult.put("isReady",player.getReady());
             } else {
                 jSonResult = null;
             }
-            if (secondPLayerPulled) {
+            if (secondPlayerPulled) {
                 player = null;
             }
         } catch (JSONException e) {
@@ -282,19 +300,22 @@ public class JsonController {
         return jSonResult.toString();
     }
 
-    @RequestMapping(value = "api/game/switchTurn",method = RequestMethod.GET)
+    @RequestMapping(value = "api/game/switchTurn",method = RequestMethod.POST)
     @ResponseBody
     public String switchTurn(@RequestParam("playerId")String playerId) {
         Player player1 = playerService.getPlayerById(Integer.parseInt(playerId));
         player1.setReady(false);
+        Player enemy = playerService.getEnemy(Integer.parseInt(playerId));
+        enemy.setReady(true);
         playerService.savePlayer(player1);
+        playerService.savePlayer(enemy);
         return "true";
     }
 
     @RequestMapping(value = "api/game/getEnemyStatus", method = RequestMethod.GET)
     @ResponseBody
-    public String getEnemyStatus(@RequestParam("gameId")int playerId) {
-        boolean enemyStatus = playerService.getEnemyStatus(playerId);
+    public String getEnemyStatus(@RequestParam("playerId")int playerId) {
+        boolean enemyStatus = playerService.getEnemy(playerId).getReady();
 
         JSONObject jSonResult = new JSONObject();
         try {

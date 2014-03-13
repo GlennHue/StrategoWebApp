@@ -32,4 +32,6 @@ public interface GameServiceApi {
     public Game getGame(int gameId);
 
     public void saveGame(Game game);
+
+    public void setStartingPlayer(int gameId);
 }

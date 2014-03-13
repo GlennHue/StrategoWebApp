@@ -81,15 +81,12 @@ public class PlayerServiceImpl implements PlayerServiceApi{
     }
 
     @Override
-    public boolean getEnemyStatus(int playerId) {
+    public Player getEnemy(int playerId) {
         Player player = getPlayerById(playerId);
-        Player enemy;
         Game game = gameService.getGame(player.getGame().getId());
         if (game.getPlayers().get(0).getId() == player.getId()) {
-            enemy = game.getPlayers().get(1);
-        } else enemy = game.getPlayers().get(0);
-
-        return enemy.getReady();
+            return game.getPlayers().get(1);
+        } else return game.getPlayers().get(0);
     }
 
 }

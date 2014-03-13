@@ -3,6 +3,7 @@ package be.kdg.service.impl;
 import be.kdg.model.*;
 import be.kdg.persistence.api.GameDAOApi;
 import be.kdg.service.api.GameServiceApi;
+import be.kdg.service.api.PlayerServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import java.util.List;
 public class GameServiceImpl implements GameServiceApi {
     @Autowired
     private GameDAOApi gameDao;
+    @Autowired
+    private PlayerServiceApi playerService;
 
     @Override
     public void setStartPosition(int gameId, String pieces) {
@@ -114,6 +117,18 @@ public class GameServiceImpl implements GameServiceApi {
     @Override
     public void saveGame(Game game) {
         gameDao.saveGame(game);
+    }
+
+    @Override
+    public void setStartingPlayer(int gameId) {
+        List<Player> players = gameDao.getGame(gameId).getPlayers();
+        for (Player player : players) {
+            if (player.getColor().equals(Color.RED)) {
+                player.setReady(true);
+            } else player.setReady(false);
+            playerService.savePlayer(player);
+
+        }
     }
 
     @Override
