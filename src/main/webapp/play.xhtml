@@ -21,9 +21,6 @@
 </h:head>
 
 <h:body onload="REDIPS.drag.init()">
-
-
-
     <ui:param name="myVar" value="1" />
     <h:form>
         <p:menubar styleClass="centeredMenuBar">
@@ -56,10 +53,8 @@
             </table>
         </div>
     </div>
-
-
-
     <div id="gameContent">
+        <h:inputHidden value="#{user.answer}" id="playerId" />
         <div id="drag">
             <table>
                 <tr>
@@ -68,7 +63,6 @@
                         <table id="sideTable" class="mark">
                             <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return ready(this);" action="#">Ready</h:commandLink>
                             </h:form></td></tr>
-
                             <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return addMark();" action="#">Mark, begint al mor te rennen</h:commandLink>
                             </h:form></td></tr>
                             <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return removeMark();" action="#">Mark, stopt mor</h:commandLink>
@@ -89,9 +83,7 @@
                     </td>
                     <!--</div>-->
                     <!--<div id="gameboard">-->
-
                     <td class="mark">
-
                         <table id="gameBoard">
                             <!--<tr>-->
                                 <ui:repeat var="tile" value="#{dragDropBean.tiles}" varStatus="status">
@@ -109,9 +101,7 @@
                                 </ui:repeat>
                             <!--</tr>-->
                         </table>
-
                     </td>
-
                     <!--</div>-->
                     <!--<div id="tableRight" class="sideTable">-->
                     <td class="mark">
@@ -138,9 +128,5 @@
             </table>
         </div>
     </div>
-
-
-
-
 </h:body>
 </html>

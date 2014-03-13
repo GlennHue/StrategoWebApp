@@ -13,7 +13,7 @@ import javax.faces.bean.SessionScoped;
 
 @Component
 @SessionScoped
-public class DragDropBean implements Serializable {
+public class GameBean implements Serializable {
   //  private List<Piece> source;
   //  private List<Piece> target;
     private Piece[] pieces;
@@ -24,7 +24,7 @@ public class DragDropBean implements Serializable {
     @Autowired
     private GameServiceApi gameService;
 
-    public DragDropBean() {
+    public GameBean() {
         /*initList();*/
         maakLijst();
     }
@@ -69,7 +69,7 @@ public class DragDropBean implements Serializable {
 
         //todo: get gameid
         gameService.movePiece(1, newIndex, oldIndex);
-}
+    }
 
     public void putStartPieces(String pieces){
         char firstChar = pieces.charAt(0);
@@ -139,8 +139,6 @@ public class DragDropBean implements Serializable {
     }
 
     public String getColor(int userId,int rank){
-
-
         return "img/piece/" + gameService.getPlayerColor(userId).substring(0, 1) + rank + ".png";
     }
 

@@ -23,8 +23,8 @@ $ = jQuery;
 var REDIPS = REDIPS || {};
 var notready = true;
 var gameId = 1;
-
-
+var playerId = 0;
+var turnPol;
 
 /**
  * @namespace
@@ -209,6 +209,10 @@ REDIPS.drag = (function () {
                     fight(oldIndex,newIndex);
                 }
 
+                if(img.length > 1) {
+                    fight();
+                }
+
                 if(pos[3] == 1) {
                     img.removeClass("sideImg");
                 }
@@ -217,9 +221,11 @@ REDIPS.drag = (function () {
                 var newIndex = pos[1] + "" + pos[2];
                 var index = newIndex + "," + oldIndex;
 
-                $.getJSON("http://localhost:8080/api/game/movePiece?index=" + index + "&gameId=1")
+                $.getJSON("http://localhost:8080/api/game/movePiece?index=" + index + "&gameId="+gameId+"&playerId="+playerId)
                     .done(function(data) {
                         if(data == true) {
+                            addMark();
+                            turnPol = setInterval(function(){getTurn()}, 10000);
                             alert("Piece moved")
                             //updatePieces(newIndex, oldIndex);
                         }
@@ -324,8 +330,6 @@ REDIPS.drag = (function () {
     }
 
     function fight(oldIndex,newIndex){
-
-
         $.getJSON("http://localhost:8080/api/game/fightWeb?gameId=" + gameId + "&playerIndex=" + oldIndex + "&enemyIndex=" + newIndex)
             .done(function(data) {
 
@@ -334,7 +338,22 @@ REDIPS.drag = (function () {
             .fail(function() {
                 alert("fight fail");
             });
+    }
 
+    function getTurn() {
+        $.post("http://localhost:8080/api/game/getEnemeyStatus?playerId=" + playerId)
+            .done(function(data) {
+                if(data.isReady == true) {
+                    alert("your turn");
+                    removeMark();
+                    clearInterval(turnPol);
+                } else {
+                    alert("Not your turn yet");
+                }
+            })
+            .fail(function() {
+                alert("get turn fail");
+            });
     }
 
     function checkTarget(source, target) {
@@ -4997,7 +5016,6 @@ function removeMark() {
 function getReady() {
     $.getJSON("http://localhost:8080/api/game/getReady?gameId=" + gameId)
         .done(function(data) {
-
             if(data.isReady == true) {
                 alert("Game start");
                 document.getElementById("readyPlayer2").innerHTML = "Ready!";
