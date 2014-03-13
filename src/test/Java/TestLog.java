@@ -1,60 +1,180 @@
+import be.kdg.beans.UserBean;
+import be.kdg.model.User;
+import be.kdg.persistence.api.UserDAOApi;
+import be.kdg.persistence.impl.UserDAOImpl;
+import be.kdg.service.api.UserServiceApi;
+import be.kdg.service.impl.UserServiceImpl;
+import org.junit.After;
+import org.junit.Before;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+
+import static junit.framework.Assert.*;
 
 /**
  * Created by Thomas on 06/02/14.
  */
 public class TestLog {
 
-    String tUser = "testUser";
-    String tPass = "testPassword";
-    String tEmail = "testEmail";
-    WebDriver driver = new FirefoxDriver();
+    private User user = new User("testUser", "testPassword", "testEmail");
+    private UserDAOApi operations = new UserDAOImpl();
+    private String fbGUY = "fbGuy";
 
- /*   @org.junit.Test
+    WebDriver driver;
+
+    @Before
+    public void setProperty(){
+        File file = new File("C:\\Users\\Thomas\\Desktop\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
+        driver = new ChromeDriver();
+    }
+
+
+    @After
+    public void closeDriver(){
+        driver.close();
+        driver.quit();
+        if(operations.getUserByUsername(user.getUsername()) != null){
+            operations.removeUser(operations.getUserByUsername(user.getUsername()));
+        }
+        if(operations.getUserByUsername(fbGUY) != null){
+            operations.removeUser(operations.getUserByUsername(fbGUY));
+        }
+    }
+
+   @org.junit.Test
     public void testFouteRegister() throws InterruptedException {
-        driver.get("http://localhost:8080/register.xhtml");
 
-        WebElement nameField = driver.findElement(By.id("j_idt6:userName"));
-        nameField.sendKeys(tUser);
+        driver.get("http://localhost:8080/index.xhtml");
 
-        WebElement emField = driver.findElement(By.id("j_idt6:email"));
-        emField.sendKeys(tEmail);
+       WebElement link = driver.findElement(By.id("regFrm:reg"));
+        link.click();
+       new WebDriverWait(driver, 10) ;
 
-        WebElement pwField = driver.findElement(By.id("j_idt6:password"));
-        pwField.sendKeys(tPass);
+       WebElement nameField = driver.findElement(By.id("regsFrm:userName"));
+       nameField.sendKeys(user.getUsername());
 
-        WebElement pwcField = driver.findElement(By.id("j_idt6:passwordConfirm"));
-        pwcField.sendKeys("blablabla");
+       WebElement emField = driver.findElement(By.id("regsFrm:email"));
+       emField.sendKeys(user.geteMail());
+
+       WebElement pwField = driver.findElement(By.id("regsFrm:password"));
+       pwField.sendKeys(user.getPassword());
+
+       WebElement pwcField = driver.findElement(By.id("regsFrm:passwordConfirm"));
+       pwcField.sendKeys("blablabla");
 
         pwField.submit();
-        assertEquals("This register should fail and not switch page because the passwords do not match.", "http://localhost:8080/register.xhtml", driver.getCurrentUrl().substring(0,36));
-    }*/
-/* Deze werkt manueel
+
+       User u = operations.getUserByUsername(user.getUsername());
+
+        assertNull("This register attempt should fail.", u);
+
+    }
+
+
+    @org.junit.Test
+    public void testAanmakenUser() throws InterruptedException {
+        user.setVerified(true);
+        operations.insertNewUser(user);
+
+        assertNotNull("This register attempt should succeed.", operations.getUserByUsername(user.getUsername()));
+    }
+
+    @org.junit.Test
+    public void testJuisteLogin() throws InterruptedException {
+        UserBean ub = new UserBean();
+
+        user.setVerified(true);
+        operations.insertNewUser(user);
+
+        ub.setUsername(user.getUsername());
+        ub.setPassword(user.getPassword());
+
+        assertTrue("This login should succeed.", operations.checkLogin(ub.getUsername(), ub.getPassword()));
+    }
+
+    @org.junit.Test
+    public void testFouteLogin() throws InterruptedException {
+        UserBean ub = new UserBean();
+
+        user.setVerified(true);
+        operations.insertNewUser(user);
+
+        ub.setUsername(user.getUsername());
+        ub.setPassword("blablabla");
+
+        assertFalse("This login should fail.", operations.checkLogin(ub.getUsername(), ub.getPassword()));
+    }
+
+    @org.junit.Test
+    public void testFouteLogin2() throws InterruptedException {
+        UserBean ub = new UserBean();
+
+        user.setVerified(true);
+        operations.insertNewUser(user);
+
+        ub.setUsername("blablabla");
+        ub.setPassword(user.getPassword());
+
+        assertFalse("This login should fail.", operations.checkLogin(ub.getUsername(), ub.getPassword()));
+    }
+
+
+   /*    Dit is veroudert doordat er een confirmatie mail is en wordt niet meer gebruikt.
     @org.junit.Test
     public void testJuisteRegister() throws InterruptedException {
 
-        driver.get("http://localhost:8080/register.xhtml");
+        driver.get("http://localhost:8080/index.xhtml");
 
-        WebElement nameField = driver.findElement(By.id("j_idt6:userName"));
-        nameField.sendKeys(tUser);
+        WebElement link = driver.findElement(By.id("regFrm:reg"));
+        link.click();
+        new WebDriverWait(driver, 10) ;
 
-        WebElement emField = driver.findElement(By.id("j_idt6:email"));
-        emField.sendKeys(tEmail);
+        WebElement nameField = driver.findElement(By.id("regsFrm:userName"));
+        nameField.sendKeys(user.getUsername());
 
-        WebElement pwField = driver.findElement(By.id("j_idt6:password"));
-        pwField.sendKeys(tPass);
+        WebElement emField = driver.findElement(By.id("regsFrm:email"));
+        emField.sendKeys(user.geteMail());
 
-        WebElement pwcField = driver.findElement(By.id("j_idt6:passwordConfirm"));
-        pwcField.sendKeys(tPass);
+        WebElement pwField = driver.findElement(By.id("regsFrm:password"));
+        pwField.sendKeys(user.getPassword());
+
+        WebElement pwcField = driver.findElement(By.id("regsFrm:passwordConfirm"));
+        pwcField.sendKeys(user.getPassword());
 
         pwField.submit();
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        assertEquals("This register should succeed.", "http://localhost:8080/emailSend.xhtml", driver.getCurrentUrl().substring(0, 37));
+        User u = operations.getUserByUsername(user.getUsername());
+        assertNotNull("This register should succeed and make a new user in the db.", u);
     }
-*/
+
+     //Deze testen zijn veroudert, werken niet meer via een apart scherm.
+    @org.junit.Test
+    public void testJuisteLogin() throws InterruptedException {
+
+        driver.get("http://localhost:8080/login.xhtml");
+
+
+        WebElement link = driver.findElement(By.id("regFrm:reg"));    //Linken naar login button
+        link.click();
+        new WebDriverWait(driver, 10) ;
+
+        WebElement nameField = driver.findElement(By.id("j_idt6:userName"));
+        nameField.sendKeys(user.getUsername());
+
+        WebElement pwField = driver.findElement(By.id("j_idt6:password"));
+        pwField.sendKeys(user.getPassword());
+
+        pwField.submit();
+
+        assertSame("This login should succeed.", "http://localhost:8080/index.xhtml", driver.getCurrentUrl().substring(0,33));
+    }
+
 /*
     @org.junit.Test
     public void testFouteLogin() throws InterruptedException {
@@ -69,19 +189,5 @@ public class TestLog {
         pwField.submit();
         assertEquals("This login should fail and redirect to login.", "http://localhost:8080/login.xhtml", driver.getCurrentUrl().substring(0,33));
     }*/
-/* werkt nog niet, manueel wel
-    @org.junit.Test
-    public void testJuisteLogin() throws InterruptedException {
 
-        driver.get("http://localhost:8080/login.xhtml");
-
-        WebElement nameLField = driver.findElement(By.id("j_idt6:userName"));
-        nameLField.sendKeys("woody");
-
-        WebElement pwLField = driver.findElement(By.id("j_idt6:password"));
-        pwLField.sendKeys("wolle");
-
-        pwLField.submit();
-        assertEquals("This login should work and go to the next page.", "http://localhost:8080/index.xhtml", driver.getCurrentUrl().substring(0,33));
-    }*/
 }

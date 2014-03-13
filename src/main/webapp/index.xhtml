@@ -19,8 +19,8 @@
 </h:head>
 
 <h:body onload="ini()">
-    <h:form id="menuFrm">
-        <p:menubar styleClass="centeredMenuBar">
+    <h:form>
+        <p:menubar id="menuFrm" styleClass="centeredMenuBar">
             <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
             <p:menuitem value="Home" url="index.xhtml"/>
             <p:menuitem value="Play" url="game.xhtml"/>
@@ -32,12 +32,12 @@
 
             <p:menuitem value="Achievements" url="achievements.xhtml"/>
 
-            <p:menuitem value="Login" url="#" onclick="showLogin()"/>
+            <p:menuitem  value="Login" url="#" onclick="showLogin()"/>
 
             <p:menuitem value="name" styleClass="invisible" url="#"/>
 
             <p:menuitem url="#">
-                <p:commandLink id="logName" styleClass="permInvisible" onclick="" value="#{userBean.user.username}"/>
+                <p:commandLink styleClass="permInvisible" onclick="" value="#{userBean.user.username}"/>
             </p:menuitem>
         </p:menubar>
     </h:form>
@@ -48,7 +48,7 @@
         <div id="loginForm">
             <div id="closeButton"></div>
             <table>
-                <h:form>
+                <h:form id="logsFrm">
                     <tr>
                         <td>
                             <h:outputLabel for="userName" value="Username: "/>
@@ -110,8 +110,8 @@
             <p> De veldslag wacht, generaal!</p>
 
             <p>
-                <h:form>
-                    <h:commandButton styleClass="btn" value="Registreer nu!" action="register"/>
+                <h:form id="regFrm">
+                    <h:commandButton id="reg" styleClass="btn" value="Registreer nu!" action="register"/>
                 </h:form>
             </p>
         </div>
