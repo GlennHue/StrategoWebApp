@@ -67,7 +67,7 @@
                             </h:form></td></tr>
                             <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return removeMark();" action="#">Mark, stopt mor</h:commandLink>
                             </h:form></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="#{dragDropBean.getColor(0,0)}" alt="FLAG"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="#{gameBean.getColor(0,0)}" alt="FLAG"/></div></td></tr>
                             <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b1.png" alt="SPY"/></div></td></tr>
                             <tr><td class="mark"><div class="drag clone climit2_8"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b2.png" alt="SCOUT"/></div></td></tr>
                             <tr><td class="mark"><div class="drag clone climit2_5"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b3.png" alt="MINER"/></div></td></tr>
@@ -86,7 +86,7 @@
                     <td class="mark">
                         <table id="gameBoard">
                             <!--<tr>-->
-                                <ui:repeat var="tile" value="#{dragDropBean.tiles}" varStatus="status">
+                                <ui:repeat var="tile" value="#{gameBean.tiles}" varStatus="status">
                                     <f:verbatim rendered="#{status.index mod 10 ==0}">
                                         &lt;/tr&gt;  &lt;tr&gt;
                                     </f:verbatim>
