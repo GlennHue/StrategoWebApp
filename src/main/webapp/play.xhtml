@@ -63,22 +63,18 @@
                         <table id="sideTable" class="mark">
                             <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return ready(this);" action="#">Ready</h:commandLink>
                             </h:form></td></tr>
-                            <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return addMark();" action="#">Mark, begint al mor te rennen</h:commandLink>
-                            </h:form></td></tr>
-                            <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return removeMark();" action="#">Mark, stopt mor</h:commandLink>
-                            </h:form></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="#{gameBean.getColor(0,0)}" alt="FLAG"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b1.png" alt="SPY"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_8"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b2.png" alt="SCOUT"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_5"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b3.png" alt="MINER"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_4"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b4.png" alt="SERGEANT"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_4"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b5.png" alt="LIEUTENANT"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_4"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b6.png" alt="CAPTAIN"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_3"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b7.png" alt="MAJOR"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_2"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b8.png" alt="COLONEL"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b9.png" alt="GENERAL"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b10.png" alt="MARSHAL"/></div></td></tr>
-                            <tr><td class="mark"><div class="drag clone climit2_6"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/b11.png" alt="BOMB"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b0.png" alt="FLAG"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b1.png" alt="SPY"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_8"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b2.png" alt="SCOUT"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_5"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b3.png" alt="MINER"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_4"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b4.png" alt="SERGEANT"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_4"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b5.png" alt="LIEUTENANT"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_4"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b6.png" alt="CAPTAIN"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_3"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b7.png" alt="MAJOR"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_2"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b8.png" alt="COLONEL"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b9.png" alt="GENERAL"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_1"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b10.png" alt="MARSHAL"/></div></td></tr>
+                            <tr><td class="mark"><div class="drag clone climit2_6"><h:graphicImage styleClass="sideImg left" library="css" name="img/piece/b11.png" alt="BOMB"/></div></td></tr>
                         </table>
                     </td>
                     <!--</div>-->
@@ -86,7 +82,7 @@
                     <td class="mark">
                         <table id="gameBoard">
                             <!--<tr>-->
-                                <ui:repeat var="tile" value="#{gameBean.tiles}" varStatus="status">
+                                <ui:repeat var="tile" value="#{dragDropBean.tiles}" varStatus="status">
                                     <f:verbatim rendered="#{status.index mod 10 ==0}">
                                         &lt;/tr&gt;  &lt;tr&gt;
                                     </f:verbatim>
@@ -109,18 +105,18 @@
                             <tr><td id="readyPlayer2">Not Ready ...</td></tr>
                             <tr><td class="mark"><h:form><h:commandLink styleClass="btn" onclick="return ready2(this);" action="#">Ready</h:commandLink>
                             </h:form></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r0.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r1.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r2.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r3.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r4.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r5.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r6.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r7.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r8.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r9.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r10.png"/></td></tr>
-                            <tr><td class="mark"><h:graphicImage styleClass="sideImg" library="css" name="img/piece/r11.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r0.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r1.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r2.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r3.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r4.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r5.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r6.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r7.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r8.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r9.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r10.png"/></td></tr>
+                            <tr><td class="mark"><h:graphicImage styleClass="sideImg right" library="css" name="img/piece/r11.png"/></td></tr>
                         </table>
                     </td>
                     <!--</div>-->
