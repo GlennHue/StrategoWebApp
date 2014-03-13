@@ -61,13 +61,8 @@
 .idea/libraries/Maven__xerces_xmlParserAPIs_2_6_2.xml
 .idea/libraries/Maven__xpp3_xpp3_1_1_4c.xml
 *.war
-*.class
-*.js
-*.png
-*.xhtml
 *.jar
 *.xml
-*.jpg
 target/JavaServerFaces/resources/css/styles.css
 .idea/workspace.xml
 .idea/artifacts/StrategoWebApp_war_exploded.xml
