@@ -19,8 +19,8 @@
 </h:head>
 
 <h:body onload="ini()">
-    <h:form>
-        <p:menubar id="menuFrm" styleClass="centeredMenuBar">
+    <h:form id="menuFrm">
+        <p:menubar styleClass="centeredMenuBar">
             <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
             <p:menuitem value="Home" url="index.xhtml"/>
             <p:menuitem value="Play" url="game.xhtml"/>
@@ -37,7 +37,7 @@
             <p:menuitem value="name" styleClass="invisible" url="#"/>
 
             <p:menuitem url="#">
-                <p:commandLink styleClass="permInvisible" onclick="" value="#{userBean.user.username}"/>
+                <p:commandLink id="logName" onclick="" value="#{userBean.user.username}"/>
             </p:menuitem>
         </p:menubar>
     </h:form>
@@ -90,7 +90,7 @@
             <a4j:param name="userName" assignTo="#{userBean.fbUsername}" />
         </a4j:jsFunction>
 
-        <h:commandLink id="tempUs" value="lkjlkjdf" onclick="tempUser(getFBName())" styleClass="invisible">
+        <h:commandLink id="tempUs" value="tmp" onclick="tempUser(getFBName())" styleClass="invisible">
         <f:ajax execute="@form" render="@none" />
         </h:commandLink>
     </h:form>
