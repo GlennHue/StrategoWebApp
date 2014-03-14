@@ -41,8 +41,7 @@ public class GameBean implements Serializable {
                 tiles[i].movePiece(new Piece(i));
             }    */
        for(int i = 60;i < 70; i++){
-
-            game.getBoard().getTile(i).setPiece(new Piece(1,"b"));
+           game.getBoard().getTile(i).setPiece(new Piece(1,"b"));
            game.getBoard().getTile(i + 10).setPiece(new Piece(1,"b"));
            game.getBoard().getTile(i + 20).setPiece(new Piece(1,"b"));
            game.getBoard().getTile(i + 30).setPiece(new Piece(1,"b"));

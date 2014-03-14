@@ -1,5 +1,6 @@
 package be.kdg.controllers;
 
+
 import be.kdg.beans.LobbyBean;
 import be.kdg.model.*;
 import be.kdg.service.api.AchievementServiceApi;
@@ -34,9 +35,11 @@ public class JsonController {
 
     // Declare this Player here so when the second user pols the queue status, he also knows a player has been found!!
     private Player player;
+    
 
     @Autowired
     private AchievementServiceApi achievementService;
+    //todo behaalde achievemtns + alle achievements, getvriendenlijst
 
     @RequestMapping(value = "/api/verifyuser", method = RequestMethod.POST)
     @ResponseBody
@@ -115,12 +118,12 @@ public class JsonController {
     @ResponseBody
     public String setStartPosition(@RequestParam("pieces") String pieces, @RequestParam("playerId") String playerId, @RequestParam("gameId") int gameId) {
 
-        gameService.setStartPosition(gameId, pieces);
-        gameService.addStartPosition(gameId, pieces);
+        //gameService.setStartPosition(gameId, pieces);
+        gameService.addStartPosition(gameId,pieces);
         playerService.setReady(Integer.parseInt(playerId));
         boolean ready = gameService.getReady(gameId);
 
-        if (ready) {
+        if(ready) {
             return "true";
         } else {
             return "false";
@@ -167,8 +170,8 @@ public class JsonController {
         playerService.setReady(playerId);
         String pieces = "r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,r1,";
         int gameId = 1;
-        gameService.setStartPosition(gameId, pieces);
-        gameService.addStartPosition(gameId, pieces);
+        //gameService.setStartPosition(gameId, pieces);
+        gameService.addStartPosition(gameId,pieces);
         playerService.setReady(playerId);
 
         return "true";
@@ -179,7 +182,7 @@ public class JsonController {
     public String movePiece(@RequestParam("index") String index, @RequestParam("playerId") int playerId) {
         int newIndex = Integer.parseInt(index.split(",")[0]);
         int oldIndex = Integer.parseInt(index.split(",")[1]);
-        gameService.addMove(playerId, newIndex, oldIndex);
+
         Player player1 = playerService.getPlayerById(playerId);
         player1.setReady(false);
         Player enemy = playerService.getEnemy(playerId);
@@ -187,6 +190,7 @@ public class JsonController {
         playerService.savePlayer(player1);
         playerService.savePlayer(enemy);
 
+        gameService.addMove(playerId,newIndex,oldIndex);
         return "true";
     }
 
@@ -260,11 +264,16 @@ public class JsonController {
 
     @RequestMapping(value = "api/game/fightWeb", method = RequestMethod.GET)
     @ResponseBody
-    public String fightWeb(@RequestParam("gameId") int gameId, @RequestParam("playerIndex") int playerIndex, @RequestParam("enemyIndex") int enemyIndex) {
-        int result = gameService.fight(gameId, playerIndex, enemyIndex);
+    public String fightWeb(@RequestParam("gameId")int gameId,@RequestParam("playerIndex")int playerIndex,@RequestParam("enemyIndex")int enemyIndex) {
+        Game game = gameService.reconstructGame(gameId);
+
+        int result =  gameService.fight(game,playerIndex,enemyIndex);
         JSONObject resultObject = new JSONObject();
         try {
-            resultObject.put("result", result);
+
+            resultObject.put("result",result);
+            resultObject.put("yourPiece",game.getBoard().getTile(playerIndex).getPiece().getName());
+            resultObject.put("theirPiece",game.getBoard().getTile(enemyIndex).getPiece().getName());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -401,7 +410,7 @@ public class JsonController {
         boolean enemyStatus = playerService.getEnemy(playerId).getReady();
         JSONObject jSonResult = new JSONObject();
         try {
-            if (enemyStatus == false) {
+            if (!enemyStatus) {
                 Move move = gameService.getMove(playerId);
                 jSonResult.put("oldIndex", move.getOldIndex());
                 jSonResult.put("newIndex", move.getNewIndex());

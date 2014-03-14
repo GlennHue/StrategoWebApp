@@ -19,9 +19,7 @@ public class GameServiceImpl implements GameServiceApi {
     @Autowired
     private PlayerServiceApi playerService;
 
-    @Override
-    public void setStartPosition(int gameId, String pieces) {
-        Game game = gameDao.getGame(gameId);
+    public void setStartPosition(Game game, String pieces) {
         char firstChar = pieces.charAt(0);
         if (firstChar == ('b')){
             putStartPiecesBlue(pieces, game);
@@ -30,6 +28,7 @@ public class GameServiceImpl implements GameServiceApi {
             putStartPiecesRed(pieces, game);
         }
     }
+
 
     private void putStartPiecesRed(String pieces, Game game) {
         String[] piecesArray = pieces.split(",");
@@ -103,9 +102,9 @@ public class GameServiceImpl implements GameServiceApi {
     }
 
     @Override
-    public int fight(int gameId,int playerIndex, int enemyIndex){
-        Piece piecePlayer = gameDao.getGame(gameId).getBoard().getTile(playerIndex).getPiece();
-        Piece pieceEnemy = gameDao.getGame(gameId).getBoard().getTile(enemyIndex).getPiece();
+    public int fight(Game game,int playerIndex, int enemyIndex){
+        Piece piecePlayer = game.getBoard().getTile(playerIndex).getPiece();
+        Piece pieceEnemy = game.getBoard().getTile(enemyIndex).getPiece();
         return piecePlayer.compareTo(pieceEnemy);
     }
 
@@ -158,7 +157,7 @@ public class GameServiceImpl implements GameServiceApi {
         Game game = gameDao.getGame(gameId);
         Board board = game.getBoard();
         for(StartPosition position : game.getStartPositions()) {
-            setStartPosition(game, position.getPiece());
+           setStartPosition(game, position.getPiece());
         }
         for(Move move : game.getMoves()) {
             int oldIndex = -1;
@@ -190,14 +189,5 @@ public class GameServiceImpl implements GameServiceApi {
         return game;
     }
 
-    private void setStartPosition(Game game, String pieces) {
-        char firstChar = pieces.charAt(0);
-        if (firstChar == ('b')){
-            putStartPiecesBlue(pieces, game);
-        }
-        else{
-            putStartPiecesRed(pieces, game);
-        }
-    }
 
 }

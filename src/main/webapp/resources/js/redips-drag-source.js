@@ -70,10 +70,25 @@ function updateBoard(oldIndex, newIndex) {
     var newMirrorIndex = getMirrorIndex(newIndex);
 
     var tds = document.getElementById("gameBoard").getElementsByTagName('td');
-    var img = tds[newMirrorIndex].innerHTML;
-    tds[newMirrorIndex].innerHTML = "";
-    tds[oldMirrorIndex].innerHTML = img;
+
+    var imgg = $(tds[newMirrorIndex]).find("img");
+    var div = $(tds[newMirrorIndex]).find("div");
+
+    if(imgg.length > 1){
+        if(color == "r"){
+        fight(oldMirrorIndex,newMirrorIndex,imgg,div);}
+        else{fight(oldIndex,newIndex,imgg,div);}
+    }else{ var img = tds[newMirrorIndex].innerHTML;
+        tds[newMirrorIndex].innerHTML = "";
+        tds[oldMirrorIndex].innerHTML = img;}
+
+
+
+
+
+
 }
+
 
 function getMirrorIndex(index) {
     return 99 - index;
@@ -254,24 +269,27 @@ REDIPS.drag = (function () {
                 var pos = rd.getPosition();
                 var img = $(td.target).find("div").find("img");
                 var imgg = $(td.target).find("img");
+                var div = $(td.target).find("div");
 
                 if(!notready) {
                     var oldIndex = pos[4] + "" + pos[5];
                     var newIndex = pos[1] + "" + pos[2];
 
-                    if(imgg.length > 1){
-                        fight(oldIndex,newIndex);
-                    }
-
-                    if(img.length > 1) {
-                        fight();
-                    }
-
-
-
-                    var oldIndex = pos[4] + "" + pos[5];
-                    var newIndex = pos[1] + "" + pos[2];
                     var indexString = newIndex + "," + oldIndex;
+
+
+                    if(imgg.length > 1){
+                        var oldMirror = oldIndex;
+                        var newMirror = newIndex;
+
+                        if(color == "r") {
+                            oldMirror = getMirrorIndex(oldIndex);
+                            newMirror = getMirrorIndex(newIndex);
+                        }
+
+                        fight(oldMirror,newMirror,imgg,div);
+                    }
+
 
                     var posting = $.post("http://localhost:8080/api/game/movePiece", { index: indexString, playerId: playerId });
 
@@ -287,6 +305,10 @@ REDIPS.drag = (function () {
                     posting.fail(function() {
                         alert("Move piece fail");
                     });
+
+
+
+
                 } else {
                     if(pos[3] == 1) {
                         img.removeClass("sideImg");
@@ -388,11 +410,27 @@ REDIPS.drag = (function () {
         return img.alt.toLowerCase();
     }
 
-    function fight(oldIndex,newIndex){
+    function fight(oldIndex,newIndex,imgg,div){
         $.getJSON("http://localhost:8080/api/game/fightWeb?gameId=" + gameId + "&playerIndex=" + oldIndex + "&enemyIndex=" + newIndex)
             .done(function(data) {
 
-                alert("fight succeed" + data.result);
+
+                if(data.result ===2){
+                    alert("You have won, u captured the flag!")
+                } else if(data.result === 0){
+                    alert("Your piece was the same as that of the enemy!" + data.yourPiece + " vs " + data.theirPiece);
+                    $(imgg[1]).remove();
+                    $(imgg[0]).remove();
+                    $(div[0]).remove();
+                } else if(data.result === 1){
+                    alert("You won"  + data.yourPiece + " vs " + data.theirPiece);
+                    $(imgg[0]).remove();
+                } else if(data.result === -1){
+                    alert("You lost"  + data.yourPiece + " vs " + data.theirPiece);
+                    $(div[0]).remove();
+                    $(imgg[1]).remove();
+                }
+
             })
             .fail(function() {
                 alert("fight fail");
