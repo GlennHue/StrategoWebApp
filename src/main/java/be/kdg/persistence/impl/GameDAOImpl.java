@@ -31,6 +31,7 @@ public class GameDAOImpl implements GameDAOApi {
     }
 
     private Game getGameOpenSession(int gameId) {
+
         String queryString = "from Game g where g.id = :id";
         Query query = session.createQuery(queryString).setInteger("id", gameId);
         return (Game) query.uniqueResult();
@@ -108,11 +109,13 @@ public class GameDAOImpl implements GameDAOApi {
     }
 
     private void close() {
-        session.close();
+        if(session.isOpen()){
+        session.close();}
     }
 
     private void closeAndCommit() {
         tx.commit();
-        session.close();
+        if(session.isOpen()){
+            session.close();}
     }
 }

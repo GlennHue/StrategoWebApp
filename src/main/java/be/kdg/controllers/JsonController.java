@@ -267,7 +267,7 @@ public class JsonController {
     public String fightWeb(@RequestParam("gameId")int gameId,@RequestParam("playerIndex")int playerIndex,@RequestParam("enemyIndex")int enemyIndex) {
         Game game = gameService.reconstructGame(gameId);
 
-        int result =  gameService.fight(game,playerIndex,enemyIndex);
+        int result =  gameService.fight(gameId,playerIndex,enemyIndex);
         JSONObject resultObject = new JSONObject();
         try {
 

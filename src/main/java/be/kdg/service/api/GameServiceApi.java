@@ -24,7 +24,7 @@ public interface GameServiceApi {
     public List<StartPosition> getStartingPositions(int gameId);
 
     public int fight(String piecePlayer, String pieceEnemy);
-    public int fight(Game game,int playerIndex, int enemyIndex);
+    public int fight(int gameId,int playerIndex, int enemyIndex);
 
     public void addMove(int playerId, int oldIndex, int newIndex);
 

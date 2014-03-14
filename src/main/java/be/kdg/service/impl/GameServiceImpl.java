@@ -102,7 +102,8 @@ public class GameServiceImpl implements GameServiceApi {
     }
 
     @Override
-    public int fight(Game game,int playerIndex, int enemyIndex){
+    public int fight(int gameId,int playerIndex, int enemyIndex){
+        Game game = reconstructGame(gameId);
         Piece piecePlayer = game.getBoard().getTile(playerIndex).getPiece();
         Piece pieceEnemy = game.getBoard().getTile(enemyIndex).getPiece();
         return piecePlayer.compareTo(pieceEnemy);
@@ -171,7 +172,7 @@ public class GameServiceImpl implements GameServiceApi {
             }
             Piece defendingPiece = board.getTiles()[newIndex].getPiece();
             Piece attackingPiece = board.getTiles()[oldIndex].getPiece();
-            if(defendingPiece != null) {
+            if(defendingPiece != null && attackingPiece !=null) {
                 if(attackingPiece.compareTo(defendingPiece) > 0) {
                     board.getTiles()[newIndex].setPiece(board.getTiles()[oldIndex].getPiece());
                     board.getTiles()[oldIndex].setPiece(null);
