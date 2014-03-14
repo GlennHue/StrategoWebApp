@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.service.impl;
 
 import be.kdg.model.Achievement;
@@ -8,9 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by Glenn on 19/02/14.
- */
 @Service("achievementService")
 public class AchievementServiceImpl implements AchievementServiceApi {
 

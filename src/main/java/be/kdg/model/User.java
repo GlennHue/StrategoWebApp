@@ -130,9 +130,9 @@ public class User {
         this.verified = isVerified;
     }
 
-    public void setId(int id) {
+    /*public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public void setUsername(String username) {
         this.username = username;

@@ -1,12 +1,15 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.persistence.api;
 
 import be.kdg.model.Achievement;
 
 import java.util.List;
 
-/**
- * Created by Glenn on 19/02/14.
- */
 public interface AchievementDAOApi {
 
     public void addAchievement(Achievement achievement);
@@ -16,6 +19,4 @@ public interface AchievementDAOApi {
     public Achievement getAchievementByTitle(String title);
 
     public Achievement getAchievementById(int id);
-
-
 }

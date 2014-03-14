@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.persistence.api;
 
 import be.kdg.model.Game;
@@ -7,9 +13,6 @@ import be.kdg.model.StartPosition;
 
 import java.util.List;
 
-/**
- * Created by Glenn on 5-3-14.
- */
 public interface GameDAOApi {
 
     public Game getGame(int gameId);
@@ -29,4 +32,6 @@ public interface GameDAOApi {
     public int getLatestMoveNr(int gameId);
 
     public Move getLastMove(int gameId);
+
+    public void refresh();
 }

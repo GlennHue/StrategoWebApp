@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.service.impl;
 
 import be.kdg.model.Game;
@@ -13,9 +19,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Glenn on 5-3-14.
- */
 @Service("playerService")
 public class PlayerServiceImpl implements PlayerServiceApi{
 

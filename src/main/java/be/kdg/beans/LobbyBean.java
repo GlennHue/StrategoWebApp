@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.beans;
 
 import be.kdg.model.Color;
@@ -15,9 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Thomas on 25/02/14.
- */
 
 @Component("lobbyBean")
 @ApplicationScoped

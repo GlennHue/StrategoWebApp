@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.persistence.api;
 
 import be.kdg.model.Game;
@@ -5,9 +11,6 @@ import be.kdg.model.User;
 
 import java.util.List;
 
-/**
- * Created by Glenn on 6/02/14.
- */
 public interface UserDAOApi {
 
     public User getUserById(int id);

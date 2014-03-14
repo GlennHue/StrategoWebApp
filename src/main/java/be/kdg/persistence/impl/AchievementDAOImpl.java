@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.persistence.impl;
 
 import be.kdg.model.Achievement;
@@ -10,9 +16,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by Glenn on 19/02/14.
- */
 @Repository("achievementDao")
 public class AchievementDAOImpl implements AchievementDAOApi {
     Session session = null;

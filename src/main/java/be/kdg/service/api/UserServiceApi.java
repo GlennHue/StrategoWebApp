@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.service.api;
 
 
@@ -7,9 +13,6 @@ import be.kdg.model.User;
 
 import java.util.List;
 
-/**
- * Created by wouter on 6/02/14.
- */
 public interface UserServiceApi {
     public User getUser(String username);
 

@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.persistence.impl;
 
 import be.kdg.model.Piece;
@@ -10,9 +16,6 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
-/**
- * Created by Glenn on 5-3-14.
- */
 @Repository("playerDAO")
 public class PlayerDAOImpl implements PlayerDAOApi{
 
@@ -86,7 +89,7 @@ public class PlayerDAOImpl implements PlayerDAOApi{
     }
 
     private Player getPlayerOpenSession(int playerId) {
-        String queryString = "from Player p where p.id = :id";
+        String queryString = "select p from Player p where p.id = :id";
         Query query = session.createQuery(queryString).setInteger("id", playerId);
         return (Player) query.uniqueResult();
     }

@@ -34,6 +34,10 @@
             <p:menuitem styleClass="invisible" value="name" url="#"/>
 
             <p:menuitem value="Login" url="#" onclick="showLogin()"/>
+
+            <p:menuitem url="#">
+                <p:commandLink styleClass="permInvisible" id="logName" onclick="" value="#{userBean.user.username}"/>
+            </p:menuitem>
         </p:menubar>
     </h:form>
     <div id="fade"></div>

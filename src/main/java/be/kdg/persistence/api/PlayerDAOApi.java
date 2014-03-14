@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.persistence.api;
 
 import be.kdg.model.Piece;
@@ -5,9 +11,6 @@ import be.kdg.model.Player;
 
 import java.util.List;
 
-/**
- * Created by Glenn on 5-3-14.
- */
 public interface PlayerDAOApi {
 
     public void insertNewPlayer(Player player);

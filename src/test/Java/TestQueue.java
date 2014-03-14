@@ -1,6 +1,8 @@
-/**
- * Created by Thomas on 12/03/14.
- */
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
 
 import be.kdg.beans.LobbyBean;
 import be.kdg.beans.UserBean;
@@ -40,7 +42,7 @@ public class TestQueue {
 
     @Before
     public void setProperty(){
-        File file = new File("C:\\Users\\Thomas\\Desktop\\chromedriver_win32\\chromedriver.exe");
+        File file = new File("C:\\Users\\Stijn\\Downloads\\Selenium-Google\\chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
         driver = new ChromeDriver();
     }
@@ -56,6 +58,12 @@ public class TestQueue {
         if(operations.getUserByUsername(user2.getUsername()) != null){
             operations.removeUser(operations.getUserByUsername(user2.getUsername()));
         }
+    }
+
+    @org.junit.Test
+    public void testCheck() {
+
+        assertNull("Er wordt maar één speler toegevoegd dus er gebeurt nog niets", lb.checkGames(ub.getUser()));
     }
 
     @org.junit.Test

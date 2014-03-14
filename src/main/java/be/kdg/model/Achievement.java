@@ -1,10 +1,15 @@
+/*
+ *
+ * Project Application Development
+ * Karel de Grote-Hogeschool
+ * 2013-2014
+ *
+ */
+
 package be.kdg.model;
 
 import javax.persistence.*;
 
-/**
- * Created by Glenn on 19/02/14.
- */
 @Table(name = "T_ACHIEVEMENT")
 @Entity
 public class Achievement {

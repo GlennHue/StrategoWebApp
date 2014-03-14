@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.controllers;//package be.kdg.controllers;
 
 import be.kdg.service.api.UserServiceApi;
@@ -7,10 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-/**
-* Created by wouter on 10/02/14.
- */
 
 @Controller
 public class RegistrationController {

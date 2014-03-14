@@ -4,8 +4,7 @@
 * 2013-2014
 */
 
-package be.kdg.model;
+public class TestAchievement {
 
-public enum Color {
-    BLUE, RED
+
 }

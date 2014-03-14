@@ -1,5 +1,12 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.persistence.impl;
 
+import be.kdg.model.Achievement;
 import be.kdg.model.Game;
 import be.kdg.model.Player;
 import be.kdg.model.User;
@@ -13,9 +20,6 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Glenn on 6/02/14.
- */
 @Repository("userDAO")
 public class UserDAOImpl implements UserDAOApi {
 
@@ -86,6 +90,7 @@ public class UserDAOImpl implements UserDAOApi {
             session.saveOrUpdate(loggedInUser);
             closeAndCommit();
         }
+        close();
         return friend;
     }
 
@@ -106,6 +111,7 @@ public class UserDAOImpl implements UserDAOApi {
         List<User> friendFriends = session.createQuery(queryStringFriend).setString("username", friendname).list();
         User user = getUserByUsernameOpenSession(username);
         User friend = getUserByUsernameOpenSession(friendname);
+        close();
         if (userFriends.contains(friend) && friendFriends.contains(user)) {
             return true;
         }
@@ -193,12 +199,14 @@ public class UserDAOImpl implements UserDAOApi {
             closeAndCommit();
             return true;
         }
+        close();
         return false;
     }
 
     private void openSessionAndTransaction() {
         session = HibernateUtil.getSessionFactory().openSession();
-        tx = session.beginTransaction();
+        tx = session.getTransaction();
+        tx.begin();
     }
 
     private void close() {
@@ -206,7 +214,13 @@ public class UserDAOImpl implements UserDAOApi {
     }
 
     private void closeAndCommit() {
-        tx.commit();
+        try{
+        if(!tx.wasCommitted())
+            tx.commit();
+        }
+        catch (Exception ex){
+            tx.rollback();
+        }
         session.close();
     }
 
@@ -234,6 +248,7 @@ public class UserDAOImpl implements UserDAOApi {
         String queryString = "from User u order by u.score desc";
         Query query = session.createQuery(queryString);
         List<User> users = query.list();
+        close();
         int rank = 0;
         for(User u : users) {
             rank++;
@@ -263,6 +278,7 @@ public class UserDAOImpl implements UserDAOApi {
         for(Player player : user.getPlayers()) {
             result.add(player.getGame());
         }
+        close();
         return result;
     }
 }

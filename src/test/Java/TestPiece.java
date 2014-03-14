@@ -1,4 +1,8 @@
-
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
 
 import be.kdg.model.Piece;
 

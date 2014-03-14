@@ -829,7 +829,7 @@ REDIPS.drag = function () {
         deleted: function () {
         }, dropped: function () {
         }, droppedBefore: function () {
-            alert(cell_source)
+            //alert(cell_source)
         }, finish: function () {
         }, moved: function () {
         }, notCloned: function () {

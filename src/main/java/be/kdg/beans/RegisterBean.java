@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.beans;
 
 
@@ -13,9 +19,6 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 import java.util.UUID;
 
-/**
- * Created by wouter on 6/02/14.
- */
 @Component("registerBean")
 @Scope("request")
 public class RegisterBean implements Serializable {

@@ -1,10 +1,13 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.model;
 
 import javax.persistence.*;
 
-/**
- * Created by Glenn on 6-3-14.
- */
 @Entity
 @Table(name = "T_STARTPOSITIONS")
 public class StartPosition {

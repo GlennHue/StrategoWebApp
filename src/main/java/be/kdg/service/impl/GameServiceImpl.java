@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.service.impl;
 
 import be.kdg.model.*;
@@ -9,9 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by Glenn on 5-3-14.
- */
 @Service("gameService")
 public class GameServiceImpl implements GameServiceApi {
     @Autowired

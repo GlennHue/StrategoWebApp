@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.controllers;
 
 
@@ -19,9 +25,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-/**
- * Created by wouter on 13/02/14.
- */
 @Controller
 public class JsonController {
     @Autowired

@@ -1,6 +1,8 @@
-/**
- * Created by Thomas on 13/03/14.
- */
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
 
 import be.kdg.beans.GameBean;
 import be.kdg.model.*;

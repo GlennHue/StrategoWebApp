@@ -55,13 +55,13 @@ function getTurn() {
         .done(function(data) {
             if(data.isReady == false) {
                 clearInterval(turnPol);
-                alert("your turn");
+                //alert("your turn");
                 updateBoard(data.oldIndex, data.newIndex);
                 removeMark();
             }
         })
         .fail(function() {
-            alert("get turn fail");
+            //alert("get turn fail");
         });
 }
 
@@ -113,7 +113,7 @@ REDIPS.drag = (function () {
     var	init,						// initialization
         initTables,					// table initialization
         enableDrag,					// method attaches / detaches onmousedown and onscroll event handlers for DIV elements
-        enableTable,				// method enables / disables tables (selected by className) to accept elements 
+        enableTable,				// method enables / disables tables (selected by className) to accept elements
         imgOnMouseMove,				// needed to set onmousemove event handler for images
         handlerOnMouseDown,			// onmousedown handler
         handlerOnDblClick,			// ondblclick handler (calls public event.dblClicked)
@@ -146,7 +146,7 @@ REDIPS.drag = (function () {
         relocate,					// relocate objects from source cell to the target cell (source and target cells are input parameters)
         emptyCell,					// method removes elements from table cell
         shiftCells,					// method shifts table content to the left or right (useful for content where the order should be preserved)
-        cellList,					// method returns cell list with new coordinates (it takes care about rowspan/colspan cells) 
+        cellList,					// method returns cell list with new coordinates (it takes care about rowspan/colspan cells)
         maxCols,					// method returns maximum number of columns in a table
         moveObject,					// method moves object to the destination table, row and cell
         deleteObject,				// method deletes DIV element
@@ -219,7 +219,7 @@ REDIPS.drag = (function () {
     // borderTd and borderTr are initially undefined
         hover = {colorTd: 'rgba(34,139,34,0.75)',
             colorTr:  'rgba(34,139,34,0.75)'},
-        scroll = {enable : true,	// (boolean) enable/disable autoscroll function (default is true) 
+        scroll = {enable : true,	// (boolean) enable/disable autoscroll function (default is true)
             bound : 25,			// (integer) bound width for autoscroll
             speed : 20},		// (integer) scroll speed in milliseconds
         only = {div: [],			// (array) DIVid -> classname, defined DIV elements can be placed only to the marked table cell with class name 'only'
@@ -233,7 +233,7 @@ REDIPS.drag = (function () {
             opacityDisabled : '',		// (integer) set opacity for disabled elements
             rowEmptyColor : 'white'},	// (string) color of empty row
         tableSort = true,				// (boolean) sort tables on DIV element click
-        trash = {className : 'trash',	// (object) contains trash class name and confirmation questions for delete DIV or ROW	
+        trash = {className : 'trash',	// (object) contains trash class name and confirmation questions for delete DIV or ROW
             question : null,
             questionRow : null},
         saveParamName = 'p',			// (string) save content parameter name
@@ -244,7 +244,7 @@ REDIPS.drag = (function () {
             step: 2,
             shift: false},
     // (object)
-        shift = {mode : 'horizontal1',	// shift modes (horizontal1, horizontal2, vertical1, vertical2) 
+        shift = {mode : 'horizontal1',	// shift modes (horizontal1, horizontal2, vertical1, vertical2)
             after : 'default',		// how to shift elements (always, if DIV element is dropped to the empty cell as well or if DIV element is deleted)
             overflow : 'bunch'},	// what to do with overflowed DIV (bunch, delete, source)
         clone = {keyDiv : false,		// (boolean) if true, elements could be cloned with pressed SHIFT key
@@ -303,7 +303,7 @@ REDIPS.drag = (function () {
                     });
 
                     posting.fail(function() {
-                        alert("Move piece fail");
+                        //alert("Move piece fail");
                     });
 
 
@@ -433,7 +433,7 @@ REDIPS.drag = (function () {
 
             })
             .fail(function() {
-                alert("fight fail");
+                //alert("fight fail");
             });
     }
 
@@ -5034,7 +5034,7 @@ function ready(button) {
                 }
             })
             .fail(function(){
-                alert("Set Start Position Fail");
+                //alert("Set Start Position Fail");
             });
 
 
@@ -5091,14 +5091,14 @@ function getReady() {
             }
         })
         .fail(function() {
-            alert("ready fail");
+            //alert("ready fail");
         });
 }
 
 function gameStart() {
     showEnemy();
     gameStarted = true;
-    alert("Game start");
+    //alert("Game start");
     if(color == "b") {
         addMark();
         turnPol = setInterval(function(){getTurn()}, 5000);

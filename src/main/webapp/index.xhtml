@@ -37,7 +37,7 @@
             <p:menuitem value="name" styleClass="invisible" url="#"/>
 
             <p:menuitem url="#">
-                <p:commandLink id="logName" onclick="" value="#{userBean.user.username}"/>
+                <p:commandLink styleClass="permInvisible" id="logName" onclick="" value="#{userBean.user.username}"/>
             </p:menuitem>
         </p:menubar>
     </h:form>
@@ -90,7 +90,7 @@
             <a4j:param name="userName" assignTo="#{userBean.fbUsername}" />
         </a4j:jsFunction>
 
-        <h:commandLink id="tempUs" value="tmp" onclick="tempUser(getFBName())" styleClass="invisible">
+        <h:commandLink styleClass="permInvisible" id="tempUs" value="tmp" onclick="tempUser(getFBName())">
         <f:ajax execute="@form" render="@none" />
         </h:commandLink>
     </h:form>

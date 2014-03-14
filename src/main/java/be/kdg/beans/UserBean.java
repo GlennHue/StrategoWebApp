@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.beans;
 
 
@@ -15,9 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created by wouter on 6/02/14.
- */
 @Component("userBean")
 @Scope("session")
 public class UserBean implements Serializable {

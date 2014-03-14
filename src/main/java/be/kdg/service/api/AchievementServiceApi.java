@@ -1,12 +1,15 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.service.api;
 
 import be.kdg.model.Achievement;
 
 import java.util.List;
 
-/**
- * Created by Glenn on 19/02/14.
- */
 public interface AchievementServiceApi {
     public void addAchievement(Achievement achievement);
 

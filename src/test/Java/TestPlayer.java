@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 import be.kdg.model.Piece;
 import be.kdg.model.Player;
 import be.kdg.model.User;

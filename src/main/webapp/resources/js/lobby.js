@@ -17,7 +17,7 @@ function addUserToQueue() {
     posting.done(function(data) {
         var result = JSON.parse(data);
 
-        alert(result.playerId);
+        //alert(result.playerId);
 
         if(result.playerId>0) {
             clearInterval(queuePol);
@@ -26,7 +26,7 @@ function addUserToQueue() {
     });
 
     posting.fail(function(data) {
-        alert("fail");
+        //alert("fail");
     });
 }
 

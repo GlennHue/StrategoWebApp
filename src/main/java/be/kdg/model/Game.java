@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.model;
 
 import org.hibernate.annotations.LazyCollection;
@@ -7,9 +13,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Marousi on 2/11/14.
- */
 @Entity
 @Table(name = "T_GAME")
 public class Game {

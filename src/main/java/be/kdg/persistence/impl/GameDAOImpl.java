@@ -1,9 +1,12 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.persistence.impl;
 
-import be.kdg.model.Game;
-import be.kdg.model.Move;
-import be.kdg.model.Player;
-import be.kdg.model.StartPosition;
+import be.kdg.model.*;
 import be.kdg.persistence.HibernateUtil;
 import be.kdg.persistence.api.GameDAOApi;
 import org.hibernate.Query;
@@ -13,9 +16,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by Glenn on 5-3-14.
- */
 @Repository("gameDao")
 public class GameDAOImpl implements GameDAOApi {
 
@@ -35,6 +35,15 @@ public class GameDAOImpl implements GameDAOApi {
         String queryString = "from Game g where g.id = :id";
         Query query = session.createQuery(queryString).setInteger("id", gameId);
         return (Game) query.uniqueResult();
+    }
+
+    @Override
+    public void refresh(){
+        openSessionAndTransaction();
+        String queryString = "from Achievement a where a.id = :id";
+        Query query = session.createQuery(queryString).setInteger("id", 1);
+        Achievement achievement = (Achievement) query.uniqueResult();
+        close();
     }
 
     @Override
@@ -105,7 +114,8 @@ public class GameDAOImpl implements GameDAOApi {
 
     private void openSessionAndTransaction() {
         session = HibernateUtil.getSessionFactory().openSession();
-        tx = session.beginTransaction();
+        tx = session.getTransaction();
+        tx.begin();
     }
 
     private void close() {
@@ -114,7 +124,13 @@ public class GameDAOImpl implements GameDAOApi {
     }
 
     private void closeAndCommit() {
-        tx.commit();
+        try{
+            if (!tx.wasCommitted())
+                tx.commit();
+        }
+        catch (Exception e){
+            tx.rollback();
+        }
         if(session.isOpen()){
             session.close();}
     }

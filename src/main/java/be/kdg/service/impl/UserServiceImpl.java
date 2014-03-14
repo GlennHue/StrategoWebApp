@@ -1,3 +1,9 @@
+/*
+* Software Development
+* Karel de Grote-hogeschool
+* 2013-2014
+*/
+
 package be.kdg.service.impl;
 
 import be.kdg.model.Achievement;
@@ -10,9 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by wouter on 6/02/14.
- */
 @Service("userService")
 public class UserServiceImpl implements UserServiceApi {
     @Autowired
