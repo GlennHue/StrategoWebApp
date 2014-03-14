@@ -156,12 +156,38 @@ public class GameServiceImpl implements GameServiceApi {
     @Override
     public Game reconstructGame(int gameId) {
         Game game = gameDao.getGame(gameId);
+        Board board = game.getBoard();
         for(StartPosition position : game.getStartPositions()) {
             setStartPosition(gameId, position.getPiece());
         }
         for(Move move : game.getMoves()) {
-            movePiece(gameId, move.getOldIndex(), move.getNewIndex());
+            int oldIndex = -1;
+            int newIndex = -1;
+            if(move.getNumber() % 2 == 0) {
+                oldIndex = move.getOldIndex();
+                newIndex = move.getNewIndex();
+            } else {
+                oldIndex = 99 - move.getOldIndex();
+                newIndex = 99 - move.getNewIndex();
+            }
+            Piece defendingPiece = board.getTiles()[newIndex].getPiece();
+            Piece attackingPiece = board.getTiles()[oldIndex].getPiece();
+            if(defendingPiece != null) {
+                if(attackingPiece.compareTo(defendingPiece) > 0) {
+                    board.getTiles()[newIndex].setPiece(board.getTiles()[oldIndex].getPiece());
+                    board.getTiles()[oldIndex].setPiece(null);
+                } else if(attackingPiece.compareTo(defendingPiece) == 0) {
+                    board.getTiles()[newIndex].setPiece(null);
+                    board.getTiles()[oldIndex].setPiece(null);
+                } else {
+                    board.getTiles()[oldIndex].setPiece(null);
+                }
+            } else {
+                board.getTiles()[newIndex].setPiece(board.getTiles()[oldIndex].getPiece());
+                board.getTiles()[oldIndex].setPiece(null);
+            }
         }
         return game;
     }
+
 }

@@ -1,6 +1,4 @@
 package be.kdg.controllers;
-
-import be.kdg.beans.DragDropBean;
 import be.kdg.beans.LobbyBean;
 import be.kdg.model.*;
 import be.kdg.service.api.AchievementServiceApi;
@@ -27,8 +25,6 @@ public class JsonController {
     @Autowired
     private UserServiceApi userService;
     @Autowired
-    private DragDropBean bean;
-    @Autowired
     private GameServiceApi gameService;
     @Autowired
     private PlayerServiceApi playerService;
@@ -37,9 +33,11 @@ public class JsonController {
 
     // Declare this Player here so when the second user pols the queue status, he also knows a player has been found!!
     private Player player;
+    
 
     @Autowired
     private AchievementServiceApi achievementService;
+    //todo behaalde achievemtns + alle achievements, getvriendenlijst
 
     @RequestMapping(value = "/api/verifyuser", method = RequestMethod.POST)
     @ResponseBody
@@ -69,6 +67,23 @@ public class JsonController {
             e.printStackTrace();
         }
         return resultObj.toString();
+    }
+
+    @RequestMapping(value = "api/user/getStats", method = RequestMethod.GET)
+    @ResponseBody
+    public String getStats(@RequestParam("username")String username) {
+        JSONObject obj = new JSONObject();
+        User user = userService.getUser(username);
+        try {
+            obj.put("maxRank", userService.getMaxRank());
+            obj.put("myRank", userService.getRank(user));
+            obj.put("wins", user.getWins());
+            obj.put("losses", user.getLosses());
+            obj.put("gamesPlayer", user.getWins() + user.getLosses());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj.toString();
     }
 
     @RequestMapping(value = "api/getFriends", method = RequestMethod.GET)
@@ -174,7 +189,9 @@ public class JsonController {
         playerService.savePlayer(player1);
         playerService.savePlayer(enemy);
 
+        gameService.addMove(playerId,newIndex,oldIndex);
         return "true";
+        //
     }
 
     /*@RequestMapping(value = "api/game/setstartposition", method = RequestMethod.GET)
@@ -264,6 +281,84 @@ public class JsonController {
     public String acceptInvite(@RequestParam("username")String username,@RequestParam("friend")String friendname){
         User friend = userService.acceptFriend(username,friendname);
     }*/
+
+    @RequestMapping(value = "api/game/win", method = RequestMethod.GET)
+    @ResponseBody
+    public String win(@RequestParam("winnerId")String winnerId) {
+        Game game = null;
+        Player winner = playerService.getPlayerById(Integer.parseInt(winnerId));
+        game = winner.getGame();
+        Player loser = null;
+        for(Player player : game.getPlayers()) {
+            if(player != winner) {
+                loser = player;
+            }
+        }
+        if(loser != null && winner != null) {
+            User winnerUser = winner.getUser();
+            User loserUser = loser.getUser();
+            int difference = winnerUser.getScore() - loserUser.getScore();
+            if (difference > 50) {
+                winnerUser.setScore(winnerUser.getScore() + 10);
+                loserUser.setScore(loserUser.getScore() - 10);
+            } else if(difference > 20) {
+                winnerUser.setScore(winnerUser.getScore() + 11);
+                loserUser.setScore(loserUser.getScore() - 11);
+            } else if(difference > 0) {
+                winnerUser.setScore(winnerUser.getScore() + 12);
+                loserUser.setScore(loserUser.getScore() - 12);
+            } else if(difference > -20) {
+                winnerUser.setScore(winnerUser.getScore() + 13);
+                loserUser.setScore(loserUser.getScore() - 13);
+            } else {
+                winnerUser.setScore(winnerUser.getScore() + 15);
+                loserUser.setScore(loserUser.getScore() - 14);
+            }
+            winnerUser.setWins(winnerUser.getWins()+1);
+            loserUser.setLosses(loserUser.getLosses()+1);
+            userService.updateUser(winnerUser);
+            userService.updateUser(loserUser);
+        }
+        return "goed bezig";
+    }
+
+    @RequestMapping(value = "api/user/getGameHistory", method = RequestMethod.GET)
+    @ResponseBody
+    public String getGameHistory(@RequestParam("username")String username) {
+        User user = userService.getUser(username);
+        JSONObject obj = new JSONObject();
+        try{
+            List<Game> games = userService.getGamesByUsername(username);
+            Move lastMove = null;
+            JSONArray array = new JSONArray();
+            for(Game game : games) {
+                int max = 0;
+                for(Move move: game.getMoves()) {
+                    if (max < move.getNumber()) {
+                        lastMove = move;
+                    }
+                }
+                JSONObject arrayElement = new JSONObject();
+                arrayElement.put("gameId", game.getId());
+                arrayElement.put("timePerTurn", game.getTime());
+                JSONArray innerArray = new JSONArray();
+                for(Player player : game.getPlayers()) {
+                    JSONObject innerArrayElement = new JSONObject();
+                    innerArrayElement.put("userId", player.getUser().getId());
+                    innerArrayElement.put("username", player.getUser().getUsername());
+                    innerArrayElement.put("score", player.getUser().getScore());
+                    innerArray.put(innerArrayElement);
+                }
+                arrayElement.put("players", innerArray);
+                array.put(arrayElement);
+            }
+            obj.put("games", array);
+            obj.put("username", username);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj.toString();
+    }
 
     @RequestMapping(value = "api/addUserToQueue",method = RequestMethod.POST)
     @ResponseBody

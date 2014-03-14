@@ -18,12 +18,15 @@ public class User {
     private int id;
 
     //private String fbUsername;
-
+    @Column(unique = true)
     private String username;
     private String password;
     private String eMail;
     private String uuid;
     private String status;
+    private int score;
+    private int wins;
+    private int losses;
     private boolean verified;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -42,7 +45,12 @@ public class User {
     )
     private List<Achievement> achievements = new ArrayList<Achievement>();
 
+    @OneToMany(mappedBy = "user")
+    @OrderBy(value = "id desc")
+    private List<Player> players = new ArrayList<Player>();
+
     public User() {
+        score = 1200;
     }
 
     public User(String username, String password, String eMail) {
@@ -51,6 +59,38 @@ public class User {
         this.eMail = eMail;
         this.verified = false;
         this.status = "offline";
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
     }
 
     public int getId() {

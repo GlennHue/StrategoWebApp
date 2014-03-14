@@ -27,6 +27,7 @@ var playerId = 0;
 var color = "";
 var otherColor = "";
 var turnPol;
+var gameStarted = false;
 
 $(document).ready(function() {
     var url = document.URL.toString().split('?')[1].toString().split('&');
@@ -53,16 +54,29 @@ function getTurn() {
     $.getJSON("http://localhost:8080/api/game/getEnemyStatus?playerId=" + playerId)
         .done(function(data) {
             if(data.isReady == false) {
-                alert("your turn");
-                removeMark();
                 clearInterval(turnPol);
-            } else {
-                alert("Not your turn yet");
+                alert("your turn");
+                updateBoard(data.oldIndex, data.newIndex);
+                removeMark();
             }
         })
         .fail(function() {
             alert("get turn fail");
         });
+}
+
+function updateBoard(oldIndex, newIndex) {
+    var oldMirrorIndex = getMirrorIndex(oldIndex);
+    var newMirrorIndex = getMirrorIndex(newIndex);
+
+    var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+    var img = tds[newMirrorIndex].innerHTML;
+    tds[newMirrorIndex].innerHTML = "";
+    tds[oldMirrorIndex].innerHTML = img;
+}
+
+function getMirrorIndex(index) {
+    return 99 - index;
 }
 
 /**
@@ -241,37 +255,43 @@ REDIPS.drag = (function () {
                 var img = $(td.target).find("div").find("img");
                 var imgg = $(td.target).find("img");
 
-                var oldIndex = pos[4] + "" + pos[5];
-                var newIndex = pos[1] + "" + pos[2];
+                if(!notready) {
+                    var oldIndex = pos[4] + "" + pos[5];
+                    var newIndex = pos[1] + "" + pos[2];
 
-                if(imgg.length > 1){
-                    fight(oldIndex,newIndex);
-                }
+                    if(imgg.length > 1){
+                        fight(oldIndex,newIndex);
+                    }
 
-                if(img.length > 1) {
-                    fight();
-                }
+                    if(img.length > 1) {
+                        fight();
+                    }
 
-                if(pos[3] == 1) {
-                    img.removeClass("sideImg");
-                }
 
-                var oldIndex = pos[4] + "" + pos[5];
-                var newIndex = pos[1] + "" + pos[2];
-                var index = newIndex + "," + oldIndex;
 
-                $.getJSON("http://localhost:8080/api/game/movePiece?index=" + index + "&gameId="+gameId+"&playerId="+playerId)
-                    .done(function(data) {
-                        if(data == true) {
+                    var oldIndex = pos[4] + "" + pos[5];
+                    var newIndex = pos[1] + "" + pos[2];
+                    var indexString = newIndex + "," + oldIndex;
+
+                    var posting = $.post("http://localhost:8080/api/game/movePiece", { index: indexString, playerId: playerId });
+
+                    posting.done(function(data) {
+                        var result = JSON.parse(data);
+
+                        if(result == true) {
                             addMark();
-                            turnPol = setInterval(function(){getTurn()}, 10000);
-                            alert("Piece moved")
-                            //updatePieces(newIndex, oldIndex);
+                            turnPol = setInterval(function(){getTurn()}, 5000);
                         }
-                    })
-                    .fail(function() {
+                    });
+
+                    posting.fail(function() {
                         alert("Move piece fail");
                     });
+                } else {
+                    if(pos[3] == 1) {
+                        img.removeClass("sideImg");
+                    }
+                }
             },
             droppedBefore : function () {
                 var rd = REDIPS.drag;
@@ -4990,7 +5010,6 @@ function ready(button) {
 }
 
 function showEnemy() {
-alert("enemy");
     var tds = document.getElementById("gameBoard").getElementsByTagName('td');
     var pieceColor;
     if(color == "b") {
@@ -5019,7 +5038,7 @@ function removeMark() {
     for(var i =0; i < 100;i++){
         if(i == 42 || i == 43 || i == 46 || i == 47 || i == 52 || i == 53 || i == 56 || i == 57){}
         else{
-        $(tds[i]).removeClass("mark");}
+            $(tds[i]).removeClass("mark");}
     }
 
     return false;
@@ -5031,8 +5050,6 @@ function getReady() {
             if(data.isReady == true) {
                 gameStart();
                 clearInterval(readyTimer);
-            } else {
-                alert("Other player not ready yet");
             }
         })
         .fail(function() {
@@ -5042,10 +5059,11 @@ function getReady() {
 
 function gameStart() {
     showEnemy();
+    gameStarted = true;
     alert("Game start");
     if(color == "b") {
         addMark();
-        turnPol = setInterval(function(){getTurn()}, 10000);
+        turnPol = setInterval(function(){getTurn()}, 5000);
     }
 }
 

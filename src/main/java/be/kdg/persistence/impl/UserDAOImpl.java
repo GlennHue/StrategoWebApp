@@ -1,5 +1,7 @@
 package be.kdg.persistence.impl;
 
+import be.kdg.model.Game;
+import be.kdg.model.Player;
 import be.kdg.model.User;
 import be.kdg.persistence.HibernateUtil;
 import be.kdg.persistence.api.UserDAOApi;
@@ -8,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,8 +78,8 @@ public class UserDAOImpl implements UserDAOApi {
     //TODO property request ofzo die friendrequest bijhoudt
     public User insertFriend(String username,String friendname) {
         openSessionAndTransaction();
-        User friend = getUserByUsernameWithoutSessionClose(friendname);
-        User loggedInUser = getUserByUsernameWithoutSessionClose(username);
+        User friend = getUserByUsernameOpenSession(friendname);
+        User loggedInUser = getUserByUsernameOpenSession(username);
 
         if (friend != null) {
             loggedInUser.addFriend(friend);
@@ -86,8 +89,8 @@ public class UserDAOImpl implements UserDAOApi {
         return friend;
     }
 
-    @Override
-    public User getUserByUsernameWithoutSessionClose(String username) {
+
+    private User getUserByUsernameOpenSession(String username) {
         String querystring = "from User u where u.username = :username";
         Query query = session.createQuery(querystring).setString("username", username);
         User user = (User) query.uniqueResult();
@@ -101,8 +104,8 @@ public class UserDAOImpl implements UserDAOApi {
         List<User> userFriends = session.createQuery(queryString).setString("username", username).list();
         String queryStringFriend = "select friends from User u join u.friends friends where u.username = :username";
         List<User> friendFriends = session.createQuery(queryStringFriend).setString("username", friendname).list();
-        User user = getUserByUsernameWithoutSessionClose(username);
-        User friend = getUserByUsernameWithoutSessionClose(friendname);
+        User user = getUserByUsernameOpenSession(username);
+        User friend = getUserByUsernameOpenSession(friendname);
         if (userFriends.contains(friend) && friendFriends.contains(user)) {
             return true;
         }
@@ -193,13 +196,6 @@ public class UserDAOImpl implements UserDAOApi {
         return false;
     }
 
-    @Override
-    public void addUser(User user) {
-        openSessionAndTransaction();
-        session.saveOrUpdate(user);
-        closeAndCommit();
-    }
-
     private void openSessionAndTransaction() {
         session = HibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();
@@ -223,5 +219,50 @@ public class UserDAOImpl implements UserDAOApi {
             session.saveOrUpdate(user);
             closeAndCommit();
         }
+    }
+
+    @Override
+    public void updateUser(User user) {
+        openSessionAndTransaction();
+        session.saveOrUpdate(user);
+        closeAndCommit();
+    }
+
+    @Override
+    public int getRank(User user) {
+        openSessionAndTransaction();
+        String queryString = "from User u order by u.score desc";
+        Query query = session.createQuery(queryString);
+        List<User> users = query.list();
+        int rank = 0;
+        for(User u : users) {
+            rank++;
+            if(u == user) {
+                break;
+            }
+        }
+        return rank;
+    }
+
+    @Override
+    public int getMaxRank() {
+        openSessionAndTransaction();
+        int count = ((Long)session.createQuery("select count(u.score) from User u").uniqueResult()).intValue();
+        close();
+        return count;
+
+
+    }
+
+    @Override
+    public List<Game> getGamesByUsername(String username) {
+        openSessionAndTransaction();
+        User user = getUserByUsernameOpenSession(username);
+        List<Game> result = new ArrayList<Game>();
+
+        for(Player player : user.getPlayers()) {
+            result.add(player.getGame());
+        }
+        return result;
     }
 }
