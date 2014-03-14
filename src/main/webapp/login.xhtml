@@ -78,24 +78,40 @@
         </div>
     </div>
     <div id="content">
-    <h2>Login</h2>
-        <table>
-    <h:form id="lgFrm">
-
-                <h:outputLabel for="userNameLogin" value="Username: "/>
-
-                <h:inputText id="userName" value="#{userBean.username}" required="true"/>
-
-                <h:outputLabel for="passwordLogin" value="Password: "/>
-
-                <h:inputSecret id="password" value="#{userBean.password}" required="true"/>
-
-                <h:commandButton id="lgBtn" styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/>
-
-                <fb:login-button max_rows="1" size="medium" show_faces="false" auto_logout_link="false"/>
-
-     </h:form>
-    </table>
+        <div id="registerForm">
+            <h2>Login</h2>
+            <h:form>
+                <table>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="userNameLogin2" value="Username: "/>
+                        </td>
+                        <td>
+                            <h:inputText id="userNameLogin2" value="#{userBean.username}" required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="passwordLogin2" value="Password: "/>
+                        </td>
+                        <td>
+                            <h:inputSecret id="passwordLogin2" value="#{userBean.password}" required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:commandButton styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/>
+                        </td>
+                        <td>
+                            <fb:login-button max_rows="1" size="medium" show_faces="false" auto_logout_link="false"/>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </div>
+        <div id="image">
+            <h:graphicImage library="css" name="img/generaal2.png" alt="Generaal" styleClass="image"/>
+        </div>
     </div>
 </h:body>
 </html>

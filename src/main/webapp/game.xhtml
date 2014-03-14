@@ -8,7 +8,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:fb="https://www.facebook.com/2008/fbml"
-      xmlns:rich="http://richfaces.org/rich">
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:c="http://java.sun.com/jstl/core">
 
 <h:head>
     <title>Stratego</title>
@@ -20,6 +21,9 @@
 </h:head>
 
 <h:body onload="ini()">
+    <c:if test="#{userBean.user == null}">
+        <h:outputScript>window.location = "http://localhost:8080/login.xhtml"</h:outputScript>
+    </c:if>
 
     <rich:dragIndicator id="indicator" />
 
@@ -61,37 +65,35 @@
         </div>
     </div>
 
-    <h:form id="queueFrm">
-        <h2>Users in queue</h2>
-        <ul>
-            <ui:repeat value="#{userBean.users}" var="u">
-                <li>
-                    <h:commandLink value="#{u.username}" />
-                </li>
-            </ui:repeat>
-        </ul>
-
-        <br />
-        <h:commandLink styleClass="btn" value="Start spel" onclick="queue()">
-            <f:ajax execute="@form" render="@none" />
-        </h:commandLink>
-        <h:commandLink id="lQ" styleClass="btn" value="Cancel" onclick="cnclQueue()">
-            <f:ajax execute="@form" render="@none" />
-        </h:commandLink>
-    </h:form>
-
-    <div id="queueContainer">
-        <div id="queueScherm">
-            <table>
-                <h:form>
+    <div id="content">
+        <div id="text">
+            <h2>Start playing!</h2>
+            <p>To find a Stratego game simply click the 'Start' button and you will be placed in the queue.<br/><br/>
+                As soon as a second player is found you will be placed in a game together. This might take a few minutes so don't panic!<br/>
+                <br/>
+                Good luck and have fun!</p>
+            <h:form id="queueFrm">
+                <table id="qTable">
+                    <tr class="permInvisible"><td></td><td></td><td><h2>Searching for a game ...</h2></td><td></td><td></td></tr>
+                    <tr class="permInvisible"><td></td><td></td><td><h:graphicImage library="css" name="img/loader.GIF" alt="Loading" style="width:50px;height:50px;"/></td><td></td><td></td></tr>
                     <tr>
-                        <td colspan="2"><h:graphicImage library="css" name="img/loader.GIF" alt="Loading" style="width:50px;height:50px;"/></td>
+                        <td></td>
+                        <td>
+                            <h:commandLink styleClass="btn" value="Start" onclick="queue()">
+                                <f:ajax execute="@form" render="@none" />
+                            </h:commandLink>
+                        </td>
+                        <td></td>
+                        <td>
+                            <h:commandLink id="lQ" styleClass="btn" value="Cancel" onclick="cnclQueue()">
+                                <f:ajax execute="@form" render="@none" />
+                            </h:commandLink>
+                        </td>
+                        <td></td>
                     </tr>
-                    <tr>
-                        <td colspan="2"><h:commandButton styleClass="btn" value="cancel" onclick="cnclQueue()"></h:commandButton></td>
-                    </tr>
-                </h:form>
-            </table>
+                </table>
+                <br/>
+            </h:form>
         </div>
     </div>
 

@@ -3,6 +3,10 @@ var queuePol;
 var user;
 
 function queue(){
+    var trs = $("#qTable").find("tr");
+    $(trs[0]).removeClass("permInvisible");
+    $(trs[1]).removeClass("permInvisible");
+
     user = document.getElementById("menuFrm:logName").innerHTML
     queuePol = setInterval(function(){addUserToQueue()}, 5000);
 }
@@ -27,9 +31,13 @@ function addUserToQueue() {
 }
 
 function cnclQueue(){
+    var trs = $("#qTable").find("tr");
+
+    $(trs[0]).addClass("permInvisible");
+    $(trs[1]).addClass("permInvisible");
+
     var jBtnL = document.getElementById("joinQueue:leaveBtn");
     jBtnL.click();
-
 }
 
 
