@@ -5,20 +5,13 @@ import org.richfaces.event.DropEvent;
 import org.richfaces.event.DropListener;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
 public class DragDropEventBean implements DropListener {
 
-    @ManagedProperty(value = "#{dragDropBean}")
-    private DragDropBean dragDropBean;
 
-
-    public void setDragDropBean(DragDropBean dragDropBean) {
-        this.dragDropBean = dragDropBean;
-    }
 
     public void processDrop(DropEvent event) {
 
@@ -30,7 +23,7 @@ public class DragDropEventBean implements DropListener {
         // dragDropBean.setTarget(event.getDropValue().toString());
 
         //  dragDropBean.setTarget(parts[1].split(",")[0]);
-        dragDropBean.movePiece(piece.getxCoordinate(), Integer.parseInt(event.getDropValue().toString()));
+
         piece.setxCoordinate(Integer.parseInt(event.getDropValue().toString()));
         //    dragDropBean.setSource(event.getDragSource().toString());
         // dragDropBean.setTarget(event.getDropTarget().toString());

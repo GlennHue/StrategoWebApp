@@ -158,7 +158,7 @@ public class GameServiceImpl implements GameServiceApi {
         Game game = gameDao.getGame(gameId);
         Board board = game.getBoard();
         for(StartPosition position : game.getStartPositions()) {
-            setStartPosition(gameId, position.getPiece());
+            setStartPosition(game, position.getPiece());
         }
         for(Move move : game.getMoves()) {
             int oldIndex = -1;
@@ -188,6 +188,16 @@ public class GameServiceImpl implements GameServiceApi {
             }
         }
         return game;
+    }
+
+    private void setStartPosition(Game game, String pieces) {
+        char firstChar = pieces.charAt(0);
+        if (firstChar == ('b')){
+            putStartPiecesBlue(pieces, game);
+        }
+        else{
+            putStartPiecesRed(pieces, game);
+        }
     }
 
 }
