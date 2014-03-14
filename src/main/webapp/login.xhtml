@@ -6,28 +6,112 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:fb="https://www.facebook.com/2008/fbml">
 
 <h:head>
     <title>Login</title>
-
+    <h:outputStylesheet library="css" name="styles.css"/>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+    <h:outputScript library="js" name="script.js"/>
+    <h:outputScript library="js" name="fblogin.js"/>
 </h:head>
 
 <h:body>
-    <h:outputScript library="js" name="fblogin.js"/>
-    <div id="fb-root"></div>
-    <h2>Login</h2>
-    <h:form>
-        <h:outputLabel for="userName" value="User"/>
-        <h:inputText id="userName" value="#{userBean.username}" required="true"/>
+    <h:form id="menuFrm">
+        <p:menubar styleClass="centeredMenuBar">
+            <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
+            <p:menuitem value="Home" url="index.xhtml"/>
+            <p:menuitem value="Play" url="game.xhtml"/>
 
-        <h:outputLabel for="password" value="Password"/>
-        <h:inputSecret id="password" value="#{userBean.password}" required="true"/>
+            <p:submenu label="Help">
+                <p:menuitem value="Instructions" url="instructions.xhtml"/>
+                <p:menuitem value="FAQ" url="faq.xhtml"/>
+            </p:submenu>
 
-        <h:commandButton value="Login" action="#{userBean.checkCredentials()}"/>
+            <p:menuitem value="Achievements" url="achievements.xhtml"/>
 
-        <h:commandButton value="Register" action="register"/>
+            <p:menuitem styleClass="invisible" value="name" url="#"/>
+
+            <p:menuitem value="Login" url="#" onclick="showLogin()"/>
+        </p:menubar>
     </h:form>
-    <fb:login-button show-faces="true" width="200" max-rows="1" autologoutlink="true"/>
+    <div id="fade"></div>
+    <div id="loginContainer">
+        <div id="loginForm">
+            <div id="closeButton"></div>
+            <table>
+                <h:form>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="userNameLogin" value="Username: "/>
+                        </td>
+                        <td>
+                            <h:inputText id="userNameLogin" value="#{userBean.username}" required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="passwordLogin" value="Password: "/>
+                        </td>
+                        <td>
+                            <h:inputSecret id="passwordLogin" value="#{userBean.password}" required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:commandButton styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/>
+                        </td>
+                        <td>
+                            <fb:login-button max_rows="1" size="medium" show_faces="false" auto_logout_link="false"/>
+                        </td>
+                    </tr>
+                </h:form>
+                <h:form>
+                    <tr>
+                        <td>
+                            <h:commandButton styleClass="btn" value="Register" action="register"/>
+                        </td>
+                    </tr>
+                </h:form>
+            </table>
+        </div>
+    </div>
+    <div id="content">
+        <div id="registerForm">
+            <h2>Login</h2>
+            <h:form>
+                <table>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="userNameLogin2" value="Username: "/>
+                        </td>
+                        <td>
+                            <h:inputText id="userNameLogin2" value="#{userBean.username}" required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel for="passwordLogin2" value="Password: "/>
+                        </td>
+                        <td>
+                            <h:inputSecret id="passwordLogin2" value="#{userBean.password}" required="true"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:commandButton styleClass="btn" value="Login" action="#{userBean.checkCredentials()}"/>
+                        </td>
+                        <td>
+                            <fb:login-button max_rows="1" size="medium" show_faces="false" auto_logout_link="false"/>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </div>
+        <div id="image">
+            <h:graphicImage library="css" name="img/generaal2.png" alt="Generaal" styleClass="image"/>
+        </div>
+    </div>
 </h:body>
 </html>
