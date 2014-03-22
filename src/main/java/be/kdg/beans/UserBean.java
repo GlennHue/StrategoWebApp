@@ -7,11 +7,13 @@
 package be.kdg.beans;
 
 
+import be.kdg.model.Achievement;
 import be.kdg.model.User;
 import be.kdg.service.api.UserServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import sun.nio.cs.AbstractCharsetProvider;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -133,5 +135,15 @@ public class UserBean implements Serializable {
     public void setFbUsername(String fbUsername) {
         this.fbUsername = fbUsername;
     }
+
+
+    public List<User> getFriends(){
+       return userService.getFriendsByUsername(username);
+    }
+
+    public List<Achievement> getAchievements(){
+        return userService.getAchievementsByUsername(username);
+    }
+
 }
 

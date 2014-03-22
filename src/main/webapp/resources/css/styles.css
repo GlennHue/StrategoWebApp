@@ -70,6 +70,36 @@ body {
     border-radius: 5px;
 }
 
+#profileContainer {
+    margin: auto;
+    margin-top: 5%;
+    background: rgba(0,0,0,0.75);
+    z-index: 1;
+    -webkit-border-radius: 20;
+    -moz-border-radius: 20;
+    border-radius: 20px;
+    border: 0;
+    overflow: auto;
+    display: inline-block;
+    text-align: left;
+}
+
+#friendsContainer{
+   font-size: 75%;
+}
+
+#achievementsContainer{
+    font-size: 75%;
+    border:2px solid #a1a1a1;
+}
+
+#achPic{
+    width: 15px;
+    height:15px;
+}
+
+
+
 #registerForm {
     border: 1px white;
     z-index: 20;
