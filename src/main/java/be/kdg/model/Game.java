@@ -37,6 +37,7 @@ public class Game {
 
     private int time;
     private int playerCount;
+    private int attackingRank;
 
     public Game() {
         setBoard(new Board());
@@ -64,6 +65,14 @@ public class Game {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getAttackingRank() {
+        return attackingRank;
+    }
+
+    public void setAttackingRank(int attackingRank) {
+        this.attackingRank = attackingRank;
     }
 
     public void setBoard(Board board) {

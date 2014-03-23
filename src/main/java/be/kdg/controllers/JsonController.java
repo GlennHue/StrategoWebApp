@@ -183,8 +183,8 @@ public class JsonController {
     @RequestMapping(value = "api/game/movePiece", method = RequestMethod.POST)
     @ResponseBody
     public String movePiece(@RequestParam("index") String index, @RequestParam("playerId") int playerId) {
-        int newIndex = Integer.parseInt(index.split(",")[0]);
-        int oldIndex = Integer.parseInt(index.split(",")[1]);
+        int oldIndex = Integer.parseInt(index.split(",")[0]);
+        int newIndex = Integer.parseInt(index.split(",")[1]);
 
         Player player1 = playerService.getPlayerById(playerId);
         player1.setReady(false);
@@ -193,7 +193,7 @@ public class JsonController {
         playerService.savePlayer(player1);
         playerService.savePlayer(enemy);
 
-        gameService.addMove(playerId,newIndex,oldIndex);
+        gameService.addMove(playerId,oldIndex,newIndex);
         return "true";
     }
 
@@ -273,7 +273,6 @@ public class JsonController {
         int result =  gameService.fight(gameId,playerIndex,enemyIndex);
         JSONObject resultObject = new JSONObject();
         try {
-
             resultObject.put("result",result);
             resultObject.put("yourPiece",game.getBoard().getTile(playerIndex).getPiece().getName());
             resultObject.put("theirPiece",game.getBoard().getTile(enemyIndex).getPiece().getName());
@@ -328,6 +327,14 @@ public class JsonController {
             userService.updateUser(loserUser);
         }
         return "goed bezig";
+    }
+
+    @RequestMapping(value = "api/game/getAttackingRank", method = RequestMethod.GET)
+    @ResponseBody
+    public String getAttackingRank(@RequestParam("gameId") int gameId) {
+        Game game = gameService.getGame(gameId);
+        int attackingRank = game.getAttackingRank();
+        return "" + attackingRank;
     }
 
     @RequestMapping(value = "api/user/getGameHistory", method = RequestMethod.GET)

@@ -33,6 +33,6 @@ function getPastGames() {
             $( rows ).appendTo( "#historyList tbody" );
         })
         .fail(function() {
-            alert("get turn fail " + player);
+            alert("get game history fail" + player);
         });
 }

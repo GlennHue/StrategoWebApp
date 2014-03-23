@@ -68,30 +68,129 @@ function getTurn() {
 function updateBoard(oldIndex, newIndex) {
     var oldMirrorIndex = getMirrorIndex(oldIndex);
     var newMirrorIndex = getMirrorIndex(newIndex);
-
     var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+    var img = tds[oldMirrorIndex].innerHTML;
 
-    var imgg = $(tds[newMirrorIndex]).find("img");
-    var div = $(tds[newMirrorIndex]).find("div");
+    if($(tds[newMirrorIndex]).children().length > 0) {
+        var temp = tds[newMirrorIndex].getElementsByTagName("div")[0].getElementsByTagName("img")[0].src.split("/")[6];
+        var playerRank = (temp.substring(2,3) === ".") ? parseInt(temp.substring(1,2)) : parseInt(temp.substring(1,3));
 
-    if(imgg.length > 1){
-        if(color == "r"){
-        fight(oldMirrorIndex,newMirrorIndex,imgg,div);}
-        else{fight(oldIndex,newIndex,imgg,div);}
-    }else{ var img = tds[newMirrorIndex].innerHTML;
-        tds[newMirrorIndex].innerHTML = "";
-        tds[oldMirrorIndex].innerHTML = img;}
-
-
-
-
-
-
+        $.getJSON("http://localhost:8080/api/game/getAttackingRank?gameId=" + gameId)
+            .done(function(data) {
+                var enemyRank = data;
+                var data = checkFight(enemyRank, playerRank);
+                updateFight(data, newMirrorIndex, oldMirrorIndex, img);
+            })
+            .fail(function() {
+                alert("get attacking rank fail");
+            })
+    } else {
+        $(tds[oldMirrorIndex]).children().remove();
+        tds[newMirrorIndex].innerHTML = img;
+    }
 }
-
 
 function getMirrorIndex(index) {
     return 99 - index;
+}
+
+function checkFight(enemyRank, playerRank) {
+    var returnJSON = {
+        "result":0,
+        "yourPiece":"",
+        "theirPiece":""};
+
+    if(enemyRank == 3 && playerRank == 11) {
+        //miner vs bomb
+        returnJSON.result = -1;
+    } else if (enemyRank == 1 && playerRank == 10) {
+        //spy vs marshal
+        returnJSON.result = -1;
+    } else if (playerRank == 0) {
+        //anything vs flag, defeat
+        returnJSON.result = 2;
+    } else if (enemyRank > playerRank) {
+        //you lose
+        returnJSON.result = -1;
+    } else if (enemyRank < playerRank) {
+        //you win
+        returnJSON.result = 1
+    }
+
+    returnJSON.yourPiece = getPiece(playerRank);
+    returnJSON.theirPiece = getPiece(enemyRank);
+
+    return returnJSON;
+}
+
+function getPiece(rank) {
+    var rankName="";
+
+    switch(rank) {
+        case 0: rankName = "FLAG"; break;
+        case 1: rankName = "SPY"; break;
+        case 2: rankName = "SCOUT"; break;
+        case 3: rankName = "MINER"; break;
+        case 4: rankName = "SERGEANT"; break;
+        case 5: rankName = "LIEUTENANT"; break;
+        case 6: rankName = "CAPTAIN"; break;
+        case 7: rankName = "MAJOR"; break;
+        case 8: rankName = "COLONEL"; break;
+        case 9: rankName = "GENERAL"; break;
+        case 10: rankName = "MARSHAL"; break;
+        case 11: rankName = "BOMB"; break;
+    }
+
+    return rankName;
+}
+
+function updateFight(data, newIndex, oldIndex, img) {
+    var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+    if(data.result === 2){
+        endGame("lose");
+    } else if(data.result === 0){
+        alert("Your piece was the same as that of the enemy! " + data.yourPiece + " vs " + data.theirPiece);
+        $(tds[newIndex]).children().remove();
+        $(tds[oldIndex]).children().remove();
+    } else if(data.result === 1){
+        alert("You won. "  + data.yourPiece + " vs " + data.theirPiece);
+        $(tds[oldIndex]).children().remove();
+    } else if(data.result === -1){
+        alert("You lost. "  + data.yourPiece + " vs " + data.theirPiece);
+        $(tds[newIndex]).find("div").remove();
+        tds[newIndex].innerHTML = tds[oldIndex].innerHTML
+        $(tds[oldIndex]).children().remove();
+    }
+}
+
+function endGame(result) {
+    $("#fade").show();
+    $("#fade").animate({ opacity: 0.75 }, 500);
+    var tds = document.getElementById("winLoseTable").getElementsByTagName('td');
+    for(var i = 0;i<tds.length;i++) {
+        if(tds[i].id === "winLose") {
+            tds[i].innerHTML = '<img src="/javax.faces.resource/img/'+result+'.png.xhtml?ln=css" alt='+result+'/>';
+        }
+    }
+    $("#endGameForm").show();
+
+    if(result==="win") {
+        var posting = $.post("http://localhost:8080/api/game/win", { winnerId: playerId });
+
+        posting.fail(function() {
+            alert("Post win fail.");
+        })
+    }
+};
+
+function redirect(location) {
+    if(location === "game") {
+        window.location = "http://localhost:8080/game.xhtml";
+    } else if (location === "quit") {
+        window.location = "http://localhost:8080/index.xhtml";
+    }
+
+    return false;
 }
 
 /**
@@ -267,29 +366,25 @@ REDIPS.drag = (function () {
             dropped : function () {
                 var rd = REDIPS.drag;
                 var pos = rd.getPosition();
-                var img = $(td.target).find("div").find("img");
-                var imgg = $(td.target).find("img");
-                var div = $(td.target).find("div");
 
                 if(!notready) {
                     var oldIndex = pos[4] + "" + pos[5];
                     var newIndex = pos[1] + "" + pos[2];
 
-                    var indexString = newIndex + "," + oldIndex;
+                    var indexString = oldIndex + "," + newIndex;
 
+                    if(td.target.children.length > 1){
+                        var playerIndex = (color=="r") ? getMirrorIndex(oldIndex) : oldIndex;
+                        var enemyIndex = (color=="r") ? getMirrorIndex(newIndex) : newIndex;
+                        fight(playerIndex, enemyIndex);
 
-                    if(imgg.length > 1){
-                        var oldMirror = oldIndex;
-                        var newMirror = newIndex;
-
-                        if(color == "r") {
-                            oldMirror = getMirrorIndex(oldIndex);
-                            newMirror = getMirrorIndex(newIndex);
+                        var imgs = $(td.target).find("img");
+                        for(var i = 0;i<imgs.length;i++) {
+                            if(imgs[i].alt === "ENEMY") {
+                                $(imgs[i]).hide();
+                            }
                         }
-
-                        fight(oldMirror,newMirror,imgg,div);
                     }
-
 
                     var posting = $.post("http://localhost:8080/api/game/movePiece", { index: indexString, playerId: playerId });
 
@@ -305,13 +400,9 @@ REDIPS.drag = (function () {
                     posting.fail(function() {
                         //alert("Move piece fail");
                     });
-
-
-
-
                 } else {
                     if(pos[3] == 1) {
-                        img.removeClass("sideImg");
+                        $(td.target).find("img").removeClass("sideImg");
                     }
                 }
             },
@@ -410,27 +501,39 @@ REDIPS.drag = (function () {
         return img.alt.toLowerCase();
     }
 
-    function fight(oldIndex,newIndex,imgg,div){
-        $.getJSON("http://localhost:8080/api/game/fightWeb?gameId=" + gameId + "&playerIndex=" + oldIndex + "&enemyIndex=" + newIndex)
+    function fight(playerIndex, enemyIndex){
+        $.getJSON("http://localhost:8080/api/game/fightWeb?gameId=" + gameId + "&playerIndex=" + playerIndex + "&enemyIndex=" + enemyIndex)
             .done(function(data) {
-
-
+                var tds = document.getElementById("gameBoard").getElementsByTagName('td');
+                var index = (color=='r') ? getMirrorIndex(enemyIndex) : enemyIndex;
                 if(data.result ===2){
-                    alert("You have won, u captured the flag!")
+                    endGame("win");
                 } else if(data.result === 0){
-                    alert("Your piece was the same as that of the enemy!" + data.yourPiece + " vs " + data.theirPiece);
-                    $(imgg[1]).remove();
-                    $(imgg[0]).remove();
-                    $(div[0]).remove();
+                    alert("Your piece was the same as that of the enemy! " + data.yourPiece + " vs " + data.theirPiece);
+                    $(tds[index]).children().remove();
                 } else if(data.result === 1){
-                    alert("You won"  + data.yourPiece + " vs " + data.theirPiece);
-                    $(imgg[0]).remove();
+                    alert("You won "  + data.yourPiece + " vs " + data.theirPiece);
+                    var imgs = $(tds[index]).find("img");
+                    if(imgs.length>1) {
+                        for(var i = 0;i<imgs.length;i++) {
+                            if(imgs[i].alt === "ENEMY") {
+                                imgs[i].remove();
+                            }
+                        }
+                    } else {
+                        imgs.remove();
+                    }
                 } else if(data.result === -1){
-                    alert("You lost"  + data.yourPiece + " vs " + data.theirPiece);
-                    $(div[0]).remove();
-                    $(imgg[1]).remove();
+                    alert("You lost "  + data.yourPiece + " vs " + data.theirPiece);
+                    $(tds[index]).find("div").remove();
                 }
 
+                var imgs = $(td.target).find("img");
+                for(var i = 0;i<imgs.length;i++) {
+                    if(imgs[i].alt === "ENEMY") {
+                        $(imgs[i]).show();
+                    }
+                }
             })
             .fail(function() {
                 //alert("fight fail");
@@ -5039,7 +5142,7 @@ function ready(button) {
 
 
         notready = false;
-        $("#sideTable").find(".btn").addClass("ready");
+        $("#sideTable").find(".btn").remove();
     }    else{
         alert("U hebt geen 40 stukken!")
     }
@@ -5056,7 +5159,7 @@ function showEnemy() {
         pieceColor = "bluepiece";
     }
     for(var i =0; i < 40;i++){
-        tds[i].innerHTML = "<img src='/javax.faces.resource/img/piece/" + pieceColor + ".png.xhtml?ln=css' alt='SPY'>";
+        tds[i].innerHTML = "<img src='/javax.faces.resource/img/piece/" + pieceColor + ".png.xhtml?ln=css' alt='ENEMY'>";
     }
 }
 
@@ -5103,8 +5206,13 @@ function gameStart() {
         addMark();
         turnPol = setInterval(function(){getTurn()}, 5000);
     }
+    var tempColor;
+    if(color=="b") {
+        tempColor = "BLUE";
+    } else {
+        tempColor = "RED";
+    }
 }
-
 
 // if REDIPS.event isn't already defined (from other REDIPS file) 
 if (!REDIPS.event) {

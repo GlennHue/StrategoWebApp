@@ -109,6 +109,8 @@ public class GameServiceImpl implements GameServiceApi {
         Game game = reconstructGame(gameId);
         Piece piecePlayer = game.getBoard().getTile(playerIndex).getPiece();
         Piece pieceEnemy = game.getBoard().getTile(enemyIndex).getPiece();
+        game.setAttackingRank(piecePlayer.getRank());
+        gameDao.saveGame(game);
         return piecePlayer.compareTo(pieceEnemy);
     }
 
@@ -192,6 +194,4 @@ public class GameServiceImpl implements GameServiceApi {
         }
         return game;
     }
-
-
 }

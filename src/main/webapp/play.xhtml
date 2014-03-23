@@ -7,7 +7,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:fb="https://www.facebook.com/2008/fbml"
       xmlns:c="http://java.sun.com/jstl/core">
 
 <h:head>
@@ -19,36 +18,42 @@
     <h:outputScript library="js" name="redips-drag-source.js" />
 </h:head>
 
-<h:body onload="REDIPS.drag.init()">
+<h:body onload="REDIPS.drag.init(), ini()">
     <c:if test="#{userBean.user == null}">
         <h:outputScript>window.location = "http://localhost:8080/login.xhtml"</h:outputScript>
     </c:if>
     <ui:param name="myVar" value="1" />
-    <h:form>
+
+    <h:form id="menuFrm">
         <p:menubar styleClass="centeredMenuBar">
             <p:menuitem value="" url="#" icon="stratego" disabled="true"/>
             <p:menuitem value="Home" url="index.xhtml"/>
-            <p:menuitem value="Play" url="game.xhtml" />
+            <p:menuitem value="Play" url="game.xhtml"/>
 
             <p:submenu label="Help">
-                <p:menuitem value="Instructions" url="instructions.xhtml" />
-                <p:menuitem value="FAQ" url="faq.xhtml" />
+                <p:menuitem value="Instructions" url="instructions.xhtml"/>
+                <p:menuitem value="FAQ" url="faq.xhtml"/>
             </p:submenu>
 
-            <p:menuitem value="Achievements" url="achievements.xhtml" />
+            <p:menuitem value="Achievements" url="achievements.xhtml"/>
 
-            <p:menuitem value="Login" url="#" onclick="showLogin()"/>
+            <p:menuitem  value="Login" url="#" onclick="showLogin()"/>
+
+            <p:menuitem value="name" styleClass="invisible" url="#"/>
+
+            <p:menuitem url="#">
+                <p:commandLink styleClass="permInvisible" id="logName" onclick="" value="#{userBean.user.username}"/>
+            </p:menuitem>
         </p:menubar>
     </h:form>
+
     <div id="fade"></div>
-    <div id="endGameDialog">
+    <div id="endGameContainer">
         <h:form id="endGameForm">
-            <table>
-                <tr><td></td><td id="winLose"></td><td></td></tr>
+            <table id="winLoseTable">
+                <tr><td id="winLose"></td></tr>
                 <tr>
-                    <td><h:commandLink styleClass="btn" onclick="return redirect('game');" action="#">Play Again</h:commandLink></td>
-                    <td><h:commandLink styleClass="btn" onclick="return redirect('replay');" action="#">Watch Replay</h:commandLink></td>
-                    <td><h:commandLink styleClass="btn" onclick="return redirect('quit');" action="#">Quit</h:commandLink></td>
+                    <td><h:commandLink styleClass="btn" onclick="return redirect('game');" action="#">Play Again</h:commandLink>&nbsp;&nbsp;<h:commandLink styleClass="btn" onclick="return redirect('quit');" action="#">Quit</h:commandLink></td>
                 </tr>
             </table>
         </h:form>
