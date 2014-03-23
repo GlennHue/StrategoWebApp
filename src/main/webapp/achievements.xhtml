@@ -18,7 +18,7 @@
     <h:outputScript library="js" name="redips-drag-source.js" />
 </h:head>
 
-<h:body onload="ini()">
+<h:body onload="ini(), getPastGames()">
     <c:if test="#{userBean.user == null}">
         <h:outputScript>window.location = "http://localhost:8080/login.xhtml"</h:outputScript>
     </c:if>
@@ -45,7 +45,8 @@
         <table>
             <tr><td> <div id="image"><h:graphicImage library="css" name="img/maarschalk.jpg" alt="Generaal" styleClass="image"/></div></td><td>#{userBean.user.username}  <br/>
             Games won: #{userBean.user.wins}   <br/>
-            Games lost: #{userBean.user.losses}</td>
+            Games lost: #{userBean.user.losses}
+            </td>
 
                 <td>
 
@@ -75,8 +76,24 @@
                     </div>
                 </td>
             </tr>
+
+            <tr>
+                <td colspan="3">
+                    <div id="historyContainer">
+                        <table id="historyList">
+                            <tr><th>Game history</th></tr>
+                             <tr>
+                                 <td>Speler 1</td> <td>Score</td>
+                                 <td>Speler 2</td> <td>Score</td>
+                             </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
     </table>
 </div>
+
+    <p:commandLink id="un" styleClass="permInvisible">#{userBean.user.username}</p:commandLink>
 
 </h:body>
 </html>
