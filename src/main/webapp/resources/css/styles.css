@@ -46,8 +46,12 @@ body {
     width: 75%
 }
 
-#text p, h2 {
+#text p, h2, ol ,h4{
     margin: 20px;
+}
+
+#text li{
+    margin-left: 20px;
 }
 
 #text .btn {
@@ -69,6 +73,8 @@ body {
     -moz-border-radius: 5;
     border-radius: 5px;
 }
+
+
 
 #profileContainer {
     margin: auto;
