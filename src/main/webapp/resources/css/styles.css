@@ -46,7 +46,7 @@ body {
     width: 75%
 }
 
-#text p, h2, ol ,h4{
+#text p, h2, ol ,h4,h5{
     margin: 20px;
 }
 
@@ -62,6 +62,8 @@ body {
     float: left;
     width: 25%;
 }
+
+
 
 #image .image {
     margin: 20px;
